@@ -5,6 +5,6 @@
 
     public interface IDataAccess
     {
-        IEnumerable<President> GetPresidents();
+        IEnumerable<DbPresident> GetDbPresidents();
     }
 }
