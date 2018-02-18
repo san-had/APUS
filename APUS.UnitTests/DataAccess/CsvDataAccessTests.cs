@@ -13,7 +13,7 @@
 
             var actualDbPersonsRowCount = csvDataAcces.GetDbPresidents().Count();
 
-            var expectedRowCount = 46;
+            var expectedRowCount = 45;
 
             Assert.Equal(expectedRowCount, actualDbPersonsRowCount);
 
