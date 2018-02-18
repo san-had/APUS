@@ -22,21 +22,11 @@ namespace APUS
             var dbPresidents = dataAccess.GetDbPresidents();
 
             var presidents = AutoMapper.Mapper.Map<IEnumerable<DataAccess.DbPresident>, IEnumerable<Models.President>>(dbPresidents);
-
         }
 
         private static void StartUp()
         {
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<DataAccess.DbPresident, Models.President>()
-                    .ForMember(
-                                dest => dest.TookOffice,
-                                opt => opt.MapFrom(src => src.TookOffice.ParseUsDateFormat()))
-                    .ForMember(
-                                dest => dest.LeftOffice,
-                                opt => opt.MapFrom(src => src.LeftOffice.ParseUsDateFormat()));
-            });
+            AutoMapper.Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperPresidentProfile>());
 
             AutoMapper.Mapper.AssertConfigurationIsValid();
         }
