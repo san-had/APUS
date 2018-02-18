@@ -8,9 +8,9 @@
 
         public string LastName { get; set; }
 
-        public DateTime TookOffice { get; set; }
+        public DateTime? TookOffice { get; set; }
 
-        public DateTime LeftOffice { get; set; }
+        public DateTime? LeftOffice { get; set; }
 
         public string Party { get; set; }
     }

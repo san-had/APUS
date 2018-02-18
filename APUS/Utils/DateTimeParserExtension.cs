@@ -4,17 +4,26 @@
 
     public static class DateTimeParserExtension
     {
-        public static DateTime ParseUsDateFormat(this string dateString)
+        public static DateTime? ParseUsDateFormat(this string dateString)
         {
             string[] ymd = dateString.Split('/');
 
-            int day = int.Parse(ymd[0]);
+            if (ymd.Length < 3)
+            {
+                return null;
+            }
 
-            int month = int.Parse(ymd[1]);
+            int day, month, year = 0;
 
-            int year = int.Parse(ymd[2]);
+            bool isParsed = int.TryParse(ymd[0], out day);
 
-            return new DateTime(year, month, day);
+            isParsed = int.TryParse(ymd[1], out month);
+
+            isParsed = int.TryParse(ymd[2], out year);
+
+            DateTime? date = new DateTime(year, month, day);
+
+            return isParsed ? date : null;
         }
     }
 }
