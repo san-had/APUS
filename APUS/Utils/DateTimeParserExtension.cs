@@ -6,6 +6,8 @@
     {
         public static DateTime? ParseUsDateFormat(this string dateString)
         {
+            DateTime? parsedDate = null;
+
             string[] ymd = dateString.Split('/');
 
             if (ymd.Length < 3)
@@ -21,9 +23,12 @@
 
             isParsed = int.TryParse(ymd[2], out year);
 
-            DateTime? date = new DateTime(year, month, day);
+            if (isParsed)
+            {
+                parsedDate = new DateTime(year, month, day);
+            }
 
-            return isParsed ? date : null;
+            return parsedDate;
         }
     }
 }
