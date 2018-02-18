@@ -8,7 +8,7 @@
     {
         public IEnumerable<DbPresident> GetDbPresidents()
         {
-            return File.ReadAllLines(@"D:\APUS_DATA\data.csv")
+            return File.ReadAllLines(Constants.CsvDataFileName)
                 .Skip(1)
                 .Select(line => line.Split(','))                
                 .Select(x => new DbPresident

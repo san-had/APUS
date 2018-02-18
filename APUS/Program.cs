@@ -8,7 +8,7 @@ namespace APUS
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello APUS!");
+            Console.WriteLine(Constants.GreetingText);
 
             StartUp();
 
