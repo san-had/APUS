@@ -2,7 +2,7 @@
 {
     internal static class Constants
     {
-        internal const string GreetingText = "Hello APUS";
+        internal const string GreetingText = "The American Presidents of the United States";
 
         internal const string CsvDataFileName = @"C:\APUS_DATA\data.csv";
 
