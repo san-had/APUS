@@ -10,14 +10,14 @@
         {
             return File.ReadAllLines(Constants.CsvDataFileName)
                 .Skip(1)
-                .Select(line => line.Split(','))                
+                .Select(line => line.Split(','))
                 .Select(x => new DbPresident
                 {
-                    FirstName = x[0],
-                    LastName = x[1],
-                    TookOffice = x[2],
-                    LeftOffice = x[3],
-                    Party = x[4]                    
+                    FirstName = x[0].Trim(),
+                    LastName = x[1].Trim(),
+                    TookOffice = x[2].Trim(),
+                    LeftOffice = x[3].Trim(),
+                    Party = x[4].Trim()
                 });
         }
     }

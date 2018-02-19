@@ -1,13 +1,13 @@
-﻿using APUS.Utils;
-using APUS.ViewModel;
-using System;
-using System.Collections.Generic;
-
-namespace APUS
+﻿namespace APUS
 {
-    class Program
+    using APUS.ViewModel;
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine(Constants.GreetingText);
 
@@ -15,7 +15,7 @@ namespace APUS
 
             Run();
         }
-        
+
         private static void Run()
         {
             var dataAccess = new DataAccess.CsvDataAccess();
@@ -39,7 +39,7 @@ namespace APUS
         private static IEnumerable<ViewModel.PresidentView> UpdateViewPresidents(IEnumerable<Models.President> presidents)
         {
             var presidentViewList = new List<ViewModel.PresidentView>();
-           
+
             foreach (var president in presidents)
             {
                 var viewPresident = new ViewModel.PresidentView();
@@ -56,17 +56,55 @@ namespace APUS
 
         private static string GetPresidencyRange(DateTime? tookOffice, DateTime? leftOffice)
         {
-            throw new NotImplementedException();
+            var sb = new StringBuilder();
+
+            if (tookOffice.HasValue || leftOffice.HasValue)
+            {
+                sb.Append("(");
+                var tookYear = tookOffice.HasValue ? tookOffice.Value.Year.ToString() : Constants.NAString;
+                sb.Append(tookYear);
+                sb.Append("-");
+                var leftYear = leftOffice.HasValue ? leftOffice.Value.Year.ToString() : Constants.NALeftOfficeString;
+                sb.Append(leftYear).Append(")");
+            }
+            else
+            {
+                sb.Append(Constants.NAString);
+            }
+
+            return sb.ToString();
         }
 
         private static int CalculateNumberOfPresidencyDays(DateTime? tookOffice, DateTime? leftOffice)
         {
-            throw new NotImplementedException();
+            int presidencyDays = 0;
+
+            if (tookOffice.HasValue && leftOffice.HasValue)
+            {
+                TimeSpan offset = leftOffice.Value.Subtract(tookOffice.Value);
+
+                presidencyDays = offset.Days;
+            }
+            if (tookOffice.HasValue && !leftOffice.HasValue)
+            {
+                DateTime? currentDate = DateTime.Now;
+
+                TimeSpan offset = currentDate.Value.Subtract(tookOffice.Value);
+
+                presidencyDays = offset.Days;
+            }
+
+            return presidencyDays;
         }
 
         private static void RenderPresidentViewList(IEnumerable<PresidentView> presidentViewList)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(Constants.CsvOutputHeader);
+
+            foreach (var presidentView in presidentViewList)
+            {
+                Console.WriteLine($"{presidentView.LastName.ToUpper()},{presidentView.FirstName},{presidentView.PresidencyRange},{presidentView.NumberOfPresidencyDays} days");
+            }
         }
     }
 }
