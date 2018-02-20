@@ -1,5 +1,5 @@
 ﻿namespace APUS
-{    
+{
     using APUS.OutputFormatters;
     using APUS.ViewModels;
     using System.Collections.Generic;
@@ -8,15 +8,15 @@
     {
         private readonly DataAccess.IDataAccess dataAccess;
 
-        private readonly IOutputFormatter outputFormatter;
+        private readonly IPresidentViewLoader presidentViewLoader;
 
-        private readonly ViewModelLoader viewModelLoader;
+        private readonly IOutputFormatter outputFormatter;
 
         public ReportGenerator()
         {
             this.dataAccess = new DataAccess.CsvDataAccess();
+            this.presidentViewLoader = new PresidentViewLoader();
             this.outputFormatter = new StdOutputFormatter();
-            this.viewModelLoader = new ViewModelLoader();
         }
 
         public void Run()
@@ -25,7 +25,7 @@
 
             var presidents = AutoMapper.Mapper.Map<IEnumerable<DataAccess.DbPresident>, IEnumerable<Models.President>>(dbPresidents);
 
-            var presidentViewList = this.viewModelLoader.UpdateViewPresidents(presidents);
+            var presidentViewList = this.presidentViewLoader.UpdateViewPresidents(presidents);
 
             this.outputFormatter.RenderOutput(presidentViewList);
         }

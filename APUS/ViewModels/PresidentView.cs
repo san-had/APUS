@@ -1,4 +1,4 @@
-﻿namespace APUS.ViewModel
+﻿namespace APUS.ViewModels
 {
     public class PresidentView
     {

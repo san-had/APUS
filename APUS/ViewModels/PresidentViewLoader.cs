@@ -5,15 +5,15 @@
     using System.Text;
     using APUS.Models;
 
-    public class ViewModelLoader
+    public class PresidentViewLoader : IPresidentViewLoader
     {
-        public IEnumerable<ViewModel.PresidentView> UpdateViewPresidents(IEnumerable<President> presidents)
+        public IEnumerable<ViewModels.PresidentView> UpdateViewPresidents(IEnumerable<President> presidents)
         {
-            var presidentViewList = new List<ViewModel.PresidentView>();
+            var presidentViewList = new List<ViewModels.PresidentView>();
 
             foreach (var president in presidents)
             {
-                var viewPresident = new ViewModel.PresidentView();
+                var viewPresident = new ViewModels.PresidentView();
 
                 viewPresident.FirstName = president.FirstName;
                 viewPresident.LastName = president.LastName;
@@ -25,7 +25,7 @@
             return presidentViewList;
         }
 
-        private int CalculateNumberOfPresidencyDays(DateTime? tookOffice, DateTime? leftOffice)
+        public int CalculateNumberOfPresidencyDays(DateTime? tookOffice, DateTime? leftOffice)
         {
             int presidencyDays = 0;
 
@@ -47,7 +47,7 @@
             return presidencyDays;
         }
 
-        private string GetPresidencyRange(DateTime? tookOffice, DateTime? leftOffice)
+        public string GetPresidencyRange(DateTime? tookOffice, DateTime? leftOffice)
         {
             var sb = new StringBuilder();
 

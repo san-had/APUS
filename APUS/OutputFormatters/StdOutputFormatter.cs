@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using APUS.ViewModel;
+    using APUS.ViewModels;
 
     public class StdOutputFormatter : IOutputFormatter
     {

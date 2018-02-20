@@ -1,6 +1,6 @@
 ﻿namespace APUS.OutputFormatters
 {
-    using APUS.ViewModel;
+    using APUS.ViewModels;
     using System.Collections.Generic;
 
     public interface IOutputFormatter
