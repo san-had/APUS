@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
     using APUS.Models;
 
@@ -9,6 +10,11 @@
     {
         public IEnumerable<ViewModels.PresidentView> UpdateViewPresidents(IEnumerable<President> presidents)
         {
+            if (presidents == null)
+            {
+                return Enumerable.Empty<PresidentView>();
+            }
+
             var presidentViewList = new List<ViewModels.PresidentView>();
 
             foreach (var president in presidents)
