@@ -21,9 +21,11 @@
             {
                 var viewPresident = new ViewModels.PresidentView();
 
+                DateTime? leftOffice = president.LeftOffice.HasValue ? president.LeftOffice.Value : DateTime.Now;
+
                 viewPresident.FirstName = president.FirstName;
                 viewPresident.LastName = president.LastName;
-                viewPresident.PresidencyRange = GetPresidencyRange(president.TookOffice, president.LeftOffice);
+                viewPresident.PresidencyRange = GetPresidencyRange(president.TookOffice, leftOffice);
                 viewPresident.NumberOfPresidencyDays = CalculateNumberOfPresidencyDays(president.TookOffice, president.LeftOffice);
 
                 presidentViewList.Add(viewPresident);
@@ -41,15 +43,7 @@
 
                 presidencyDays = offset.Days;
             }
-            if (tookOffice.HasValue && !leftOffice.HasValue)
-            {
-                DateTime? currentDate = DateTime.Now;
-
-                TimeSpan offset = currentDate.Value.Subtract(tookOffice.Value);
-
-                presidencyDays = offset.Days;
-            }
-
+ 
             return presidencyDays;
         }
 
