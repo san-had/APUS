@@ -7,9 +7,5 @@
     public interface IPresidentViewLoader
     {
         IEnumerable<ViewModels.PresidentView> UpdateViewPresidents(IEnumerable<President> presidents);
-
-        int CalculateNumberOfPresidencyDays(DateTime? tookOffice, DateTime? leftOffice);
-
-        string GetPresidencyRange(DateTime? tookOffice, DateTime? leftOffice);
     }
 }

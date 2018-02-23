@@ -6,7 +6,7 @@
     using System.Text;
     using APUS.Models;
 
-    public class PresidentViewLoader : IPresidentViewLoader
+    public class PresidentViewLoader : IPresidentViewLoader, IPresidentViewCalculator
     {
         public IEnumerable<ViewModels.PresidentView> UpdateViewPresidents(IEnumerable<President> presidents)
         {
