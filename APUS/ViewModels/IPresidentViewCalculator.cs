@@ -7,5 +7,7 @@
         int CalculateNumberOfPresidencyDays(DateTime? tookOffice, DateTime? leftOffice);
 
         string GetPresidencyRange(DateTime? tookOffice, DateTime? leftOffice);
+
+        DateTime? LeftOfficeParser(DateTime? leftOffice);
     }
 }
