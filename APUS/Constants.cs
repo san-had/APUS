@@ -4,7 +4,7 @@
     {
         internal const string GreetingText = "The American Presidents of the United States";
 
-        internal const string CsvDataFileName = @"C:\APUS_DATA\data.csv";
+        internal const string CsvDataFileName = @"Data\data.csv";
 
         public const string NAString = "n.a.";
 
