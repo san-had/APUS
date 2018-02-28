@@ -3,6 +3,7 @@
     using APUS;
     using APUS.Models;
     using APUS.ViewModels;
+    using NSubstitute;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -14,7 +15,9 @@
         [Fact]
         public void UpdateViewPresidents_PresidentsCollectionIsNull_ReturnsEmptyPresidentViewList()
         {
-            var presidentViewLoader = new PresidentViewLoader();
+            var presidentViewCalculator = Substitute.For<IPresidentViewCalculator>();
+
+            var presidentViewLoader = new PresidentViewLoader(presidentViewCalculator);
 
             var presidentViewList = presidentViewLoader.UpdateViewPresidents(null);
 
@@ -24,7 +27,9 @@
         [Fact]
         public void UpdateViewPresidents_PresidentsCollectionIsEmpty_ReturnsEmptyPresidentViewList()
         {
-            var presidentViewLoader = new PresidentViewLoader();
+            var presidentViewCalculator = Substitute.For<IPresidentViewCalculator>();
+
+            var presidentViewLoader = new PresidentViewLoader(presidentViewCalculator);
 
             var presidentViewList = presidentViewLoader.UpdateViewPresidents(Enumerable.Empty<President>());
 
@@ -34,7 +39,9 @@
         [Fact]
         public void UpdateViewPresidents_PresidentsCollectionIsNotNull_ReturnsNotEmptyPresidentViewList()
         {
-            var presidentViewLoader = new PresidentViewLoader();
+            var presidentViewCalculator = Substitute.For<IPresidentViewCalculator>();
+
+            var presidentViewLoader = new PresidentViewLoader(presidentViewCalculator);
 
             var presidentList = new List<President>
             {
@@ -57,9 +64,9 @@
         [MemberData(nameof(GetInputDataForCalculateNumberOfPresidencyDaysTest))]
         public void CalculateNumberOfPresidencyDays_ReturnsCalculatedDays(int expecteddays, DateTime? tookOffice, DateTime? leftOffice)
         {
-            var presidentViewLoader = new PresidentViewLoader();
+            var presidentViewCalculator = new PresidentViewCalculator();
 
-            var actualDays = presidentViewLoader.CalculateNumberOfPresidencyDays(tookOffice, leftOffice);
+            var actualDays = presidentViewCalculator.CalculateNumberOfPresidencyDays(tookOffice, leftOffice);
 
             Assert.Equal(expecteddays, actualDays);
         }
@@ -89,9 +96,9 @@
         [MemberData(nameof(GetInputDataForPresidencyRangeTest))]
         public void GetPresidencyRange_ReturnFromToString(string expectedString, DateTime? tookOffice, DateTime? leftOffice)
         {
-            var presidentViewLoader = new PresidentViewLoader();
+            var presidentViewCalculator = new PresidentViewCalculator();
 
-            var actualString = presidentViewLoader.GetPresidencyRange(tookOffice, leftOffice);
+            var actualString = presidentViewCalculator.GetPresidencyRange(tookOffice, leftOffice);
 
             Assert.Equal(expectedString, actualString);
         }
@@ -117,9 +124,9 @@
         [MemberData(nameof(GetLeftOfficeInputDataForLeftOfficeParserTests))]
         public void LeftOfficeParser_ReturnsRightDateTimeNullable(DateTime? expectedDate, DateTime? leftOfficeDate)
         {
-            var presidentViewLoader = new PresidentViewLoader();
+            var presidentViewCalculator = new PresidentViewCalculator();
 
-            var actualDate = presidentViewLoader.LeftOfficeParser(leftOfficeDate);
+            var actualDate = presidentViewCalculator.LeftOfficeParser(leftOfficeDate);
 
             Assert.Equal(expectedDate.Value.Year, actualDate.Value.Year);
             Assert.Equal(expectedDate.Value.Month, actualDate.Value.Month);
