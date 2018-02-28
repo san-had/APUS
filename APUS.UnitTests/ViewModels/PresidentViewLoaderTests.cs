@@ -15,9 +15,9 @@
         [Fact]
         public void UpdateViewPresidents_PresidentsCollectionIsNull_ReturnsEmptyPresidentViewList()
         {
-            var presidentViewCalculator = Substitute.For<IPresidentViewCalculator>();
+            var fakePresidentViewCalculator = Substitute.For<IPresidentViewCalculator>();
 
-            var presidentViewLoader = new PresidentViewLoader(presidentViewCalculator);
+            var presidentViewLoader = new PresidentViewLoader(fakePresidentViewCalculator);
 
             var presidentViewList = presidentViewLoader.UpdateViewPresidents(null);
 
@@ -27,9 +27,9 @@
         [Fact]
         public void UpdateViewPresidents_PresidentsCollectionIsEmpty_ReturnsEmptyPresidentViewList()
         {
-            var presidentViewCalculator = Substitute.For<IPresidentViewCalculator>();
+            var fakePresidentViewCalculator = Substitute.For<IPresidentViewCalculator>();
 
-            var presidentViewLoader = new PresidentViewLoader(presidentViewCalculator);
+            var presidentViewLoader = new PresidentViewLoader(fakePresidentViewCalculator);
 
             var presidentViewList = presidentViewLoader.UpdateViewPresidents(Enumerable.Empty<President>());
 
@@ -39,9 +39,9 @@
         [Fact]
         public void UpdateViewPresidents_PresidentsCollectionIsNotNull_ReturnsNotEmptyPresidentViewList()
         {
-            var presidentViewCalculator = Substitute.For<IPresidentViewCalculator>();
+            var fakePresidentViewCalculator = Substitute.For<IPresidentViewCalculator>();
 
-            var presidentViewLoader = new PresidentViewLoader(presidentViewCalculator);
+            var presidentViewLoader = new PresidentViewLoader(fakePresidentViewCalculator);
 
             var presidentList = new List<President>
             {
