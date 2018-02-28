@@ -8,21 +8,18 @@
     {
         private readonly DataAccess.IDataAccess dataAccess;
 
-        private readonly IPresidentViewLoader presidentViewLoader;
-
-        private readonly IPresidentViewCalculator presidentViewCalculator;
+        private readonly IPresidentViewLoader presidentViewLoader;      
 
         private readonly IOutputFormatter outputFormatter;
 
-        public ReportGenerator()
+        public ReportGenerator(DataAccess.IDataAccess dataAccess, IPresidentViewLoader presidentViewLoader, IOutputFormatter outputFormatter)
         {
-            this.dataAccess = new DataAccess.CsvDataAccess();
-            this.presidentViewCalculator = new PresidentViewCalculator();
-            this.presidentViewLoader = new PresidentViewLoader(this.presidentViewCalculator);
-            this.outputFormatter = new StdOutputFormatter();
+            this.dataAccess = dataAccess;
+            this.presidentViewLoader = presidentViewLoader;
+            this.outputFormatter = outputFormatter;
         }
 
-        public void Run()
+        public void CreateReport()
         {
             var dbPresidents = dataAccess.GetDbPresidents();
 
