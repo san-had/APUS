@@ -10,12 +10,15 @@
 
         private readonly IPresidentViewLoader presidentViewLoader;
 
+        private readonly IPresidentViewCalculator presidentViewCalculator;
+
         private readonly IOutputFormatter outputFormatter;
 
         public ReportGenerator()
         {
             this.dataAccess = new DataAccess.CsvDataAccess();
-            this.presidentViewLoader = new PresidentViewLoader();
+            this.presidentViewCalculator = new PresidentViewCalculator();
+            this.presidentViewLoader = new PresidentViewLoader(this.presidentViewCalculator);
             this.outputFormatter = new StdOutputFormatter();
         }
 
