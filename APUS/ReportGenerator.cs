@@ -2,6 +2,7 @@
 {
     using APUS.OutputFormatters;
     using APUS.ViewModels;
+    using System;
     using System.Collections.Generic;
 
     public class ReportGenerator
@@ -14,6 +15,21 @@
 
         public ReportGenerator(DataAccess.IDataAccess dataAccess, IPresidentViewLoader presidentViewLoader, IOutputFormatter outputFormatter)
         {
+            if (dataAccess == null)
+            {
+                throw new ArgumentNullException(nameof(dataAccess));
+            }
+
+            if (presidentViewLoader == null)
+            {
+                throw new ArgumentNullException(nameof(presidentViewLoader));
+            }
+
+            if (outputFormatter == null)
+            {
+                throw new ArgumentNullException(nameof(outputFormatter));
+            }
+
             this.dataAccess = dataAccess;
             this.presidentViewLoader = presidentViewLoader;
             this.outputFormatter = outputFormatter;

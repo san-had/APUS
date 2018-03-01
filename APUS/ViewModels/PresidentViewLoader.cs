@@ -11,6 +11,11 @@
 
         public PresidentViewLoader(IPresidentViewCalculator presidentViewCalculator)
         {
+            if (presidentViewCalculator == null)
+            {
+                throw new ArgumentNullException(nameof(presidentViewCalculator));
+            }
+
             this.presidentViewCalculator = presidentViewCalculator;
         }
 
