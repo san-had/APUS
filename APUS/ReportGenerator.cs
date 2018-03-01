@@ -8,7 +8,7 @@
     {
         private readonly DataAccess.IDataAccess dataAccess;
 
-        private readonly IPresidentViewLoader presidentViewLoader;      
+        private readonly IPresidentViewLoader presidentViewLoader;
 
         private readonly IOutputFormatter outputFormatter;
 
