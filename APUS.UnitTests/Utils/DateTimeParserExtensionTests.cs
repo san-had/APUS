@@ -7,8 +7,12 @@
     public class DateTimeParserExtensionTests
     {
         [Theory]
+        [InlineData(null, null)]
+        [InlineData(null, "")]
         [InlineData(null, "a/b/c")]
         [InlineData(null, "03\04/2017")]
+        [InlineData(null, "03/a/2017")]
+        [InlineData(null, "03/13/2017")]
         public void ParseUsDateFormat_WrongStringFormat_ReturnsNull(DateTime? expectedDateTime, string dateTimeString)
         {
             var actualDate = dateTimeString.ParseUsDateFormat();
@@ -30,6 +34,5 @@
             Assert.Equal(expedtedDate.Value, actualDate.Value);
             Assert.Equal(expedtedDate.Value, actualDate2.Value);
         }
-
     }
 }

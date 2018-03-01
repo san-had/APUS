@@ -6,6 +6,11 @@
     {
         public static DateTime? ParseUsDateFormat(this string dateString)
         {
+            if (dateString == null)
+            {
+                return null;
+            }
+
             DateTime? parsedDate = null;
 
             string[] ymd = dateString.Split('/');
@@ -17,11 +22,13 @@
 
             int day, month, year = 0;
 
-            bool isParsed = int.TryParse(ymd[0], out day);
+            bool isParsedDay = int.TryParse(ymd[0], out day);
 
-            isParsed = int.TryParse(ymd[1], out month);
+            bool isParsedMonth = int.TryParse(ymd[1], out month);
 
-            isParsed = int.TryParse(ymd[2], out year);
+            bool isParsedYear = int.TryParse(ymd[2], out year);
+
+            bool isParsed = isParsedDay && isParsedMonth && isParsedYear;
 
             if (isParsed)
             {
