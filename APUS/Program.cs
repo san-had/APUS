@@ -24,7 +24,7 @@
         {
             DataAccess.IDataAccess dataAccess = new DataAccess.CsvDataAccess();
 
-            ViewModels.PresidentViewCalculator presidentViewCalculator = new ViewModels.PresidentViewCalculator();
+            ViewModels.IPresidentViewCalculator presidentViewCalculator = new ViewModels.PresidentViewCalculator();
 
             ViewModels.IPresidentViewLoader presidentViewLoader = new ViewModels.PresidentViewLoader(presidentViewCalculator);
 
