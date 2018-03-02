@@ -10,10 +10,10 @@
             CreateMap<DataAccess.DbPresident, Models.President>()
                     .ForMember(
                                 dest => dest.TookOffice,
-                                opt => opt.MapFrom(src => src.TookOffice.ParseUsDateFormat()))
+                                opt => opt.MapFrom(src => src.TookOffice.ParseEnDateFormat()))
                     .ForMember(
                                 dest => dest.LeftOffice,
-                                opt => opt.MapFrom(src => src.LeftOffice.ParseUsDateFormat()));
+                                opt => opt.MapFrom(src => src.LeftOffice.ParseEnDateFormat()));
         }
     }
 }

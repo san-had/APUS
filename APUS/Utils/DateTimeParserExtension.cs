@@ -4,7 +4,7 @@
 
     public static class DateTimeParserExtension
     {
-        public static DateTime? ParseUsDateFormat(this string dateString)
+        public static DateTime? ParseEnDateFormat(this string dateString)
         {
             if (dateString == null)
             {
@@ -24,7 +24,17 @@
 
             bool isParsedDay = int.TryParse(ymd[0], out day);
 
+            if (day > 31)
+            {
+                isParsedDay = false;
+            }
+
             bool isParsedMonth = int.TryParse(ymd[1], out month);
+
+            if (month > 12)
+            {
+                isParsedMonth = false;
+            }
 
             bool isParsedYear = int.TryParse(ymd[2], out year);
 
