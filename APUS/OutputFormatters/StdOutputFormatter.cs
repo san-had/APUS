@@ -1,18 +1,24 @@
 ﻿namespace APUS.OutputFormatters
 {
-    using System;
     using System.Collections.Generic;
     using APUS.ViewModels;
 
     public class StdOutputFormatter : IOutputFormatter
     {
+        private readonly IConsoleWriter consoleWriter;
+
+        public StdOutputFormatter(IConsoleWriter consoleWriter)
+        {
+            this.consoleWriter = consoleWriter;
+        }
+
         public void RenderOutput(IEnumerable<PresidentView> presidentViewList)
         {
-            Console.WriteLine(Constants.CsvOutputHeader);
+            consoleWriter.WriteLine(Constants.CsvOutputHeader);
 
             foreach (var presidentView in presidentViewList)
             {
-                Console.WriteLine($"{presidentView.LastName.ToUpper()},{presidentView.FirstName},{presidentView.PresidencyRange},{presidentView.NumberOfPresidencyDays} days");
+                consoleWriter.WriteLine($"{presidentView.LastName.ToUpper()},{presidentView.FirstName},{presidentView.PresidencyRange},{presidentView.NumberOfPresidencyDays} days");
             }
         }
     }
