@@ -100,6 +100,36 @@
             return list;
         }
 
+        [Theory]
+        [MemberData(nameof(GetLeftYearInputDataForGetLeftYearStringTests))]
+        public void GetLeftYearString_ReturnsRightString(string expectedString, DateTime? leftOfficeDate)
+        {
+            var presidentViewCalculator = new PresidentViewCalculator();
 
+            var actualString = presidentViewCalculator.GetLeftYearString(leftOfficeDate);
+
+            Assert.Equal(expectedString, actualString);
+        }
+
+        [ExcludeFromCodeCoverage]
+        public static IEnumerable<object[]> GetLeftYearInputDataForGetLeftYearStringTests()
+        {
+            DateTime? date1 = null;
+            DateTime? date2 = new DateTime(1789, 4, 3);
+            DateTime? date3 = DateTime.Now;
+
+            string expected1 = Constants.NALeftOfficeString;
+            string expected2 = "1789";
+            string expected3 = Constants.NALeftOfficeString;
+
+            var list = new List<object[]>()
+            {
+                new object[] {expected1, date1},
+                new object[] {expected2, date2},
+                new object[] {expected3, date3}
+            };
+
+            return list;
+        }
     }
 }

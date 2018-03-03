@@ -29,7 +29,7 @@
                 var tookYear = tookOffice.HasValue ? tookOffice.Value.Year.ToString() : Constants.NAString;
                 sb.Append(tookYear);
                 sb.Append("-");
-                var leftYear = leftOffice.HasValue ? leftOffice.Value.Year.ToString() : Constants.NALeftOfficeString;
+                var leftYear = GetLeftYearString(leftOffice);
                 sb.Append(leftYear).Append(")");
             }
             else
@@ -43,6 +43,19 @@
         public DateTime? LeftOfficeParser(DateTime? leftOffice)
         {
             return leftOffice.HasValue ? leftOffice.Value : DateTime.Now;
+        }
+
+        public string GetLeftYearString(DateTime? leftOffice)
+        {
+            string leftOfficeString = string.Empty;
+
+            var currentDate = DateTime.Now.Date;
+
+            leftOfficeString = leftOffice.HasValue && leftOffice.Value.Date != currentDate
+                ? leftOffice.Value.Year.ToString() 
+                : Constants.NALeftOfficeString;
+           
+            return leftOfficeString;
         }
     }
 }
