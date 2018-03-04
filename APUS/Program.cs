@@ -47,6 +47,9 @@
             var outputFormatterTypeName = Configuration["outputFormatter"];
             var outputFormatterType = Type.GetType(outputFormatterTypeName, true);
 
+            var reportGeneratorTypeName = Configuration["reportGenerator"];
+            var reportGeneratorType = Type.GetType(reportGeneratorTypeName, true);
+
             DataAccess.IDataAccess dataAccess = (DataAccess.IDataAccess)Activator.CreateInstance(dataAccessType);
 
             ViewModels.IPresidentViewCalculator presidentViewCalculator = (ViewModels.IPresidentViewCalculator)Activator.CreateInstance(presidentViewCalculatorType);
@@ -57,7 +60,7 @@
 
             OutputFormatters.IOutputFormatter outputFormatter = (OutputFormatters.IOutputFormatter)Activator.CreateInstance(outputFormatterType, new object[] { consoleWriter });
 
-            var reportGenerator = new ReportGenerator(dataAccess, presidentViewLoader, outputFormatter);
+            IReportGenerator reportGenerator = (IReportGenerator)Activator.CreateInstance(reportGeneratorType, new object[] { dataAccess, presidentViewLoader, outputFormatter });
 
             reportGenerator.CreateReport();
         }

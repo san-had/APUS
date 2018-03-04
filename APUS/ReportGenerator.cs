@@ -5,7 +5,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class ReportGenerator
+    public class ReportGenerator : IReportGenerator
     {
         private readonly DataAccess.IDataAccess dataAccess;
 
