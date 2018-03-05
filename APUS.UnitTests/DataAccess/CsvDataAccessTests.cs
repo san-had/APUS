@@ -9,14 +9,13 @@
         [Fact]
         public void CsvDataAccess_ReadsFile_ReturnsDbPersons()
         {
-            var csvDataAcces = new CsvDataAccess();
+            var fakeCsvDataAcces = new FakeCsvDataAccess();
 
-            var actualDbPersonsRowCount = csvDataAcces.GetDbPresidents().Count();
+            var actualDbPersonsRowCount = fakeCsvDataAcces.GetDbPresidents().Count();
 
-            var expectedRowCount = 45;
+            var expectedRowCount = 3;
 
             Assert.Equal(expectedRowCount, actualDbPersonsRowCount);
-
         }
     }
 }
