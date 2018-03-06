@@ -6,6 +6,8 @@
 
         internal const string CsvDataFileName = @"Data\data.csv";
 
+        internal const string Csv2DataFileName = @"Data\data2.csv";
+
         public const string NAString = "n.a.";
 
         public const string NALeftOfficeString = "Incumbent";

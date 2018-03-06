@@ -3,10 +3,13 @@
     using Microsoft.Extensions.Configuration;
     using System;
     using System.IO;
+    using System.Linq;
 
     internal class Program
     {
         public static IConfiguration Configuration { get; set; }
+
+        public static string dataAccess;
 
         private static void Main(string[] args)
         {
@@ -32,7 +35,11 @@
 
             Configuration = builder.Build();
 
-            var dataAccessTypeName = Configuration["dataAccess"];
+            int dataAccessTypeNumber = GetDataAccessType();
+
+            string dataAccessString = dataAccessTypeNumber == 1 ? "dataAccess" : "dataAccess2";
+
+            var dataAccessTypeName = Configuration[dataAccessString];
             var dataAccessType = Type.GetType(dataAccessTypeName, true);
 
             var presidentViewCalculatorTypeName = Configuration["presidentViewCalculator"];
@@ -63,6 +70,27 @@
             IReportGenerator reportGenerator = (IReportGenerator)Activator.CreateInstance(reportGeneratorType, new object[] { dataAccess, presidentViewLoader, outputFormatter });
 
             reportGenerator.CreateReport();
+        }
+
+        private static int GetDataAccessType()
+        {
+            int dataAccessNumber = 0;
+            var validChoices = new int[] { 1, 2 };
+            bool isParsed = false;
+
+            Console.WriteLine();
+            Console.WriteLine("1. CsvDataAccess");
+            Console.WriteLine("2. CsvDataAccess");
+            Console.WriteLine();
+            Console.Write("Your choice: ");
+
+            while (!validChoices.Contains(dataAccessNumber) && !isParsed)
+            {
+                var readString = Console.ReadLine();
+                isParsed = int.TryParse(readString.Trim(), out dataAccessNumber);
+            }
+
+            return dataAccessNumber;
         }
     }
 }
