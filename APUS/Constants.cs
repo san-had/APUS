@@ -8,6 +8,8 @@
 
         internal const string Csv2DataFileName = @"Data\data2.csv";
 
+        internal const string JsonDataFileName = @"Data\mayorsOfNYC.json";
+
         public const string NAString = "n.a.";
 
         public const string NALeftOfficeString = "Incumbent";

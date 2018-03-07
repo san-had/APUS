@@ -37,7 +37,7 @@
 
             int dataAccessTypeNumber = GetDataAccessType();
 
-            string dataAccessString = dataAccessTypeNumber == 1 ? "dataAccess" : "dataAccess2";
+            string dataAccessString = ((DataAccesType)dataAccessTypeNumber).ToString();
 
             var dataAccessTypeName = Configuration[dataAccessString];
             var dataAccessType = Type.GetType(dataAccessTypeName, true);
@@ -75,12 +75,13 @@
         private static int GetDataAccessType()
         {
             int dataAccessNumber = 0;
-            var validChoices = new int[] { 1, 2 };
+            var validChoices = new int[] { 1, 2, 3 };
             bool isParsed = false;
 
             Console.WriteLine();
             Console.WriteLine("1. CsvDataAccess");
-            Console.WriteLine("2. CsvDataAccess");
+            Console.WriteLine("2. Csv2DataAccess");
+            Console.WriteLine("3. JsonDataAccess");
             Console.WriteLine();
             Console.Write("Your choice: ");
 
