@@ -2,15 +2,23 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using APUS.DataAccess;
     using APUS.Models;
 
     public class DataLoader : IDataLoader
     {
+        private readonly IDataAccess dataAccess;
+        private readonly IMapper mapper;
+
+        public DataLoader(IDataAccess dataAccess, IMapper mapper)
+        {
+            this.dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
+            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        }
+
         public IEnumerable<President> LoadData(IEnumerable<DbPresident> dbPresidents)
         {
-            throw new NotImplementedException();
+            return this.mapper.Mapping(dbPresidents);
         }
     }
 }
