@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class UsDateParser : IDateParser
+    public class UsDateParser : DateParser, IDateParser
     {
         public DateTime? ParseDate(string dateString)
         {
@@ -11,39 +11,16 @@
                 return null;
             }
 
-            DateTime? parsedDate = null;
+            string[] mdy = dateString.Split('/');
 
-            string[] ymd = dateString.Split('/');
-
-            if (ymd.Length < 3)
+            if (mdy.Length != 3)
             {
                 return null;
             }
 
-            int day, month, year = 0;
+            string[] ymd = new string[3] { mdy[2], mdy[0], mdy[1] };
 
-            bool isParsedDay = int.TryParse(ymd[1], out day);
-
-            if (day > 31)
-            {
-                isParsedDay = false;
-            }
-
-            bool isParsedMonth = int.TryParse(ymd[0], out month);
-
-            if (month > 12)
-            {
-                isParsedMonth = false;
-            }
-
-            bool isParsedYear = int.TryParse(ymd[2], out year);
-
-            bool isParsed = isParsedDay && isParsedMonth && isParsedYear;
-
-            if (isParsed)
-            {
-                parsedDate = new DateTime(year, month, day);
-            }
+            DateTime? parsedDate = DateComposition(ymd);
 
             return parsedDate;
         }
