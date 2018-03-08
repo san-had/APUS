@@ -9,8 +9,6 @@
     {
         public static IConfiguration Configuration { get; set; }
 
-        public static string dataAccess;
-
         private static void Main(string[] args)
         {
             Console.WriteLine(Constants.GreetingText);
@@ -42,6 +40,34 @@
             var dataAccessTypeName = Configuration[dataAccessString];
             var dataAccessType = Type.GetType(dataAccessTypeName, true);
 
+            string dateParserString;
+            switch (dataAccessTypeNumber)
+            {
+                case 1:
+                    dateParserString = "enDateParser";
+                    break;
+
+                case 2:
+                    dateParserString = "enDateParser";
+                    break;
+
+                case 3:
+                    dateParserString = "utcDateTimeParser";
+                    break;
+
+                default:
+                    throw new NotImplementedException(dataAccessTypeNumber.ToString());
+            }
+
+            var dateParserTypeName = Configuration[dateParserString];
+            var dateParserType = Type.GetType(dateParserTypeName, true);
+
+            var mapperTypeName = Configuration["mapper"];
+            var mapperType = Type.GetType(mapperTypeName, true);
+
+            var dataLoaderTypeName = Configuration["dataLoader"];
+            var dataLoaderType = Type.GetType(dataLoaderTypeName, true);
+
             var presidentViewCalculatorTypeName = Configuration["presidentViewCalculator"];
             var presidentViewCalculatorType = Type.GetType(presidentViewCalculatorTypeName, true);
 
@@ -58,6 +84,12 @@
             var reportGeneratorType = Type.GetType(reportGeneratorTypeName, true);
 
             DataAccess.IDataAccess dataAccess = (DataAccess.IDataAccess)Activator.CreateInstance(dataAccessType);
+
+            DataLoader.IDateParser dateParser = (DataLoader.IDateParser)Activator.CreateInstance(dateParserType);
+
+            DataLoader.IMapper mapper = (DataLoader.IMapper)Activator.CreateInstance(mapperType, new object[] { dateParser });
+
+            DataLoader.IDataLoader dataLoader = (DataLoader.IDataLoader)Activator.CreateInstance(dataLoaderType, new object[] { dataAccess, mapper });
 
             ViewModels.IPresidentViewCalculator presidentViewCalculator = (ViewModels.IPresidentViewCalculator)Activator.CreateInstance(presidentViewCalculatorType);
 
