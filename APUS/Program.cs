@@ -48,7 +48,7 @@
                     break;
 
                 case 2:
-                    dateParserString = "enDateParser";
+                    dateParserString = "usDateParser";
                     break;
 
                 case 3:
