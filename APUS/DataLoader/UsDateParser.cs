@@ -20,20 +20,20 @@
                 return null;
             }
 
-            int month, day, year = 0;
-
-            bool isParsedMonth = int.TryParse(ymd[0], out month);
-
-            if (month > 12)
-            {
-                isParsedMonth = false;
-            }
+            int day, month, year = 0;
 
             bool isParsedDay = int.TryParse(ymd[1], out day);
 
             if (day > 31)
             {
                 isParsedDay = false;
+            }
+
+            bool isParsedMonth = int.TryParse(ymd[0], out month);
+
+            if (month > 12)
+            {
+                isParsedMonth = false;
             }
 
             bool isParsedYear = int.TryParse(ymd[2], out year);

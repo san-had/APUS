@@ -117,7 +117,7 @@
             Console.WriteLine();
             Console.Write("Your choice: ");
 
-            while (!validChoices.Contains(dataAccessNumber) && !isParsed)
+            while (!validChoices.Contains(dataAccessNumber) || !isParsed)
             {
                 var readString = Console.ReadLine();
                 isParsed = int.TryParse(readString.Trim(), out dataAccessNumber);
