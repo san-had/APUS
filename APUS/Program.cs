@@ -13,16 +13,7 @@
         {
             Console.WriteLine(Constants.GreetingText);
 
-            StartUp();
-
             Run();
-        }
-
-        private static void StartUp()
-        {
-            AutoMapper.Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperPresidentProfile>());
-
-            AutoMapper.Mapper.AssertConfigurationIsValid();
         }
 
         private static void Run()
