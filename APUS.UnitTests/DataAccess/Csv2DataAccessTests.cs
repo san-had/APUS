@@ -17,5 +17,17 @@
 
             Assert.Equal(expectedRowCount, actualDbPersonsRowCount);
         }
+
+        [Fact]
+        public void CsvDataAccess2_ReadsFile_ReturnsDbPresidentType()
+        {
+            var csv2DataAcces = new Csv2DataAccess();
+
+            var actualDbPersonsTypeName = csv2DataAcces.GetDbPresidents().First().GetType().ToString();
+
+            var expectedTypeName = "APUS.DataAccess.DbPresident";
+
+            Assert.Equal(expectedTypeName, actualDbPersonsTypeName);
+        }
     }
 }

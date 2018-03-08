@@ -7,15 +7,27 @@
     public class CsvDataAccessTests
     {
         [Fact]
-        public void CsvDataAccess_ReadsFile_ReturnsDbPersons()
+        public void CsvDataAccess_ReadsFile_ReturnsRightRowNumber()
         {
-            var fakeCsvDataAcces = new FakeCsvDataAccess();
+            var csvDataAcces = new CsvDataAccess();
 
-            var actualDbPersonsRowCount = fakeCsvDataAcces.GetDbPresidents().Count();
+            var actualDbPersonsRowCount = csvDataAcces.GetDbPresidents().Count();
 
-            var expectedRowCount = 3;
+            var expectedRowCount = 45;
 
             Assert.Equal(expectedRowCount, actualDbPersonsRowCount);
+        }
+
+        [Fact]
+        public void CsvDataAccess_ReadsFile_ReturnsDbPresidentType()
+        {
+            var csvDataAcces = new CsvDataAccess();
+
+            var actualDbPersonsTypeName = csvDataAcces.GetDbPresidents().First().GetType().ToString();
+
+            var expectedTypeName = "APUS.DataAccess.DbPresident";
+
+            Assert.Equal(expectedTypeName, actualDbPersonsTypeName);
         }
     }
 }
