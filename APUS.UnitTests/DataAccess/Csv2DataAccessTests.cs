@@ -7,7 +7,7 @@
     public class Csv2DataAccessTests
     {
         [Fact]
-        public void CsvDataAccess2_ReadsFile_ReturnsDbPersons()
+        public void CsvDataAccess2_ReadsFile_ReturnsRightRowCount()
         {
             var csv2DataAcces = new Csv2DataAccess();
 

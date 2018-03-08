@@ -1,12 +1,12 @@
-﻿namespace APUS.UnitTests.Utils
+﻿namespace APUS.UnitTests.DataLoader
 {
     using System;
     using Xunit;
-    using APUS.Utils;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using APUS.DataLoader;
 
-    public class DateTimeParserExtensionTests
+    public class EnDateTimeParserTests
     {
         [Theory]
         [InlineData(null, null)]
@@ -18,7 +18,7 @@
         [InlineData(null, "32/03/2017")]
         public void ParseEnDateFormat_WrongStringFormat_ReturnsNull(DateTime? expectedDateTime, string dateTimeString)
         {
-            var actualDate = dateTimeString.ParseEnDateFormat();
+            var actualDate = new EnDateParser().ParseDate(dateTimeString);
 
             Assert.Equal(expectedDateTime.HasValue, actualDate.HasValue);
         }
@@ -27,7 +27,7 @@
         [MemberData(nameof(GetInputDataForParseEnDateFormatTests))]
         public void ParseEnDateFormat_RightStringFormat_ReturnsDateTime(string inputString, DateTime? expectedDate)
         {
-            var actualDate = inputString.ParseEnDateFormat();
+            var actualDate = new EnDateParser().ParseDate(inputString);
 
             Assert.Equal(expectedDate.Value, actualDate.Value);
         }
