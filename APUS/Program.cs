@@ -99,7 +99,7 @@
 
             OutputFormatters.IOutputFormatter outputFormatter = (OutputFormatters.IOutputFormatter)Activator.CreateInstance(outputFormatterType, new object[] { consoleWriter });
 
-            IReportGenerator reportGenerator = (IReportGenerator)Activator.CreateInstance(reportGeneratorType, new object[] { dataAccess, presidentViewLoader, outputFormatter });
+            IReportGenerator reportGenerator = (IReportGenerator)Activator.CreateInstance(reportGeneratorType, new object[] { dataLoader, presidentViewLoader, outputFormatter });
 
             reportGenerator.CreateReport();
         }
