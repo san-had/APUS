@@ -6,7 +6,7 @@
     {
         public DateTime? DateComposition(string[] ymd)
         {
-            if (ymd.Length != 3)
+            if (ymd == null || ymd.Length != 3)
             {
                 return null;
             }
