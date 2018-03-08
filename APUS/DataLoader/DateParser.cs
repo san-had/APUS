@@ -1,6 +1,7 @@
 ﻿namespace APUS.DataLoader
 {
     using System;
+    using System.Collections.Generic;
 
     public class DateParser
     {
@@ -26,7 +27,7 @@
 
             bool isParsedDay = int.TryParse(ymd[2], out day);
 
-            if (day > 31)
+            if (day > MonthMaxDays(month))
             {
                 isParsedDay = false;
             }
@@ -39,6 +40,30 @@
             }
 
             return parsedDate;
+        }
+
+        public int MonthMaxDays(int month)
+        {
+            if (month > 12)
+            {
+                return 32;
+            }
+            var maxDayDictionary = new Dictionary<int, int>()
+            {
+                {1,31},
+                {2,29},
+                {3,31},
+                {4,30},
+                {5,31},
+                {6,30},
+                {7,31},
+                {8,31},
+                {9,30},
+                {10,31},
+                {11,30},
+                {12,31}
+            };
+            return maxDayDictionary[month];
         }
     }
 }
