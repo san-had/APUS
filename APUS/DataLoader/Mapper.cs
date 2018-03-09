@@ -1,9 +1,9 @@
 ﻿namespace APUS.DataLoader
 {
     using System.Collections.Generic;
-    using APUS.DataAccess;
     using System;
     using APUS.Models;
+    using APUS.DataAccess.DbModels;
 
     public class Mapper : IMapper
     {

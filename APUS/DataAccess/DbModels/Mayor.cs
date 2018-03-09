@@ -1,4 +1,4 @@
-﻿namespace APUS.DataAccess
+﻿namespace APUS.DataAccess.DbModels
 {
     using Newtonsoft.Json;
 

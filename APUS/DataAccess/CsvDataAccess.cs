@@ -1,5 +1,6 @@
 ﻿namespace APUS.DataAccess
 {
+    using APUS.DataAccess.DbModels;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;

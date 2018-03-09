@@ -4,6 +4,6 @@
 
     public interface IMapper
     {
-        IEnumerable<Models.President> Mapping(IEnumerable<DataAccess.DbPresident> dbPresidents);
+        IEnumerable<Models.President> Mapping(IEnumerable<DataAccess.DbModels.DbPresident> dbPresidents);
     }
 }

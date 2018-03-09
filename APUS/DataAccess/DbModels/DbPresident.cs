@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace APUS.DataAccess
+namespace APUS.DataAccess.DbModels
 {
     public class DbPresident
     {

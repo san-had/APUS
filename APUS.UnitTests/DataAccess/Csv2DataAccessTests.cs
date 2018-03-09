@@ -25,7 +25,7 @@
 
             var actualDbPersonsTypeName = csv2DataAcces.GetDbPresidents().First().GetType().ToString();
 
-            var expectedTypeName = "APUS.DataAccess.DbPresident";
+            var expectedTypeName = "APUS.DataAccess.DbModels.DbPresident";
 
             Assert.Equal(expectedTypeName, actualDbPersonsTypeName);
         }

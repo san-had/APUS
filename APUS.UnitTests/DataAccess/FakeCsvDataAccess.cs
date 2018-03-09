@@ -1,6 +1,7 @@
 ﻿namespace APUS.UnitTests.DataAccess
 {
     using APUS.DataAccess;
+    using APUS.DataAccess.DbModels;
     using System.Collections.Generic;
 
     public class FakeCsvDataAccess : IDataAccess
