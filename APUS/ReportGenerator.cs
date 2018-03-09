@@ -8,24 +8,24 @@
     {
         private readonly DataLoader.IDataLoader dataLoader;
 
-        private readonly IPresidentViewLoader presidentViewLoader;
+        private readonly IOfficerViewLoader officerViewLoader;
 
         private readonly IOutputFormatter outputFormatter;
 
-        public ReportGenerator(DataLoader.IDataLoader dataLoader, IPresidentViewLoader presidentViewLoader, IOutputFormatter outputFormatter)
+        public ReportGenerator(DataLoader.IDataLoader dataLoader, IOfficerViewLoader officerViewLoader, IOutputFormatter outputFormatter)
         {
             this.dataLoader = dataLoader ?? throw new ArgumentNullException(nameof(dataLoader));
-            this.presidentViewLoader = presidentViewLoader ?? throw new ArgumentNullException(nameof(presidentViewLoader));
+            this.officerViewLoader = officerViewLoader ?? throw new ArgumentNullException(nameof(officerViewLoader));
             this.outputFormatter = outputFormatter ?? throw new ArgumentNullException(nameof(outputFormatter));
         }
 
         public void CreateReport()
         {
-            var presidents = dataLoader.LoadData();
+            var officers = dataLoader.LoadData();
 
-            var presidentViewList = this.presidentViewLoader.UpdateViewPresidents(presidents);
+            var officerViewList = this.officerViewLoader.UpdateViewOfficers(officers);
 
-            this.outputFormatter.RenderOutput(presidentViewList);
+            this.outputFormatter.RenderOutput(officerViewList);
         }
     }
 }

@@ -7,40 +7,40 @@
     using System.Linq;
     using Xunit;
 
-    public class PresidentViewLoaderTests
+    public class OfficerViewLoaderTests
     {
         [Fact]
-        public void UpdateViewPresidents_PresidentsCollectionIsNull_ReturnsEmptyPresidentViewList()
+        public void UpdateViewOfficers_OfficersCollectionIsNull_ReturnsEmptyOfficerViewList()
         {
-            var fakePresidentViewCalculator = Substitute.For<IPresidentViewCalculator>();
+            var fakeOfficerViewCalculator = Substitute.For<IOfficerViewCalculator>();
 
-            var presidentViewLoader = new PresidentViewLoader(fakePresidentViewCalculator);
+            var officerViewLoader = new OfficerViewLoader(fakeOfficerViewCalculator);
 
-            var presidentViewList = presidentViewLoader.UpdateViewPresidents(null);
+            var officerViewList = officerViewLoader.UpdateViewOfficers(null);
 
-            Assert.Empty(presidentViewList);
+            Assert.Empty(officerViewList);
         }
 
         [Fact]
-        public void UpdateViewPresidents_PresidentsCollectionIsEmpty_ReturnsEmptyPresidentViewList()
+        public void UpdateViewOfficers_OfficersCollectionIsEmpty_ReturnsEmptyOfficerViewList()
         {
-            var fakePresidentViewCalculator = Substitute.For<IPresidentViewCalculator>();
+            var fakeOfficerViewCalculator = Substitute.For<IOfficerViewCalculator>();
 
-            var presidentViewLoader = new PresidentViewLoader(fakePresidentViewCalculator);
+            var officerViewLoader = new OfficerViewLoader(fakeOfficerViewCalculator);
 
-            var presidentViewList = presidentViewLoader.UpdateViewPresidents(Enumerable.Empty<Officer>());
+            var officerViewList = officerViewLoader.UpdateViewOfficers(Enumerable.Empty<Officer>());
 
-            Assert.Empty(presidentViewList);
+            Assert.Empty(officerViewList);
         }
 
         [Fact]
-        public void UpdateViewPresidents_PresidentsCollectionIsNotNull_ReturnsNotEmptyPresidentViewList()
+        public void UpdateViewOfficers_OfficersCollectionIsNotNull_ReturnsNotEmptyOfficerViewList()
         {
-            var fakePresidentViewCalculator = Substitute.For<IPresidentViewCalculator>();
+            var fakeOfficerViewCalculator = Substitute.For<IOfficerViewCalculator>();
 
-            var presidentViewLoader = new PresidentViewLoader(fakePresidentViewCalculator);
+            var officerViewLoader = new OfficerViewLoader(fakeOfficerViewCalculator);
 
-            var presidentList = new List<Officer>
+            var officerList = new List<Officer>
             {
                 new Officer
                 {
@@ -52,9 +52,9 @@
                 }
             };
 
-            var presidentViewList = presidentViewLoader.UpdateViewPresidents(presidentList);
+            var officerViewList = officerViewLoader.UpdateViewOfficers(officerList);
 
-            Assert.NotEmpty(presidentViewList);
+            Assert.NotEmpty(officerViewList);
         }
     }
 }

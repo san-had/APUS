@@ -3,9 +3,9 @@
     using System;
     using System.Text;
 
-    public class PresidentViewCalculator : IPresidentViewCalculator
+    public class OfficerViewCalculator : IOfficerViewCalculator
     {
-        public int CalculateNumberOfPresidencyDays(DateTime? tookOffice, DateTime? leftOffice)
+        public int CalculateNumberOfInOfficeDays(DateTime? tookOffice, DateTime? leftOffice)
         {
             int presidencyDays = 0;
 
@@ -19,7 +19,7 @@
             return presidencyDays;
         }
 
-        public string GetPresidencyRange(DateTime? tookOffice, DateTime? leftOffice)
+        public string GetInOfficeRange(DateTime? tookOffice, DateTime? leftOffice)
         {
             var sb = new StringBuilder();
 
@@ -52,9 +52,9 @@
             var currentDate = DateTime.Now.Date;
 
             leftOfficeString = leftOffice.HasValue && leftOffice.Value.Date != currentDate
-                ? leftOffice.Value.Year.ToString() 
+                ? leftOffice.Value.Year.ToString()
                 : Constants.NALeftOfficeString;
-           
+
             return leftOfficeString;
         }
     }

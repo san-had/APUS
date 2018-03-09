@@ -12,13 +12,13 @@
             this.consoleWriter = consoleWriter;
         }
 
-        public void RenderOutput(IEnumerable<PresidentView> presidentViewList)
+        public void RenderOutput(IEnumerable<OfficerView> presidentViewList)
         {
             consoleWriter.WriteLine(Constants.CsvOutputHeader);
 
             foreach (var presidentView in presidentViewList)
             {
-                consoleWriter.WriteLine($"{presidentView.LastName.ToUpper()},{presidentView.FirstName},{presidentView.PresidencyRange},{presidentView.NumberOfPresidencyDays} days");
+                consoleWriter.WriteLine($"{presidentView.LastName.ToUpper()},{presidentView.FirstName},{presidentView.InOfficeRange},{presidentView.NumberOfInOfficeDays} days");
             }
         }
     }

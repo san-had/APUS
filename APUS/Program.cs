@@ -59,11 +59,11 @@
             var dataLoaderTypeName = Configuration["dataLoader"];
             var dataLoaderType = Type.GetType(dataLoaderTypeName, true);
 
-            var presidentViewCalculatorTypeName = Configuration["presidentViewCalculator"];
-            var presidentViewCalculatorType = Type.GetType(presidentViewCalculatorTypeName, true);
+            var officerViewCalculatorTypeName = Configuration["officerViewCalculator"];
+            var officerViewCalculatorType = Type.GetType(officerViewCalculatorTypeName, true);
 
-            var presidentViewLoaderTypeName = Configuration["presidentViewLoader"];
-            var presidentViewLoaderType = Type.GetType(presidentViewLoaderTypeName, true);
+            var officerViewLoaderTypeName = Configuration["officerViewLoader"];
+            var officerViewLoaderType = Type.GetType(officerViewLoaderTypeName, true);
 
             var consoleWriterTypeName = Configuration["consoleWriter"];
             var consoleWriterType = Type.GetType(consoleWriterTypeName, true);
@@ -82,15 +82,15 @@
 
             DataLoader.IDataLoader dataLoader = (DataLoader.IDataLoader)Activator.CreateInstance(dataLoaderType, new object[] { dataAccess, mapper });
 
-            ViewModels.IPresidentViewCalculator presidentViewCalculator = (ViewModels.IPresidentViewCalculator)Activator.CreateInstance(presidentViewCalculatorType);
+            ViewModels.IOfficerViewCalculator officerViewCalculator = (ViewModels.IOfficerViewCalculator)Activator.CreateInstance(officerViewCalculatorType);
 
-            ViewModels.IPresidentViewLoader presidentViewLoader = (ViewModels.IPresidentViewLoader)Activator.CreateInstance(presidentViewLoaderType, new object[] { presidentViewCalculator });
+            ViewModels.IOfficerViewLoader officerViewLoader = (ViewModels.IOfficerViewLoader)Activator.CreateInstance(officerViewLoaderType, new object[] { officerViewCalculator });
 
             OutputFormatters.IConsoleWriter consoleWriter = (OutputFormatters.IConsoleWriter)Activator.CreateInstance(consoleWriterType);
 
             OutputFormatters.IOutputFormatter outputFormatter = (OutputFormatters.IOutputFormatter)Activator.CreateInstance(outputFormatterType, new object[] { consoleWriter });
 
-            IReportGenerator reportGenerator = (IReportGenerator)Activator.CreateInstance(reportGeneratorType, new object[] { dataLoader, presidentViewLoader, outputFormatter });
+            IReportGenerator reportGenerator = (IReportGenerator)Activator.CreateInstance(reportGeneratorType, new object[] { dataLoader, officerViewLoader, outputFormatter });
 
             reportGenerator.CreateReport();
         }

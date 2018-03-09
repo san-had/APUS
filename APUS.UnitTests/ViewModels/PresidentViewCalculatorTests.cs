@@ -13,9 +13,9 @@
         [MemberData(nameof(GetInputDataForCalculateNumberOfPresidencyDaysTest))]
         public void CalculateNumberOfPresidencyDays_ReturnsCalculatedDays(int expecteddays, DateTime? tookOffice, DateTime? leftOffice)
         {
-            var presidentViewCalculator = new PresidentViewCalculator();
+            var officerViewCalculator = new OfficerViewCalculator();
 
-            var actualDays = presidentViewCalculator.CalculateNumberOfPresidencyDays(tookOffice, leftOffice);
+            var actualDays = officerViewCalculator.CalculateNumberOfInOfficeDays(tookOffice, leftOffice);
 
             Assert.Equal(expecteddays, actualDays);
         }
@@ -45,9 +45,9 @@
         [MemberData(nameof(GetInputDataForPresidencyRangeTest))]
         public void GetPresidencyRange_ReturnFromToString(string expectedString, DateTime? tookOffice, DateTime? leftOffice)
         {
-            var presidentViewCalculator = new PresidentViewCalculator();
+            var officerViewCalculator = new OfficerViewCalculator();
 
-            var actualString = presidentViewCalculator.GetPresidencyRange(tookOffice, leftOffice);
+            var actualString = officerViewCalculator.GetInOfficeRange(tookOffice, leftOffice);
 
             Assert.Equal(expectedString, actualString);
         }
@@ -73,9 +73,9 @@
         [MemberData(nameof(GetLeftOfficeInputDataForLeftOfficeParserTests))]
         public void LeftOfficeParser_ReturnsRightDateTimeNullable(DateTime? expectedDate, DateTime? leftOfficeDate)
         {
-            var presidentViewCalculator = new PresidentViewCalculator();
+            var officerViewCalculator = new OfficerViewCalculator();
 
-            var actualDate = presidentViewCalculator.LeftOfficeParser(leftOfficeDate);
+            var actualDate = officerViewCalculator.LeftOfficeParser(leftOfficeDate);
 
             Assert.Equal(expectedDate.Value.Year, actualDate.Value.Year);
             Assert.Equal(expectedDate.Value.Month, actualDate.Value.Month);
@@ -104,9 +104,9 @@
         [MemberData(nameof(GetLeftYearInputDataForGetLeftYearStringTests))]
         public void GetLeftYearString_ReturnsRightString(string expectedString, DateTime? leftOfficeDate)
         {
-            var presidentViewCalculator = new PresidentViewCalculator();
+            var officerViewCalculator = new OfficerViewCalculator();
 
-            var actualString = presidentViewCalculator.GetLeftYearString(leftOfficeDate);
+            var actualString = officerViewCalculator.GetLeftYearString(leftOfficeDate);
 
             Assert.Equal(expectedString, actualString);
         }
