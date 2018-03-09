@@ -6,6 +6,6 @@
 
     public interface IPresidentViewLoader
     {
-        IEnumerable<ViewModels.PresidentView> UpdateViewPresidents(IEnumerable<President> presidents);
+        IEnumerable<ViewModels.PresidentView> UpdateViewPresidents(IEnumerable<Officer> presidents);
     }
 }

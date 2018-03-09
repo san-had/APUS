@@ -16,7 +16,7 @@
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public IEnumerable<President> LoadData()
+        public IEnumerable<Officer> LoadData()
         {
             return this.mapper.Map(dataAccess.GetDbPresidents());
         }

@@ -28,7 +28,7 @@
 
             var presidentViewLoader = new PresidentViewLoader(fakePresidentViewCalculator);
 
-            var presidentViewList = presidentViewLoader.UpdateViewPresidents(Enumerable.Empty<President>());
+            var presidentViewList = presidentViewLoader.UpdateViewPresidents(Enumerable.Empty<Officer>());
 
             Assert.Empty(presidentViewList);
         }
@@ -40,9 +40,9 @@
 
             var presidentViewLoader = new PresidentViewLoader(fakePresidentViewCalculator);
 
-            var presidentList = new List<President>
+            var presidentList = new List<Officer>
             {
-                new President
+                new Officer
                 {
                     FirstName = "Firstname",
                     LastName = "LastName",

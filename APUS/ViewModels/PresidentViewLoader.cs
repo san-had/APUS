@@ -19,7 +19,7 @@
             this.presidentViewCalculator = presidentViewCalculator;
         }
 
-        public IEnumerable<ViewModels.PresidentView> UpdateViewPresidents(IEnumerable<President> presidents)
+        public IEnumerable<ViewModels.PresidentView> UpdateViewPresidents(IEnumerable<Officer> presidents)
         {
             if (presidents == null)
             {

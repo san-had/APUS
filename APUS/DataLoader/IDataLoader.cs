@@ -4,6 +4,6 @@
 
     public interface IDataLoader
     {
-        IEnumerable<Models.President> LoadData();
+        IEnumerable<Models.Officer> LoadData();
     }
 }

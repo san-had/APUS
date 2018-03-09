@@ -14,11 +14,11 @@
             this.dateParser = dateParser ?? throw new ArgumentNullException(nameof(dateParser));
         }
 
-        public IEnumerable<President> Map(IEnumerable<DbPresident> dbPresidents)
+        public IEnumerable<Officer> Map(IEnumerable<DbPresident> dbPresidents)
         {
             foreach (var dbPresident in dbPresidents)
             {
-                var president = new President();
+                var president = new Officer();
                 president.FirstName = dbPresident.FirstName;
                 president.LastName = dbPresident.LastName;
                 president.TookOffice = this.dateParser.ParseDate(dbPresident.TookOffice);
