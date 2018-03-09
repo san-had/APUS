@@ -16,8 +16,6 @@
 
         public IEnumerable<President> Mapping(IEnumerable<DbPresident> dbPresidents)
         {
-            var presidentList = new List<President>();
-
             foreach (var dbPresident in dbPresidents)
             {
                 var president = new President();
@@ -26,9 +24,8 @@
                 president.TookOffice = this.dateParser.ParseDate(dbPresident.TookOffice);
                 president.LeftOffice = this.dateParser.ParseDate(dbPresident.LeftOffice);
 
-                presidentList.Add(president);
+                yield return president;
             }
-            return presidentList;
         }
     }
 }

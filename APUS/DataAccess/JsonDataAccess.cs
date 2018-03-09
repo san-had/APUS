@@ -17,7 +17,6 @@
 
         public IEnumerable<DbPresident> MapMayorsToDbPresident(IEnumerable<Mayor> mayors)
         {
-            IList<DbPresident> dbPresidentList = new List<DbPresident>();
             foreach (var mayor in mayors)
             {
                 var dbPresident = new DbPresident();
@@ -26,9 +25,9 @@
                 dbPresident.TookOffice = mayor.TakeOffice;
                 dbPresident.LeftOffice = mayor.LeftOffice;
                 dbPresident.Party = string.Empty;
-                dbPresidentList.Add(dbPresident);
+
+                yield return dbPresident;
             }
-            return dbPresidentList;
         }
 
         public IEnumerable<Mayor> DeserializeMayorCollection(string mayorText)
