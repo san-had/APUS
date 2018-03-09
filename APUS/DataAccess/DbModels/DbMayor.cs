@@ -3,7 +3,7 @@
     using Newtonsoft.Json;
 
     [JsonObject]
-    public class Mayor
+    public class DbMayor
     {
         [JsonProperty("first")]
         public string FirstName { get; set; }

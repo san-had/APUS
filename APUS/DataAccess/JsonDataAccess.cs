@@ -16,7 +16,7 @@
             return MapMayorsToDbPresident(mayorsCollection);
         }
 
-        public IEnumerable<DbPresident> MapMayorsToDbPresident(IEnumerable<Mayor> mayors)
+        public IEnumerable<DbPresident> MapMayorsToDbPresident(IEnumerable<DbMayor> mayors)
         {
             foreach (var mayor in mayors)
             {
@@ -31,9 +31,9 @@
             }
         }
 
-        public IEnumerable<Mayor> DeserializeMayorCollection(string mayorText)
+        public IEnumerable<DbMayor> DeserializeMayorCollection(string mayorText)
         {
-            var mayorsCollection = JsonConvert.DeserializeObject<IEnumerable<Mayor>>(mayorText);
+            var mayorsCollection = JsonConvert.DeserializeObject<IEnumerable<DbMayor>>(mayorText);
 
             return mayorsCollection;
         }
