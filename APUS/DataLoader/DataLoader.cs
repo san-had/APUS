@@ -18,7 +18,7 @@
 
         public IEnumerable<President> LoadData()
         {
-            return this.mapper.Mapping(dataAccess.GetDbPresidents());
+            return this.mapper.Map(dataAccess.GetDbPresidents());
         }
     }
 }

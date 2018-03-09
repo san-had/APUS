@@ -14,7 +14,7 @@
             this.dateParser = dateParser ?? throw new ArgumentNullException(nameof(dateParser));
         }
 
-        public IEnumerable<President> Mapping(IEnumerable<DbPresident> dbPresidents)
+        public IEnumerable<President> Map(IEnumerable<DbPresident> dbPresidents)
         {
             foreach (var dbPresident in dbPresidents)
             {
