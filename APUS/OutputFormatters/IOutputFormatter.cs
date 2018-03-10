@@ -5,6 +5,6 @@
 
     public interface IOutputFormatter
     {
-        void RenderOutput(IEnumerable<OfficerView> presidentViewList);
+        void RenderOutput(IEnumerable<OfficerView> officerViewList);
     }
 }

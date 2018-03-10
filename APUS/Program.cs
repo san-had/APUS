@@ -68,7 +68,7 @@
             var consoleWriterTypeName = Configuration["consoleWriter"];
             var consoleWriterType = Type.GetType(consoleWriterTypeName, true);
 
-            var outputFormatterTypeName = Configuration["outputFormatter"];
+            var outputFormatterTypeName = Configuration["tableOutputFormatter"];
             var outputFormatterType = Type.GetType(outputFormatterTypeName, true);
 
             var reportGeneratorTypeName = Configuration["reportGenerator"];
