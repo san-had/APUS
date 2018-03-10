@@ -46,10 +46,11 @@
         {
             if (month > 12)
             {
-                return 32;
+                return 0;
             }
             var maxDayDictionary = new Dictionary<int, int>()
             {
+                {0,0},
                 {1,31},
                 {2,29},
                 {3,31},
