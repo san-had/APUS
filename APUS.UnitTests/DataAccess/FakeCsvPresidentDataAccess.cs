@@ -1,14 +1,13 @@
 ﻿namespace APUS.UnitTests.DataAccess
 {
-    using APUS.DataAccess;
-    using APUS.DataAccess.DbModels;
+    using APUS.CommonDataAccess;
     using System.Collections.Generic;
 
-    public class FakeCsvDataAccess : IDataAccess
+    public class FakeCsvPresidentDataAccess : ICommonDataAccess
     {
-        public IEnumerable<DbPresident> GetDbPresidents()
+        public IEnumerable<CommonDbOfficer> GetCommonDbOfficers()
         {
-            var dbPresident1 = new DbPresident
+            var dbCommonOfficer1 = new CommonDbOfficer
             {
                 FirstName = "George",
                 LastName = "Washington",
@@ -17,9 +16,9 @@
                 Party = "Independent"
             };
 
-            yield return dbPresident1;
+            yield return dbCommonOfficer1;
 
-            var dbPresident2 = new DbPresident
+            var dbCommonOfficer2 = new CommonDbOfficer
             {
                 FirstName = "John",
                 LastName = "Adams",
@@ -28,9 +27,9 @@
                 Party = "Federalist"
             };
 
-            yield return dbPresident2;
+            yield return dbCommonOfficer2;
 
-            var dbPresident3 = new DbPresident
+            var dbCommonOfficer3 = new CommonDbOfficer
             {
                 FirstName = "Donald",
                 LastName = "Trump",
@@ -39,7 +38,7 @@
                 Party = "Republican"
             };
 
-            yield return dbPresident3;
+            yield return dbCommonOfficer3;
         }
     }
 }

@@ -6,11 +6,11 @@
     public class FakeCsvDataAccessTests
     {
         [Fact]
-        public void FakeCsvDataAccess_ReadsFile_ReturnsRightRowCount()
+        public void FakeCsvPresidentDataAccess_ReadsFile_ReturnsRightRowCount()
         {
-            var fakeCsvDataAcces = new FakeCsvDataAccess();
+            var fakeCsvPresidentDataAcces = new FakeCsvPresidentDataAccess();
 
-            var actualDbPersonsRowCount = fakeCsvDataAcces.GetDbPresidents().Count();
+            var actualDbPersonsRowCount = fakeCsvPresidentDataAcces.GetCommonDbOfficers().Count();
 
             var expectedRowCount = 3;
 
@@ -18,13 +18,13 @@
         }
 
         [Fact]
-        public void FakeCsvDataAccess_ReadsFile_ReturnsDbPresidentType()
+        public void FakeCsvPresidentDataAccess_ReadsFile_ReturnsDbPresidentType()
         {
-            var fakeCsvDataAcces = new FakeCsvDataAccess();
+            var fakeCsvPresidentDataAcces = new FakeCsvPresidentDataAccess();
 
-            var actualDbPersonsTypeName = fakeCsvDataAcces.GetDbPresidents().First().GetType().ToString();
+            var actualDbPersonsTypeName = fakeCsvPresidentDataAcces.GetCommonDbOfficers().First().GetType().ToString();
 
-            var expectedTypeName = "APUS.DataAccess.DbModels.DbPresident";
+            var expectedTypeName = "APUS.CommonDataAccess.CommonDbOfficer";
 
             Assert.Equal(expectedTypeName, actualDbPersonsTypeName);
         }
