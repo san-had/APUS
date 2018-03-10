@@ -74,11 +74,11 @@
             var reportGeneratorTypeName = Configuration["reportGenerator"];
             var reportGeneratorType = Type.GetType(reportGeneratorTypeName, true);
 
-            DataAccess.IDataAccess dataAccess = (DataAccess.IDataAccess)Activator.CreateInstance(dataAccessType);
+            CommonDataAccess.ICommonDataAccess dataAccess = (CommonDataAccess.ICommonDataAccess)Activator.CreateInstance(dataAccessType);
 
             DataLoader.IDateParser dateParser = (DataLoader.IDateParser)Activator.CreateInstance(dateParserType);
 
-            DataLoader.IMapper mapper = (DataLoader.IMapper)Activator.CreateInstance(mapperType, new object[] { dateParser });
+            DataLoader.IOfficerDataMapper mapper = (DataLoader.IOfficerDataMapper)Activator.CreateInstance(mapperType, new object[] { dateParser });
 
             DataLoader.IDataLoader dataLoader = (DataLoader.IDataLoader)Activator.CreateInstance(dataLoaderType, new object[] { dataAccess, mapper });
 

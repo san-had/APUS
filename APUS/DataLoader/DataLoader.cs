@@ -2,15 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
-    using APUS.DataAccess;
+    using APUS.CommonDataAccess;
     using APUS.Models;
 
     public class DataLoader : IDataLoader
     {
-        private readonly IDataAccess dataAccess;
-        private readonly IMapper mapper;
+        private readonly ICommonDataAccess dataAccess;
+        private readonly IOfficerDataMapper mapper;
 
-        public DataLoader(IDataAccess dataAccess, IMapper mapper)
+        public DataLoader(ICommonDataAccess dataAccess, IOfficerDataMapper mapper)
         {
             this.dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -18,7 +18,7 @@
 
         public IEnumerable<Officer> LoadData()
         {
-            return this.mapper.Map(dataAccess.GetDbPresidents());
+            return this.mapper.Map(dataAccess.GetCommonDbOfficers());
         }
     }
 }

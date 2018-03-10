@@ -1,33 +1,35 @@
 ﻿namespace APUS.DataAccess
 {
+    using APUS.CommonDataAccess;
     using APUS.DataAccess.DbModels;
     using Newtonsoft.Json;
     using System.Collections.Generic;
     using System.IO;
 
-    public class JsonDataAccess : IDataAccess
+    public class JsonMayorDataAccess : ICommonDataAccess
     {
-        public IEnumerable<DbPresident> GetDbPresidents()
+        public IEnumerable<CommonDbOfficer> GetCommonDbOfficers()
         {
             var mayorsText = ReadMayorsFile(Constants.JsonDataFileName);
 
             var mayorsCollection = DeserializeMayorCollection(mayorsText);
 
-            return MapMayorsToDbPresident(mayorsCollection);
+            return MapMayorsToCommonDbOfficer(mayorsCollection);
         }
 
-        public IEnumerable<DbPresident> MapMayorsToDbPresident(IEnumerable<DbMayor> mayors)
+        public IEnumerable<CommonDbOfficer> MapMayorsToCommonDbOfficer(IEnumerable<DbMayor> mayors)
         {
             foreach (var mayor in mayors)
             {
-                var dbPresident = new DbPresident();
-                dbPresident.FirstName = mayor.FirstName;
-                dbPresident.LastName = mayor.LastName;
-                dbPresident.TookOffice = mayor.TakeOffice;
-                dbPresident.LeftOffice = mayor.LeftOffice;
-                dbPresident.Party = string.Empty;
+                var dbCommonOfficer = new CommonDbOfficer();
+                dbCommonOfficer.FirstName = mayor.FirstName;
+                dbCommonOfficer.LastName = mayor.LastName;
+                dbCommonOfficer.TookOffice = mayor.TakeOffice;
+                dbCommonOfficer.LeftOffice = mayor.LeftOffice;
+                dbCommonOfficer.Party = string.Empty;
+                dbCommonOfficer.DataType = "M";
 
-                yield return dbPresident;
+                yield return dbCommonOfficer;
             }
         }
 

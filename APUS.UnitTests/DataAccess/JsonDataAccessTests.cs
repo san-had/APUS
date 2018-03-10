@@ -1,18 +1,17 @@
 ﻿namespace APUS.UnitTests.DataAccess
 {
     using APUS.DataAccess;
-    using System;
     using System.Linq;
     using Xunit;
 
     public class JsonDataAccessTests
     {
         [Fact]
-        public void JsonDataAccess_ReadsFile_ReturnsRightRowNumber()
+        public void JsonMayorDataAccess_ReadsFile_ReturnsRightRowNumber()
         {
-            var jsonDataAcces = new JsonDataAccess();
+            var jsonMayorDataAcces = new JsonMayorDataAccess();
 
-            var actualDbPersonsRowCount = jsonDataAcces.GetDbPresidents().Count();
+            var actualDbPersonsRowCount = jsonMayorDataAcces.GetCommonDbOfficers().Count();
 
             var expectedRowCount = 4;
 
@@ -20,13 +19,13 @@
         }
 
         [Fact]
-        public void JsonDataAccess_ReadsFile_ReturnsDbPresidentType()
+        public void JsonMayorDataAccess_ReadsFile_ReturnsDbPresidentType()
         {
-            var jsonDataAcces = new JsonDataAccess();
+            var jsonMayorDataAcces = new JsonMayorDataAccess();
 
-            var actualDbPersonsTypeName = jsonDataAcces.GetDbPresidents().First().GetType().ToString();
+            var actualDbPersonsTypeName = jsonMayorDataAcces.GetCommonDbOfficers().First().GetType().ToString();
 
-            var expectedTypeName = "APUS.DataAccess.DbModels.DbPresident";
+            var expectedTypeName = "APUS.CommonDataAccess.CommonDbOfficer";
 
             Assert.Equal(expectedTypeName, actualDbPersonsTypeName);
         }

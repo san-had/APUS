@@ -4,30 +4,30 @@
     using System.Linq;
     using Xunit;
 
-    public class Csv2DataAccessTests
+    public class Csv2PresidentDataAccessTests
     {
         [Fact]
-        public void CsvDataAccess2_ReadsFile_ReturnsRightRowCount()
+        public void Csv2PresidentDataAccess_ReadsFile_ReturnsRightRowCount()
         {
-            var csv2DataAcces = new Csv2DataAccess();
+            var csv2PresidentDataAcces = new Csv2PresidentDataAccess();
 
-            var actualDbPersonsRowCount = csv2DataAcces.GetDbPresidents().Count();
+            var actualDbCommonOfficersRowCount = csv2PresidentDataAcces.GetCommonDbOfficers().Count();
 
             var expectedRowCount = 45;
 
-            Assert.Equal(expectedRowCount, actualDbPersonsRowCount);
+            Assert.Equal(expectedRowCount, actualDbCommonOfficersRowCount);
         }
 
         [Fact]
         public void CsvDataAccess2_ReadsFile_ReturnsDbPresidentType()
         {
-            var csv2DataAcces = new Csv2DataAccess();
+            var csv2PresidentDataAcces = new Csv2PresidentDataAccess();
 
-            var actualDbPersonsTypeName = csv2DataAcces.GetDbPresidents().First().GetType().ToString();
+            var actualDbCommonOfficersTypeName = csv2PresidentDataAcces.GetCommonDbOfficers().First().GetType().ToString();
 
-            var expectedTypeName = "APUS.DataAccess.DbModels.DbPresident";
+            var expectedTypeName = "APUS.CommonDataAccess.CommonDbOfficer";
 
-            Assert.Equal(expectedTypeName, actualDbPersonsTypeName);
+            Assert.Equal(expectedTypeName, actualDbCommonOfficersTypeName);
         }
     }
 }

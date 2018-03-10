@@ -7,11 +7,11 @@
     public class CsvDataAccessTests
     {
         [Fact]
-        public void CsvDataAccess_ReadsFile_ReturnsRightRowNumber()
+        public void CsvPresidentDataAccess_ReadsFile_ReturnsRightRowNumber()
         {
-            var csvDataAcces = new CsvDataAccess();
+            var csvPresidentDataAcces = new CsvPresidentDataAccess();
 
-            var actualDbPersonsRowCount = csvDataAcces.GetDbPresidents().Count();
+            var actualDbPersonsRowCount = csvPresidentDataAcces.GetCommonDbOfficers().Count();
 
             var expectedRowCount = 45;
 
@@ -19,13 +19,13 @@
         }
 
         [Fact]
-        public void CsvDataAccess_ReadsFile_ReturnsDbPresidentType()
+        public void CsvPresidentDataAccess_ReadsFile_ReturnsDbPresidentType()
         {
-            var csvDataAcces = new CsvDataAccess();
+            var csvPresidentDataAcces = new CsvPresidentDataAccess();
 
-            var actualDbPersonsTypeName = csvDataAcces.GetDbPresidents().First().GetType().ToString();
+            var actualDbPersonsTypeName = csvPresidentDataAcces.GetCommonDbOfficers().First().GetType().ToString();
 
-            var expectedTypeName = "APUS.DataAccess.DbModels.DbPresident";
+            var expectedTypeName = "APUS.CommonDataAccess.CommonDbOfficer";
 
             Assert.Equal(expectedTypeName, actualDbPersonsTypeName);
         }
