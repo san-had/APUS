@@ -4,6 +4,8 @@
     using System;
     using System.IO;
     using System.Linq;
+    using Unity;
+    using Unity.Injection;
 
     internal class Program
     {
@@ -23,6 +25,8 @@
                      .AddJsonFile("appsettings.json");
 
             Configuration = builder.Build();
+
+            IUnityContainer container = new UnityContainer();
 
             int dataAccessTypeNumber = GetDataAccessType();
 
@@ -80,6 +84,8 @@
 
             CommonDataAccess.ICommonDataAccess dataAccess = (CommonDataAccess.ICommonDataAccess)Activator.CreateInstance(dataAccessType);
 
+            //           var dataAccess = container.Resolve<CommonDataAccess.ICommonDataAccess>(dataAccessType);
+
             DataLoader.IDateParser dateParser = (DataLoader.IDateParser)Activator.CreateInstance(dateParserType);
 
             DataLoader.IOfficerDataMapper mapper = (DataLoader.IOfficerDataMapper)Activator.CreateInstance(mapperType, new object[] { dateParser });
@@ -94,8 +100,12 @@
 
             OutputFormatters.IOutputFormatter outputFormatter = (OutputFormatters.IOutputFormatter)Activator.CreateInstance(outputFormatterType, new object[] { consoleWriter });
 
-            IReportGenerator reportGenerator = (IReportGenerator)Activator.CreateInstance(reportGeneratorType, new object[] { dataLoader, officerViewLoader, outputFormatter });
+            //            IReportGenerator reportGenerator = (IReportGenerator)Activator.CreateInstance(reportGeneratorType, new object[] { dataLoader, officerViewLoader, outputFormatter });
 
+            container
+                .RegisterType<IReportGenerator, ReportGenerator>(new InjectionConstructor(dataLoader, officerViewLoader, outputFormatter));
+
+            var reportGenerator = container.Resolve<IReportGenerator>();
             reportGenerator.CreateReport();
         }
 
