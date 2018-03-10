@@ -6,11 +6,11 @@
     using APUS.ViewModels;
     using ConsoleTableExt;
 
-    public class ConsoleTableOutputformatter : IOutputFormatter
+    public class ConsoleTableOutputFormatter : IOutputFormatter
     {
         private readonly IConsoleWriter consoleWriter;
 
-        public ConsoleTableOutputformatter(IConsoleWriter consoleWriter)
+        public ConsoleTableOutputFormatter(IConsoleWriter consoleWriter)
         {
             this.consoleWriter = consoleWriter ?? throw new ArgumentNullException(nameof(consoleWriter));
         }

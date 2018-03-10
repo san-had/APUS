@@ -68,7 +68,11 @@
             var consoleWriterTypeName = Configuration["consoleWriter"];
             var consoleWriterType = Type.GetType(consoleWriterTypeName, true);
 
-            var outputFormatterTypeName = Configuration["tableOutputFormatter"];
+            int outputFormatTypeNumber = GetOutputFormat();
+
+            string outputFormatString = ((OutputFormatterType)outputFormatTypeNumber).ToString();
+
+            var outputFormatterTypeName = Configuration[outputFormatString];
             var outputFormatterType = Type.GetType(outputFormatterTypeName, true);
 
             var reportGeneratorTypeName = Configuration["reportGenerator"];
@@ -115,6 +119,27 @@
             }
 
             return dataAccessNumber;
+        }
+
+        private static int GetOutputFormat()
+        {
+            int formatNumber = 0;
+            var validChoices = new int[] { 1, 2 };
+            bool isParsed = false;
+
+            Console.WriteLine();
+            Console.WriteLine("1. Standard");
+            Console.WriteLine("2. Table");
+            Console.WriteLine();
+            Console.Write("Your choice: ");
+
+            while (!validChoices.Contains(formatNumber) || !isParsed)
+            {
+                var readString = Console.ReadLine();
+                isParsed = int.TryParse(readString.Trim(), out formatNumber);
+            }
+
+            return formatNumber;
         }
     }
 }
