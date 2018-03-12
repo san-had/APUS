@@ -38,7 +38,7 @@
 
             foreach (var officer in officerViewList)
             {
-                table.Rows.Add(officer.LastName, officer.FirstName, officer.InOfficeRange, officer.NumberOfInOfficeDays);
+                table.Rows.Add(officer.Col1, officer.Col2, officer.Col3, officer.Col4);
             }
 
             return table;

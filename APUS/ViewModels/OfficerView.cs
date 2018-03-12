@@ -1,13 +1,17 @@
-﻿namespace APUS.ViewModels
+﻿using System.Collections.Generic;
+
+namespace APUS.ViewModels
 {
     public class OfficerView
     {
-        public string LastName { get; set; }
+        public IEnumerable<string> Header { get; set; }
 
-        public string FirstName { get; set; }
+        public string Col1 { get; set; }
 
-        public string InOfficeRange { get; set; }
+        public string Col2 { get; set; }
 
-        public int NumberOfInOfficeDays { get; set; }
+        public string Col3 { get; set; }
+
+        public string Col4 { get; set; }
     }
 }

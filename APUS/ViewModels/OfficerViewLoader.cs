@@ -23,18 +23,18 @@
 
             var officerViewList = new List<OfficerView>();
 
-            foreach (var president in officers)
+            foreach (var officer in officers)
             {
-                var viewPresident = new ViewModels.OfficerView();
+                var officerView = new ViewModels.OfficerView();
 
-                DateTime? leftOffice = this.officerViewCalculator.LeftOfficeParser(president.LeftOffice);
+                DateTime? leftOffice = this.officerViewCalculator.LeftOfficeParser(officer.LeftOffice);
 
-                viewPresident.FirstName = president.FirstName;
-                viewPresident.LastName = president.LastName;
-                viewPresident.InOfficeRange = this.officerViewCalculator.GetInOfficeRange(president.TookOffice, leftOffice);
-                viewPresident.NumberOfInOfficeDays = this.officerViewCalculator.CalculateNumberOfInOfficeDays(president.TookOffice, leftOffice);
+                officerView.Col2 = officer.FirstName;
+                officerView.Col1 = officer.LastName;
+                officerView.Col3 = this.officerViewCalculator.GetInOfficeRange(officer.TookOffice, leftOffice);
+                officerView.Col4 = this.officerViewCalculator.CalculateNumberOfInOfficeDays(officer.TookOffice, leftOffice).ToString();
 
-                officerViewList.Add(viewPresident);
+                officerViewList.Add(officerView);
             }
             return officerViewList;
         }
