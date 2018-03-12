@@ -4,8 +4,6 @@ namespace APUS.ViewModels
 {
     public class OfficerView
     {
-        public IEnumerable<string> Header { get; set; }
-
         public string Col1 { get; set; }
 
         public string Col2 { get; set; }

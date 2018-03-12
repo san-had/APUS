@@ -18,7 +18,7 @@
 
             foreach (var officerView in officerViewList)
             {
-                consoleWriter.WriteLine($"{officerView.Col1.ToUpper()},{officerView.Col2},{officerView.Col3},{officerView.Col4} days");
+                consoleWriter.WriteLine($"{officerView.Col1},{officerView.Col2},{officerView.Col3},{officerView.Col4}");
             }
         }
     }

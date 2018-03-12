@@ -34,7 +34,7 @@
             table.Columns.Add("Last Name", typeof(string));
             table.Columns.Add("First Name", typeof(string));
             table.Columns.Add("In-Office Range", typeof(string));
-            table.Columns.Add("# of In-Office Days", typeof(int));
+            table.Columns.Add("# of In-Office Days", typeof(string));
 
             foreach (var officer in officerViewList)
             {

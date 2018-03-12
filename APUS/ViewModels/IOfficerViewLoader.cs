@@ -5,6 +5,6 @@
 
     public interface IOfficerViewLoader
     {
-        IEnumerable<OfficerView> UpdateViewOfficers(IEnumerable<Officer> presidents);
+        IEnumerable<OfficerView> UpdateViewOfficers(IEnumerable<Officer> officers);
     }
 }

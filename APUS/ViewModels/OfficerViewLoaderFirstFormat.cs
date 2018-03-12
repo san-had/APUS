@@ -5,11 +5,11 @@
     using System.Linq;
     using APUS.Models;
 
-    public class OfficerViewLoader : IOfficerViewLoader
+    public class OfficerViewLoaderFirstFormat : IOfficerViewLoader
     {
         private IOfficerViewCalculator officerViewCalculator;
 
-        public OfficerViewLoader(IOfficerViewCalculator officerViewCalculator)
+        public OfficerViewLoaderFirstFormat(IOfficerViewCalculator officerViewCalculator)
         {
             this.officerViewCalculator = officerViewCalculator ?? throw new ArgumentNullException(nameof(officerViewCalculator));
         }
@@ -30,9 +30,9 @@
                 DateTime? leftOffice = this.officerViewCalculator.LeftOfficeParser(officer.LeftOffice);
 
                 officerView.Col2 = officer.FirstName;
-                officerView.Col1 = officer.LastName;
+                officerView.Col1 = officer.LastName.ToUpper();
                 officerView.Col3 = this.officerViewCalculator.GetInOfficeRange(officer.TookOffice, leftOffice);
-                officerView.Col4 = this.officerViewCalculator.CalculateNumberOfInOfficeDays(officer.TookOffice, leftOffice).ToString();
+                officerView.Col4 = $"{this.officerViewCalculator.CalculateNumberOfInOfficeDays(officer.TookOffice, leftOffice).ToString()} days";
 
                 officerViewList.Add(officerView);
             }

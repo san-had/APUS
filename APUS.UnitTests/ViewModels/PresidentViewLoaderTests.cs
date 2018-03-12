@@ -14,7 +14,7 @@
         {
             var fakeOfficerViewCalculator = Substitute.For<IOfficerViewCalculator>();
 
-            var officerViewLoader = new OfficerViewLoader(fakeOfficerViewCalculator);
+            var officerViewLoader = new OfficerViewLoaderFirstFormat(fakeOfficerViewCalculator);
 
             var officerViewList = officerViewLoader.UpdateViewOfficers(null);
 
@@ -26,7 +26,7 @@
         {
             var fakeOfficerViewCalculator = Substitute.For<IOfficerViewCalculator>();
 
-            var officerViewLoader = new OfficerViewLoader(fakeOfficerViewCalculator);
+            var officerViewLoader = new OfficerViewLoaderFirstFormat(fakeOfficerViewCalculator);
 
             var officerViewList = officerViewLoader.UpdateViewOfficers(Enumerable.Empty<Officer>());
 
@@ -38,7 +38,7 @@
         {
             var fakeOfficerViewCalculator = Substitute.For<IOfficerViewCalculator>();
 
-            var officerViewLoader = new OfficerViewLoader(fakeOfficerViewCalculator);
+            var officerViewLoader = new OfficerViewLoaderFirstFormat(fakeOfficerViewCalculator);
 
             var officerList = new List<Officer>
             {
