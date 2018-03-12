@@ -2,6 +2,7 @@
 {
     using Microsoft.Extensions.Configuration;
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
 
@@ -140,6 +141,19 @@
             }
 
             return formatNumber;
+        }
+
+        private static int GetViewFormat()
+        {
+            var menuDictionary = new Dictionary<int, string>()
+            {
+                {1, "First Format" },
+                {2, "Second Format" }
+            };
+
+            var menu = new Menu();
+            menu.DisplayMenu(menuDictionary);
+            return menu.GetChoise(menuDictionary);
         }
     }
 }
