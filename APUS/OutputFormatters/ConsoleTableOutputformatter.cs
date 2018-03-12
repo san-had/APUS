@@ -15,28 +15,28 @@
             this.consoleWriter = consoleWriter ?? throw new ArgumentNullException(nameof(consoleWriter));
         }
 
-        public void RenderOutput(IEnumerable<OfficerView> officerViewList)
+        public void RenderOutput(OfficerViewModel officerViewModel)
         {
-            PrintTable(officerViewList);
+            PrintTable(officerViewModel);
         }
 
-        public void PrintTable(IEnumerable<OfficerView> officerViewList)
+        public void PrintTable(OfficerViewModel officerViewModel)
         {
             consoleWriter.WriteLine(string.Empty);
             consoleWriter.WriteLine("Officer list in table format");
-            var tableBuilder = ConsoleTableBuilder.From(OfficerTableData(officerViewList));
+            var tableBuilder = ConsoleTableBuilder.From(OfficerTableData(officerViewModel));
             tableBuilder.ExportAndWriteLine();
         }
 
-        private DataTable OfficerTableData(IEnumerable<OfficerView> officerViewList)
+        private DataTable OfficerTableData(OfficerViewModel officerViewModel)
         {
             DataTable table = new DataTable();
-            table.Columns.Add("Last Name", typeof(string));
-            table.Columns.Add("First Name", typeof(string));
-            table.Columns.Add("In-Office Range", typeof(string));
-            table.Columns.Add("# of In-Office Days", typeof(string));
+            foreach (var col in officerViewModel.OfficerViewHeader)
+            {
+                table.Columns.Add(col, typeof(string));
+            }
 
-            foreach (var officer in officerViewList)
+            foreach (var officer in officerViewModel.OfficerViewRows)
             {
                 table.Rows.Add(officer.Col1, officer.Col2, officer.Col3, officer.Col4);
             }

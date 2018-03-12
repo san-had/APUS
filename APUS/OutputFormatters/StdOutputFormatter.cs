@@ -12,14 +12,19 @@
             this.consoleWriter = consoleWriter;
         }
 
-        public void RenderOutput(IEnumerable<OfficerView> officerViewList)
+        public void RenderOutput(OfficerViewModel officerViewModel)
         {
-            consoleWriter.WriteLine(Constants.CsvOutputHeader);
+            WriteHeader(officerViewModel.OfficerViewHeader);
 
-            foreach (var officerView in officerViewList)
+            foreach (var officerView in officerViewModel.OfficerViewRows)
             {
                 consoleWriter.WriteLine($"{officerView.Col1},{officerView.Col2},{officerView.Col3},{officerView.Col4}");
             }
+        }
+
+        public void WriteHeader(IEnumerable<string> header)
+        {
+            consoleWriter.WriteLine(string.Join(',', header));
         }
     }
 }

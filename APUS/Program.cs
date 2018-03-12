@@ -62,8 +62,8 @@
             var officerViewCalculatorTypeName = Configuration["officerViewCalculator"];
             var officerViewCalculatorType = Type.GetType(officerViewCalculatorTypeName, true);
 
-            var officerViewLoaderTypeName = Configuration["officerViewLoader"];
-            var officerViewLoaderType = Type.GetType(officerViewLoaderTypeName, true);
+            var officerViewModelLoaderTypeName = Configuration["officerViewModelLoader"];
+            var officerViewModelLoaderType = Type.GetType(officerViewModelLoaderTypeName, true);
 
             var consoleWriterTypeName = Configuration["consoleWriter"];
             var consoleWriterType = Type.GetType(consoleWriterTypeName, true);
@@ -88,13 +88,13 @@
 
             ViewModels.IOfficerViewCalculator officerViewCalculator = (ViewModels.IOfficerViewCalculator)Activator.CreateInstance(officerViewCalculatorType);
 
-            ViewModels.IOfficerViewLoader officerViewLoader = (ViewModels.IOfficerViewLoader)Activator.CreateInstance(officerViewLoaderType, new object[] { officerViewCalculator });
+            ViewModels.IOfficerViewModelLoader officerViewModelLoader = (ViewModels.IOfficerViewModelLoader)Activator.CreateInstance(officerViewModelLoaderType, new object[] { officerViewCalculator });
 
             OutputFormatters.IConsoleWriter consoleWriter = (OutputFormatters.IConsoleWriter)Activator.CreateInstance(consoleWriterType);
 
             OutputFormatters.IOutputFormatter outputFormatter = (OutputFormatters.IOutputFormatter)Activator.CreateInstance(outputFormatterType, new object[] { consoleWriter });
 
-            IReportGenerator reportGenerator = (IReportGenerator)Activator.CreateInstance(reportGeneratorType, new object[] { dataLoader, officerViewLoader, outputFormatter });
+            IReportGenerator reportGenerator = (IReportGenerator)Activator.CreateInstance(reportGeneratorType, new object[] { dataLoader, officerViewModelLoader, outputFormatter });
 
             reportGenerator.CreateReport();
         }

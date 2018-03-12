@@ -14,11 +14,11 @@
         {
             var fakeOfficerViewCalculator = Substitute.For<IOfficerViewCalculator>();
 
-            var officerViewLoader = new OfficerViewLoaderFirstFormat(fakeOfficerViewCalculator);
+            var officerViewModelLoader = new OfficerViewModelLoaderFirstFormat(fakeOfficerViewCalculator);
 
-            var officerViewList = officerViewLoader.UpdateViewOfficers(null);
+            var officerViewModel = officerViewModelLoader.UpdateViewOfficerModel(null);
 
-            Assert.Empty(officerViewList);
+            Assert.Empty(officerViewModel.OfficerViewRows);
         }
 
         [Fact]
@@ -26,11 +26,11 @@
         {
             var fakeOfficerViewCalculator = Substitute.For<IOfficerViewCalculator>();
 
-            var officerViewLoader = new OfficerViewLoaderFirstFormat(fakeOfficerViewCalculator);
+            var officerViewModelLoader = new OfficerViewModelLoaderFirstFormat(fakeOfficerViewCalculator);
 
-            var officerViewList = officerViewLoader.UpdateViewOfficers(Enumerable.Empty<Officer>());
+            var officerViewModel = officerViewModelLoader.UpdateViewOfficerModel(Enumerable.Empty<Officer>());
 
-            Assert.Empty(officerViewList);
+            Assert.Empty(officerViewModel.OfficerViewRows);
         }
 
         [Fact]
@@ -38,7 +38,7 @@
         {
             var fakeOfficerViewCalculator = Substitute.For<IOfficerViewCalculator>();
 
-            var officerViewLoader = new OfficerViewLoaderFirstFormat(fakeOfficerViewCalculator);
+            var officerViewModelLoader = new OfficerViewModelLoaderFirstFormat(fakeOfficerViewCalculator);
 
             var officerList = new List<Officer>
             {
@@ -52,9 +52,9 @@
                 }
             };
 
-            var officerViewList = officerViewLoader.UpdateViewOfficers(officerList);
+            var officerViewModel = officerViewModelLoader.UpdateViewOfficerModel(officerList);
 
-            Assert.NotEmpty(officerViewList);
+            Assert.NotEmpty(officerViewModel.OfficerViewRows);
         }
     }
 }
