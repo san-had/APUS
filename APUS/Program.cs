@@ -1,103 +1,118 @@
 ﻿namespace APUS
 {
-    using Microsoft.Extensions.Configuration;
     using System;
     using System.Collections.Generic;
-    using System.IO;
+    using Unity;
+    using Unity.Injection;
 
     internal class Program
     {
-        public static IConfiguration Configuration { get; set; }
+        private static IUnityContainer container = new UnityContainer();
 
         private static void Main(string[] args)
         {
             Console.WriteLine(Constants.GreetingText);
 
+            Setup();
+
             Run();
+        }
+
+        private static void Setup()
+        {
+            DataAccessConfiguration();
+
+            DataLoaderConfiguration();
+
+            ViewModelLoaderConfiguration();
+
+            OutputFormatterConfiguration();
+
+            ReportGeneratorConfiguration();
+        }
+
+        private static void DataAccessConfiguration()
+        {
+            int dataAccessTypeNumber = GetDataAccessType();
+
+            switch (dataAccessTypeNumber)
+            {
+                case 1:
+                    container.RegisterType<CommonDataAccess.ICommonDataAccess, DataAccess.CsvPresidentDataAccess>();
+                    container.RegisterType<DataLoader.IDateParser, DataLoader.EnDateParser>();
+                    break;
+
+                case 2:
+                    container.RegisterType<CommonDataAccess.ICommonDataAccess, DataAccess.Csv2PresidentDataAccess>();
+                    container.RegisterType<DataLoader.IDateParser, DataLoader.UsDateParser>();
+                    break;
+
+                case 3:
+                    container.RegisterType<CommonDataAccess.ICommonDataAccess, DataAccess.JsonMayorDataAccess>();
+                    container.RegisterType<DataLoader.IDateParser, DataLoader.UTCDateTimeParser>();
+                    break;
+
+                default:
+                    throw new NotImplementedException($"Invalid dataAccessTypeNumber: {dataAccessTypeNumber.ToString()}");
+            }
+        }
+
+        private static void DataLoaderConfiguration()
+        {
+            container.RegisterType<DataLoader.IOfficerDataMapper, DataLoader.OfficerDataMapper>(new InjectionConstructor(typeof(DataLoader.IDateParser)));
+            container.RegisterType<DataLoader.IDataLoader, DataLoader.DataLoader>(new InjectionConstructor(typeof(CommonDataAccess.ICommonDataAccess), typeof(DataLoader.IOfficerDataMapper)));
+        }
+
+        private static void ViewModelLoaderConfiguration()
+        {
+            container.RegisterType<ViewModels.IOfficerViewCalculator, ViewModels.OfficerViewCalculator>();
+
+            int viewFormatNumber = GetViewFormat();
+
+            switch (viewFormatNumber)
+            {
+                case 1:
+                    container.RegisterType<ViewModels.IOfficerViewModelLoader, ViewModels.OfficerViewModelLoaderFirstFormat>(new InjectionConstructor(typeof(ViewModels.IOfficerViewCalculator)));
+                    break;
+
+                case 2:
+                    container.RegisterType<ViewModels.IOfficerViewModelLoader, ViewModels.OfficerViewModelLoaderSecondFormat>(new InjectionConstructor(typeof(ViewModels.IOfficerViewCalculator)));
+                    break;
+
+                default:
+                    throw new NotImplementedException($"Invalid viewFormatNumber: {viewFormatNumber.ToString()}");
+            }
+        }
+
+        private static void OutputFormatterConfiguration()
+        {
+            int outputFormatTypeNumber = GetOutputFormat();
+
+            switch (outputFormatTypeNumber)
+            {
+                case 1:
+                    container.RegisterType<OutputFormatters.IOutputFormatter, OutputFormatters.StdOutputFormatter>(new InjectionConstructor(typeof(OutputFormatters.IConsoleWriter)));
+                    break;
+
+                case 2:
+                    container.RegisterType<OutputFormatters.IOutputFormatter, OutputFormatters.ConsoleTableOutputFormatter>(new InjectionConstructor(typeof(OutputFormatters.IConsoleWriter)));
+                    break;
+
+                default:
+                    throw new NotImplementedException($"Invalid outputFormatTypeNumber: {outputFormatTypeNumber.ToString()}");
+            }
+
+            container.RegisterType<OutputFormatters.IConsoleWriter, OutputFormatters.ConsoleWriter>();
+        }
+
+        private static void ReportGeneratorConfiguration()
+        {
+            container.RegisterType<IReportGenerator, ReportGenerator>(new InjectionConstructor(typeof(DataLoader.IDataLoader), typeof(ViewModels.IOfficerViewModelLoader), typeof(OutputFormatters.IOutputFormatter)));
         }
 
         private static void Run()
         {
-            var builder = new ConfigurationBuilder()
-                     .SetBasePath(Directory.GetCurrentDirectory())
-                     .AddJsonFile("appsettings.json");
-
-            Configuration = builder.Build();
-
-            int dataAccessTypeNumber = GetDataAccessType();
-
-            string dataAccessString = ((DataAccesType)dataAccessTypeNumber).ToString();
-
-            var dataAccessTypeName = Configuration[dataAccessString];
-            var dataAccessType = Type.GetType(dataAccessTypeName, true);
-
-            string dateParserString;
-            switch (dataAccessTypeNumber)
-            {
-                case 1:
-                    dateParserString = "enDateParser";
-                    break;
-
-                case 2:
-                    dateParserString = "usDateParser";
-                    break;
-
-                case 3:
-                    dateParserString = "utcDateTimeParser";
-                    break;
-
-                default:
-                    throw new NotImplementedException(dataAccessTypeNumber.ToString());
-            }
-
-            var dateParserTypeName = Configuration[dateParserString];
-            var dateParserType = Type.GetType(dateParserTypeName, true);
-
-            var mapperTypeName = Configuration["mapper"];
-            var mapperType = Type.GetType(mapperTypeName, true);
-
-            var dataLoaderTypeName = Configuration["dataLoader"];
-            var dataLoaderType = Type.GetType(dataLoaderTypeName, true);
-
-            var officerViewCalculatorTypeName = Configuration["officerViewCalculator"];
-            var officerViewCalculatorType = Type.GetType(officerViewCalculatorTypeName, true);
-
-            int viewFormatNumber = GetViewFormat();
-            string viewFormatString = ((ViewFormatType)viewFormatNumber).ToString();
-
-            var officerViewModelLoaderTypeName = Configuration[viewFormatString];
-            var officerViewModelLoaderType = Type.GetType(officerViewModelLoaderTypeName, true);
-
-            var consoleWriterTypeName = Configuration["consoleWriter"];
-            var consoleWriterType = Type.GetType(consoleWriterTypeName, true);
-
-            int outputFormatTypeNumber = GetOutputFormat();
-
-            string outputFormatString = ((OutputFormatterType)outputFormatTypeNumber).ToString();
-
-            var outputFormatterTypeName = Configuration[outputFormatString];
-            var outputFormatterType = Type.GetType(outputFormatterTypeName, true);
-
-            var reportGeneratorTypeName = Configuration["reportGenerator"];
-            var reportGeneratorType = Type.GetType(reportGeneratorTypeName, true);
-
-            CommonDataAccess.ICommonDataAccess dataAccess = (CommonDataAccess.ICommonDataAccess)Activator.CreateInstance(dataAccessType);
-
-            DataLoader.IDateParser dateParser = (DataLoader.IDateParser)Activator.CreateInstance(dateParserType);
-
-            DataLoader.IOfficerDataMapper mapper = (DataLoader.IOfficerDataMapper)Activator.CreateInstance(mapperType, new object[] { dateParser });
-
-            DataLoader.IDataLoader dataLoader = (DataLoader.IDataLoader)Activator.CreateInstance(dataLoaderType, new object[] { dataAccess, mapper });
-
-            ViewModels.IOfficerViewCalculator officerViewCalculator = (ViewModels.IOfficerViewCalculator)Activator.CreateInstance(officerViewCalculatorType);
-
-            ViewModels.IOfficerViewModelLoader officerViewModelLoader = (ViewModels.IOfficerViewModelLoader)Activator.CreateInstance(officerViewModelLoaderType, new object[] { officerViewCalculator });
-
-            OutputFormatters.IConsoleWriter consoleWriter = (OutputFormatters.IConsoleWriter)Activator.CreateInstance(consoleWriterType);
-
-            OutputFormatters.IOutputFormatter outputFormatter = (OutputFormatters.IOutputFormatter)Activator.CreateInstance(outputFormatterType, new object[] { consoleWriter });
-
-            IReportGenerator reportGenerator = (IReportGenerator)Activator.CreateInstance(reportGeneratorType, new object[] { dataLoader, officerViewModelLoader, outputFormatter });
+            var reportGenerator = container.Resolve<IReportGenerator>();
 
             reportGenerator.CreateReport();
         }
