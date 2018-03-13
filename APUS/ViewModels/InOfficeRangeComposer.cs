@@ -3,22 +3,8 @@
     using System;
     using System.Text;
 
-    public class OfficerViewCalculator : IOfficerViewCalculator
+    public class InOfficeRangeComposer : IInOfficeRangeComposer
     {
-        public int CalculateNumberOfInOfficeDays(DateTime? tookOffice, DateTime? leftOffice)
-        {
-            int presidencyDays = 0;
-
-            if (tookOffice.HasValue && leftOffice.HasValue)
-            {
-                TimeSpan offset = leftOffice.Value.Subtract(tookOffice.Value);
-
-                presidencyDays = offset.Days;
-            }
-
-            return presidencyDays;
-        }
-
         public string GetInOfficeRange(DateTime? tookOffice, DateTime? leftOffice)
         {
             var sb = new StringBuilder();
@@ -38,11 +24,6 @@
             }
 
             return sb.ToString();
-        }
-
-        public DateTime? LeftOfficeParser(DateTime? leftOffice)
-        {
-            return leftOffice.HasValue ? leftOffice.Value : DateTime.Now;
         }
 
         public string GetLeftYearString(DateTime? leftOffice)

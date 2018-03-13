@@ -7,20 +7,52 @@
 
     public class OfficerViewModelLoaderFirstFormat : IOfficerViewModelLoader
     {
-        private IOfficerViewCalculator officerViewCalculator;
+        private IInOfficeDaysCalculator inOfficeDaysCalculator;
 
-        public IOfficerViewCalculator OfficerViewCalculator
+        public IInOfficeDaysCalculator InOfficeDaysCalculator
         {
             get
             {
-                if (officerViewCalculator == null)
+                if (inOfficeDaysCalculator == null)
                 {
-                    throw new NullReferenceException(nameof(officerViewCalculator));
+                    throw new NullReferenceException(nameof(inOfficeDaysCalculator));
                 }
 
-                return officerViewCalculator;
+                return inOfficeDaysCalculator;
             }
-            set { officerViewCalculator = value; }
+            set { inOfficeDaysCalculator = value; }
+        }
+
+        private IInOfficeRangeComposer inOfficeRangeComposer;
+
+        public IInOfficeRangeComposer InOfficeRangeComposer
+        {
+            get
+            {
+                if (inOfficeRangeComposer == null)
+                {
+                    throw new NullReferenceException(nameof(inOfficeRangeComposer));
+                }
+
+                return inOfficeRangeComposer;
+            }
+            set { inOfficeRangeComposer = value; }
+        }
+
+        private ILeftOfficeParser leftOfficeParser;
+
+        public ILeftOfficeParser LeftOfficeParser
+        {
+            get
+            {
+                if (leftOfficeParser == null)
+                {
+                    throw new NullReferenceException(nameof(leftOfficeParser));
+                }
+
+                return leftOfficeParser;
+            }
+            set { leftOfficeParser = value; }
         }
 
         public OfficerViewModel UpdateViewOfficerModel(IEnumerable<Officer> officers)
@@ -41,12 +73,12 @@
                 {
                     var officerView = new ViewModels.OfficerView();
 
-                    DateTime? leftOffice = this.officerViewCalculator.LeftOfficeParser(officer.LeftOffice);
+                    DateTime? leftOffice = this.leftOfficeParser.ParseLeftOffice(officer.LeftOffice);
 
                     officerView.Col2 = officer.FirstName;
                     officerView.Col1 = officer.LastName.ToUpper();
-                    officerView.Col3 = this.officerViewCalculator.GetInOfficeRange(officer.TookOffice, leftOffice);
-                    officerView.Col4 = $"{this.officerViewCalculator.CalculateNumberOfInOfficeDays(officer.TookOffice, leftOffice).ToString()} days";
+                    officerView.Col3 = this.inOfficeRangeComposer.GetInOfficeRange(officer.TookOffice, leftOffice);
+                    officerView.Col4 = $"{this.inOfficeDaysCalculator.CalculateNumberOfInOfficeDays(officer.TookOffice, leftOffice).ToString()} days";
 
                     officerViewList.Add(officerView);
                 }

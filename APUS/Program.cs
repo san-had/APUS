@@ -65,14 +65,20 @@
 
         private static void ViewModelLoaderConfiguration()
         {
-            container.RegisterType<ViewModels.IOfficerViewCalculator, ViewModels.OfficerViewCalculator>();
+            container.RegisterType<ViewModels.IInOfficeDaysCalculator, ViewModels.InOfficeDaysCalculator>();
+            container.RegisterType<ViewModels.IInOfficeRangeComposer, ViewModels.InOfficeRangeComposer>();
+            container.RegisterType<ViewModels.ILeftOfficeParser, ViewModels.LeftOfficeParser>();
 
             int viewFormatNumber = GetViewFormat();
 
             switch (viewFormatNumber)
             {
                 case 1:
-                    container.RegisterType<ViewModels.IOfficerViewModelLoader, ViewModels.OfficerViewModelLoaderFirstFormat>(new InjectionProperty("OfficerViewCalculator"));
+                    container.RegisterType<ViewModels.IOfficerViewModelLoader, ViewModels.OfficerViewModelLoaderFirstFormat>
+                        (
+                            new InjectionProperty("InOfficeDaysCalculator"),
+                            new InjectionProperty("InOfficeRangeComposer"),
+                            new InjectionProperty("LeftOfficeParser"));
                     break;
 
                 case 2:
