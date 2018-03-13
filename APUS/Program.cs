@@ -4,7 +4,6 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
 
     internal class Program
     {
@@ -63,7 +62,10 @@
             var officerViewCalculatorTypeName = Configuration["officerViewCalculator"];
             var officerViewCalculatorType = Type.GetType(officerViewCalculatorTypeName, true);
 
-            var officerViewModelLoaderTypeName = Configuration["officerViewModelLoader"];
+            int viewFormatNumber = GetViewFormat();
+            string viewFormatString = ((ViewFormatType)viewFormatNumber).ToString();
+
+            var officerViewModelLoaderTypeName = Configuration[viewFormatString];
             var officerViewModelLoaderType = Type.GetType(officerViewModelLoaderTypeName, true);
 
             var consoleWriterTypeName = Configuration["consoleWriter"];
@@ -102,45 +104,29 @@
 
         private static int GetDataAccessType()
         {
-            int dataAccessNumber = 0;
-            var validChoices = new int[] { 1, 2, 3 };
-            bool isParsed = false;
-
-            Console.WriteLine();
-            Console.WriteLine("1. CsvDataAccess");
-            Console.WriteLine("2. Csv2DataAccess");
-            Console.WriteLine("3. JsonDataAccess");
-            Console.WriteLine();
-            Console.Write("Your choice: ");
-
-            while (!validChoices.Contains(dataAccessNumber) || !isParsed)
+            var menuDictionary = new Dictionary<int, string>()
             {
-                var readString = Console.ReadLine();
-                isParsed = int.TryParse(readString.Trim(), out dataAccessNumber);
-            }
+                {1, "CsvDataAccess" },
+                {2, "Csv2DataAccess" },
+                {3, "JsonDataAccess" }
+            };
 
-            return dataAccessNumber;
+            var menu = new Menu();
+            menu.DisplayMenu(menuDictionary);
+            return menu.GetChoise(menuDictionary);
         }
 
         private static int GetOutputFormat()
         {
-            int formatNumber = 0;
-            var validChoices = new int[] { 1, 2 };
-            bool isParsed = false;
-
-            Console.WriteLine();
-            Console.WriteLine("1. Standard");
-            Console.WriteLine("2. Table");
-            Console.WriteLine();
-            Console.Write("Your choice: ");
-
-            while (!validChoices.Contains(formatNumber) || !isParsed)
+            var menuDictionary = new Dictionary<int, string>()
             {
-                var readString = Console.ReadLine();
-                isParsed = int.TryParse(readString.Trim(), out formatNumber);
-            }
+                {1, "Standard" },
+                {2, "Table" }
+            };
 
-            return formatNumber;
+            var menu = new Menu();
+            menu.DisplayMenu(menuDictionary);
+            return menu.GetChoise(menuDictionary);
         }
 
         private static int GetViewFormat()

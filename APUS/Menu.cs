@@ -18,7 +18,7 @@
                 Console.WriteLine($"{item.Key}. {item.Value}");
             }
             Console.WriteLine();
-            Console.WriteLine("Your choice: ");
+            Console.Write("Your choice: ");
         }
 
         public int GetChoise(Dictionary<int, string> options)
