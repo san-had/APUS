@@ -9,9 +9,18 @@
     {
         private IOfficerViewCalculator officerViewCalculator;
 
-        public OfficerViewModelLoaderFirstFormat(IOfficerViewCalculator officerViewCalculator)
+        public IOfficerViewCalculator OfficerViewCalculator
         {
-            this.officerViewCalculator = officerViewCalculator ?? throw new ArgumentNullException(nameof(officerViewCalculator));
+            get
+            {
+                if (officerViewCalculator == null)
+                {
+                    throw new NullReferenceException(nameof(officerViewCalculator));
+                }
+
+                return officerViewCalculator;
+            }
+            set { officerViewCalculator = value; }
         }
 
         public OfficerViewModel UpdateViewOfficerModel(IEnumerable<Officer> officers)

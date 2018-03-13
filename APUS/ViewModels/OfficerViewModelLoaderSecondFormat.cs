@@ -1,19 +1,11 @@
 ﻿namespace APUS.ViewModels
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using APUS.Models;
 
     public class OfficerViewModelLoaderSecondFormat : IOfficerViewModelLoader
     {
-        private IOfficerViewCalculator officerViewCalculator;
-
-        public OfficerViewModelLoaderSecondFormat(IOfficerViewCalculator officerViewCalculator)
-        {
-            this.officerViewCalculator = officerViewCalculator ?? throw new ArgumentNullException(nameof(officerViewCalculator));
-        }
-
         public OfficerViewModel UpdateViewOfficerModel(IEnumerable<Officer> officers)
         {
             var officerViewModel = new OfficerViewModel();

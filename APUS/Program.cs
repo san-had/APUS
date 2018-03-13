@@ -72,11 +72,11 @@
             switch (viewFormatNumber)
             {
                 case 1:
-                    container.RegisterType<ViewModels.IOfficerViewModelLoader, ViewModels.OfficerViewModelLoaderFirstFormat>(new InjectionConstructor(typeof(ViewModels.IOfficerViewCalculator)));
+                    container.RegisterType<ViewModels.IOfficerViewModelLoader, ViewModels.OfficerViewModelLoaderFirstFormat>(new InjectionProperty("OfficerViewCalculator"));
                     break;
 
                 case 2:
-                    container.RegisterType<ViewModels.IOfficerViewModelLoader, ViewModels.OfficerViewModelLoaderSecondFormat>(new InjectionConstructor(typeof(ViewModels.IOfficerViewCalculator)));
+                    container.RegisterType<ViewModels.IOfficerViewModelLoader, ViewModels.OfficerViewModelLoaderSecondFormat>();
                     break;
 
                 default:
