@@ -8,14 +8,14 @@
     {
         private readonly DataLoader.IDataLoader dataLoader;
 
-        private readonly IOfficerViewLoader officerViewLoader;
+        private readonly IOfficerViewModelLoader officerViewModelLoader;
 
         private readonly IOutputFormatter outputFormatter;
 
-        public ReportGenerator(DataLoader.IDataLoader dataLoader, IOfficerViewLoader officerViewLoader, IOutputFormatter outputFormatter)
+        public ReportGenerator(DataLoader.IDataLoader dataLoader, IOfficerViewModelLoader officerViewModelLoader, IOutputFormatter outputFormatter)
         {
             this.dataLoader = dataLoader ?? throw new ArgumentNullException(nameof(dataLoader));
-            this.officerViewLoader = officerViewLoader ?? throw new ArgumentNullException(nameof(officerViewLoader));
+            this.officerViewModelLoader = officerViewModelLoader ?? throw new ArgumentNullException(nameof(officerViewModelLoader));
             this.outputFormatter = outputFormatter ?? throw new ArgumentNullException(nameof(outputFormatter));
         }
 
@@ -23,9 +23,9 @@
         {
             var officers = dataLoader.LoadData();
 
-            var officerViewList = this.officerViewLoader.UpdateViewOfficers(officers);
+            var officerViewModel = this.officerViewModelLoader.UpdateViewOfficerModel(officers);
 
-            this.outputFormatter.RenderOutput(officerViewList);
+            this.outputFormatter.RenderOutput(officerViewModel);
         }
     }
 }

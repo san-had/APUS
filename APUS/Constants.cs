@@ -13,7 +13,5 @@
         public const string NAString = "n.a.";
 
         public const string NALeftOfficeString = "Incumbent";
-
-        internal const string CsvOutputHeader = "last name, first name, in-office range, # of in-office days";
     }
 }
