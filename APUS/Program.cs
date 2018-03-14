@@ -9,15 +9,18 @@
     [ExcludeFromCodeCoverage]
     internal class Program
     {
-        private static IUnityContainer container = new UnityContainer();
+        private static IUnityContainer container;
 
         private static void Main(string[] args)
         {
             Console.WriteLine(Constants.GreetingText);
 
-            Setup();
+            using (container = new UnityContainer())
+            {
+                Setup();
 
-            Run();
+                Run();
+            }
         }
 
         private static void Setup()
