@@ -2,9 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Unity;
     using Unity.Injection;
 
+    [ExcludeFromCodeCoverage]
     internal class Program
     {
         private static IUnityContainer container = new UnityContainer();
