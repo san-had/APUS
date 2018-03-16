@@ -80,7 +80,7 @@
             switch (viewFormatNumber)
             {
                 case 1:
-                    container.RegisterType<ViewModels.IOfficerViewModelLoader, ViewModels.OfficerViewModelLoaderFirstFormat>
+                    container.RegisterType<ViewModels.IOfficerViewModelDataMapper, ViewModels.OfficerViewModelLoaderFirstFormat>
                         (
                             new InjectionProperty("InOfficeDaysCalculator"),
                             new InjectionProperty("InOfficeRangeComposer"),
@@ -88,7 +88,7 @@
                     break;
 
                 case 2:
-                    container.RegisterType<ViewModels.IOfficerViewModelLoader, ViewModels.OfficerViewModelLoaderSecondFormat>();
+                    container.RegisterType<ViewModels.IOfficerViewModelDataMapper, ViewModels.OfficerViewModelLoaderSecondFormat>();
                     break;
 
                 default:
@@ -119,7 +119,7 @@
 
         private static void ReportGeneratorConfiguration()
         {
-            container.RegisterType<IReportGenerator, ReportGenerator>(new InjectionConstructor(typeof(DataLoader.IDataLoader), typeof(ViewModels.IOfficerViewModelLoader), typeof(OutputFormatters.IOutputFormatter)));
+            container.RegisterType<IReportGenerator, ReportGenerator>(new InjectionConstructor(typeof(DataLoader.IDataLoader), typeof(ViewModels.IOfficerViewModelDataMapper), typeof(OutputFormatters.IOutputFormatter)));
         }
 
         private static void Run()

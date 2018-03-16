@@ -23,7 +23,7 @@
             officerViewModelLoader.InOfficeRangeComposer = fakeInOfficeRangeComposer;
             officerViewModelLoader.LeftOfficeParser = fakeLeftOfficeParser;
 
-            var officerViewModel = officerViewModelLoader.UpdateViewOfficerModel(null);
+            var officerViewModel = officerViewModelLoader.MapDomainData(null);
 
             Assert.Empty(officerViewModel.OfficerViewRows);
         }
@@ -41,7 +41,7 @@
             officerViewModelLoader.InOfficeRangeComposer = fakeInOfficeRangeComposer;
             officerViewModelLoader.LeftOfficeParser = fakeLeftOfficeParser;
 
-            var officerViewModel = officerViewModelLoader.UpdateViewOfficerModel(Enumerable.Empty<Officer>());
+            var officerViewModel = officerViewModelLoader.MapDomainData(Enumerable.Empty<Officer>());
 
             Assert.Empty(officerViewModel.OfficerViewRows);
         }
@@ -71,7 +71,7 @@
                 }
             };
 
-            var officerViewModel = officerViewModelLoader.UpdateViewOfficerModel(officerList);
+            var officerViewModel = officerViewModelLoader.MapDomainData(officerList);
 
             Assert.NotEmpty(officerViewModel.OfficerViewRows);
         }

@@ -5,9 +5,9 @@
     using APUS.Models;
     using APUS.ViewModels.Calculation;
 
-    public class OfficerViewModelLoaderSecondFormat : IOfficerViewModelLoader
+    public class OfficerViewModelLoaderSecondFormat : IOfficerViewModelDataMapper
     {
-        public OfficerViewModel UpdateViewOfficerModel(IEnumerable<Officer> officers)
+        public OfficerViewModel MapDomainData(IEnumerable<Officer> officers)
         {
             var officerViewModel = new OfficerViewModel();
 

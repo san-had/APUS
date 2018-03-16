@@ -6,7 +6,7 @@
     using APUS.Models;
     using APUS.ViewModels.Calculation;
 
-    public class OfficerViewModelLoaderFirstFormat : IOfficerViewModelLoader
+    public class OfficerViewModelLoaderFirstFormat : IOfficerViewModelDataMapper
     {
         private IInOfficeDaysCalculator inOfficeDaysCalculator;
 
@@ -56,7 +56,7 @@
             set { leftOfficeParser = value; }
         }
 
-        public OfficerViewModel UpdateViewOfficerModel(IEnumerable<Officer> officers)
+        public OfficerViewModel MapDomainData(IEnumerable<Officer> officers)
         {
             var officerViewModel = new OfficerViewModel();
 

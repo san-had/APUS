@@ -8,11 +8,11 @@
     {
         private readonly DataLoader.IDataLoader dataLoader;
 
-        private readonly IOfficerViewModelLoader officerViewModelLoader;
+        private readonly IOfficerViewModelDataMapper officerViewModelLoader;
 
         private readonly IOutputFormatter outputFormatter;
 
-        public ReportGenerator(DataLoader.IDataLoader dataLoader, IOfficerViewModelLoader officerViewModelLoader, IOutputFormatter outputFormatter)
+        public ReportGenerator(DataLoader.IDataLoader dataLoader, IOfficerViewModelDataMapper officerViewModelLoader, IOutputFormatter outputFormatter)
         {
             this.dataLoader = dataLoader ?? throw new ArgumentNullException(nameof(dataLoader));
             this.officerViewModelLoader = officerViewModelLoader ?? throw new ArgumentNullException(nameof(officerViewModelLoader));
@@ -23,7 +23,7 @@
         {
             var officers = dataLoader.LoadData();
 
-            var officerViewModel = this.officerViewModelLoader.UpdateViewOfficerModel(officers);
+            var officerViewModel = this.officerViewModelLoader.MapDomainData(officers);
 
             this.outputFormatter.RenderOutput(officerViewModel);
         }
