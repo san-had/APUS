@@ -1,6 +1,6 @@
-﻿namespace APUS.UnitTests.ViewModels
+﻿namespace APUS.UnitTests.ViewModels.Calculation
 {
-    using APUS.ViewModels;
+    using APUS.ViewModels.Calculation;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;

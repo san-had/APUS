@@ -1,4 +1,4 @@
-﻿namespace APUS.ViewModels
+﻿namespace APUS.ViewModels.Calculation
 {
     using System;
     using System.Text;

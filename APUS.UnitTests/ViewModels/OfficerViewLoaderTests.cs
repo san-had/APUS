@@ -2,6 +2,7 @@
 {
     using APUS.Models;
     using APUS.ViewModels;
+    using APUS.ViewModels.Calculation;
     using NSubstitute;
     using System.Collections.Generic;
     using System.Linq;

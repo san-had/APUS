@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using APUS.Models;
+    using APUS.ViewModels.Calculation;
 
     public class OfficerViewModelLoaderFirstFormat : IOfficerViewModelLoader
     {

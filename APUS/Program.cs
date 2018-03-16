@@ -1,5 +1,6 @@
 ﻿namespace APUS
 {
+    using APUS.ViewModels.Calculation;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -70,9 +71,9 @@
 
         private static void ViewModelLoaderConfiguration()
         {
-            container.RegisterType<ViewModels.IInOfficeDaysCalculator, ViewModels.InOfficeDaysCalculator>();
-            container.RegisterType<ViewModels.IInOfficeRangeComposer, ViewModels.InOfficeRangeComposer>();
-            container.RegisterType<ViewModels.ILeftOfficeParser, ViewModels.LeftOfficeParser>();
+            container.RegisterType<IInOfficeDaysCalculator, InOfficeDaysCalculator>();
+            container.RegisterType<IInOfficeRangeComposer, InOfficeRangeComposer>();
+            container.RegisterType<ILeftOfficeParser, LeftOfficeParser>();
 
             int viewFormatNumber = GetViewFormat();
 
