@@ -1,6 +1,6 @@
 ﻿namespace APUS.UnitTests.DataAccess
 {
-    using APUS.CommonDataAccess;
+    using CommonDataAccess;
     using System.Collections.Generic;
 
     public class FakeCsvPresidentDataAccess : ICommonDataAccess

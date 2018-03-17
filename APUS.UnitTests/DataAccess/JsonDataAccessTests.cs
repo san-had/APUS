@@ -25,7 +25,7 @@
 
             var actualDbPersonsTypeName = jsonMayorDataAcces.GetCommonDbOfficers().First().GetType().ToString();
 
-            var expectedTypeName = "APUS.CommonDataAccess.CommonDbOfficer";
+            var expectedTypeName = "CommonDataAccess.CommonDbOfficer";
 
             Assert.Equal(expectedTypeName, actualDbPersonsTypeName);
         }

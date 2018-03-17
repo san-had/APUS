@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APUS", "APUS\APUS.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APUS.UnitTests", "APUS.UnitTests\APUS.UnitTests.csproj", "{71268744-638C-424C-9240-96CE4AB41D87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonDataAccess", "CommonDataAccess\CommonDataAccess.csproj", "{D4DEDCEC-A893-47AF-9661-2ACECA207060}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{71268744-638C-424C-9240-96CE4AB41D87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71268744-638C-424C-9240-96CE4AB41D87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71268744-638C-424C-9240-96CE4AB41D87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4DEDCEC-A893-47AF-9661-2ACECA207060}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4DEDCEC-A893-47AF-9661-2ACECA207060}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4DEDCEC-A893-47AF-9661-2ACECA207060}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4DEDCEC-A893-47AF-9661-2ACECA207060}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

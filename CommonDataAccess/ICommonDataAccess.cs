@@ -1,4 +1,4 @@
-﻿namespace APUS.CommonDataAccess
+﻿namespace CommonDataAccess
 {
     using System.Collections.Generic;
 

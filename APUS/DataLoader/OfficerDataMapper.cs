@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System;
     using APUS.Models;
-    using APUS.CommonDataAccess;
+    using CommonDataAccess;
 
     public class OfficerDataMapper : IOfficerDataMapper
     {

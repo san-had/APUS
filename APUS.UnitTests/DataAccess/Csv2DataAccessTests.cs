@@ -25,7 +25,7 @@
 
             var actualDbCommonOfficersTypeName = csv2PresidentDataAcces.GetCommonDbOfficers().First().GetType().ToString();
 
-            var expectedTypeName = "APUS.CommonDataAccess.CommonDbOfficer";
+            var expectedTypeName = "CommonDataAccess.CommonDbOfficer";
 
             Assert.Equal(expectedTypeName, actualDbCommonOfficersTypeName);
         }

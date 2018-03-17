@@ -1,6 +1,6 @@
 ﻿namespace APUS.DataAccess
 {
-    using APUS.CommonDataAccess;
+    using CommonDataAccess;
     using APUS.DataAccess.DbModels;
     using Newtonsoft.Json;
     using System.Collections.Generic;
