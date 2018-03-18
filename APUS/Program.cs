@@ -39,28 +39,28 @@
 
         private static void DataAccessConfiguration()
         {
-            int dataAccessTypeNumber = GetDataAccessType();
+            Type dataAccessType = GetDataAccessType();
 
-            switch (dataAccessTypeNumber)
-            {
-                case 1:
-                    container.RegisterType<CommonDataAccess.ICommonDataAccess, DataAccess.CsvPresidentDataAccess>();
-                    container.RegisterType<DataLoader.IDateParser, DataLoader.EnDateParser>();
-                    break;
+            //switch (dataAccessTypeNumber)
+            //{
+            //    case 1:
+            //        container.RegisterType<CommonDataAccess.ICommonDataAccess, >();
+            //        container.RegisterType<DataLoader.IDateParser, DataLoader.EnDateParser>();
+            //        break;
 
-                case 2:
-                    container.RegisterType<CommonDataAccess.ICommonDataAccess, DataAccess.Csv2PresidentDataAccess>();
-                    container.RegisterType<DataLoader.IDateParser, DataLoader.UsDateParser>();
-                    break;
+            //    case 2:
+            //        container.RegisterType<CommonDataAccess.ICommonDataAccess, DataAccess.Csv2PresidentDataAccess>();
+            //        container.RegisterType<DataLoader.IDateParser, DataLoader.UsDateParser>();
+            //        break;
 
-                case 3:
-                    container.RegisterType<CommonDataAccess.ICommonDataAccess, DataAccess.JsonMayorDataAccess>();
-                    container.RegisterType<DataLoader.IDateParser, DataLoader.UTCDateTimeParser>();
-                    break;
+            //    case 3:
+            //        container.RegisterType<CommonDataAccess.ICommonDataAccess, DataAccess.JsonMayorDataAccess>();
+            //        container.RegisterType<DataLoader.IDateParser, DataLoader.UTCDateTimeParser>();
+            //        break;
 
-                default:
-                    throw new NotImplementedException($"Invalid dataAccessTypeNumber: {dataAccessTypeNumber.ToString()}");
-            }
+            //    default:
+            //        throw new NotImplementedException($"Invalid dataAccessTypeNumber: {dataAccessTypeNumber.ToString()}");
+            //}
         }
 
         private static void DataLoaderConfiguration()
@@ -129,18 +129,15 @@
             reportGenerator.CreateReport();
         }
 
-        private static int GetDataAccessType()
+        private static Type GetDataAccessType()
         {
-            var menuDictionary = new Dictionary<int, string>()
-            {
-                {1, "CsvDataAccess" },
-                {2, "Csv2DataAccess" },
-                {3, "JsonDataAccess" }
-            };
+            var pluginExplorer = new PluginExplorer();
 
-            var menu = new Menu();
-            menu.DisplayMenu(menuDictionary);
-            return menu.GetChoise(menuDictionary);
+            var typeDictionary = pluginExplorer.GetPlugins(Constants.DataAccessPluginFolder);
+
+            var pluginMenu = new PluginMenu();
+            pluginMenu.DisplayMenu(typeDictionary);
+            return pluginMenu.GetChoise(typeDictionary);
         }
 
         private static int GetOutputFormat()

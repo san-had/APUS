@@ -1,4 +1,4 @@
-﻿namespace APUS.DataAccess
+﻿namespace JsonMayorDataAccess
 {
     using CommonDataAccess;
     using APUS.DataAccess.DbModels;

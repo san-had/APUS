@@ -1,6 +1,6 @@
-﻿namespace APUS.UnitTests.DataAccess
+﻿namespace CsvPresidentDataAccessUnitTests
 {
-    using APUS.DataAccess;
+    using CsvPresidentDataAccess;
     using System.Linq;
     using Xunit;
 

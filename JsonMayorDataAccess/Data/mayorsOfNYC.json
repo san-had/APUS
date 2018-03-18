@@ -1,0 +1,28 @@
+﻿{
+  "mayors": [
+    {
+      "first": "David",
+      "last:": "Dinkins",
+      "from": "1990-01-01T00:00:00Z",
+      "to": "1994-01-01T00:00:00Z"
+    },
+    {
+      "first": "Rudy",
+      "last:": "Giuliani",
+      "from": "1994-01-01T00:00:00Z",
+      "to": "2002-01-01T00:00:00Z"
+    },
+    {
+      "first": "Michael",
+      "last:": "Bloomberg",
+      "from": "2002-01-01T00:00:00Z",
+      "to": "2014-01-01T00:00:00Z"
+    },
+    {
+      "first": "Bill",
+      "last:": "de Blasio",
+      "from": "2014-01-01T00:00:00Z",
+      "to": "Incumbent"
+    }
+  ]
+}
