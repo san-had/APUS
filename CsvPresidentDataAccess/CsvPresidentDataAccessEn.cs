@@ -5,7 +5,7 @@
     using System.IO;
     using System.Linq;
 
-    public class CsvPresidentDataAccess : ICommonDataAccess
+    public class CsvPresidentDataAccessEn : ICommonDataAccess
     {
         public IEnumerable<CommonDbOfficer> GetCommonDbOfficers()
         {

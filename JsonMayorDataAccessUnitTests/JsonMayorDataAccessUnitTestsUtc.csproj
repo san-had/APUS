@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JsonMayorDataAccess\JsonMayorDataAccess.csproj" />
+    <ProjectReference Include="..\JsonMayorDataAccess\JsonMayorDataAccessUtc.csproj" />
   </ItemGroup>
 
   <ItemGroup>

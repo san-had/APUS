@@ -6,7 +6,7 @@
     using System.Collections.Generic;
     using System.IO;
 
-    public class JsonMayorDataAccess : ICommonDataAccess
+    public class JsonMayorDataAccessUtc : ICommonDataAccess
     {
         public IEnumerable<CommonDbOfficer> GetCommonDbOfficers()
         {

@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using CommonDataAccess;
     using APUS.Models;
+    using CommonDataAccess;
 
     public class DataLoader : IDataLoader
     {

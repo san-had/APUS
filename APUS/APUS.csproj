@@ -8,11 +8,20 @@
 
   <ItemGroup>
     <PackageReference Include="ConsoleTableExt" Version="2.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
     <PackageReference Include="Unity" Version="5.7.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="DataAccessPlugins\Csv2PresidentDataAccessUs.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataAccessPlugins\CsvPresidentDataAccessEn.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataAccessPlugins\JsonMayorDataAccessUtc.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Data\data.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -22,6 +31,10 @@
     <None Update="Data\mayorsOfNYC.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CommonDataAccess\CommonDataAccess.csproj" />
   </ItemGroup>
 
 </Project>

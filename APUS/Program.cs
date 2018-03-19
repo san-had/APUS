@@ -46,22 +46,21 @@
 
             var dataAccessPluginName = dictionary.Values.First().Assembly.FullName.Split(',')[0].Trim();
 
-            switch (dataAccessPluginName)
+            if (dataAccessPluginName.EndsWith("En"))
             {
-                case "CsvPresidentDataAccess":
-                    container.RegisterType<DataLoader.IDateParser, DataLoader.EnDateParser>();
-                    break;
-
-                case "Csv2PresidentDataAccess":
-                    container.RegisterType<DataLoader.IDateParser, DataLoader.UsDateParser>();
-                    break;
-
-                case "JsonMayorDataAccess":
-                    container.RegisterType<DataLoader.IDateParser, DataLoader.UTCDateTimeParser>();
-                    break;
-
-                default:
-                    throw new NotImplementedException($"Invalid dataAccessType: {dataAccessPluginName}");
+                container.RegisterType<DataLoader.IDateParser, DataLoader.EnDateParser>();
+            }
+            else if (dataAccessPluginName.EndsWith("Us"))
+            {
+                container.RegisterType<DataLoader.IDateParser, DataLoader.UsDateParser>();
+            }
+            else if (dataAccessPluginName.EndsWith("Utc"))
+            {
+                container.RegisterType<DataLoader.IDateParser, DataLoader.UTCDateTimeParser>();
+            }
+            else
+            {
+                throw new NotImplementedException($"No available DateTime parser for this dataAccessType: {dataAccessPluginName}");
             }
 
             DisplayContainerRegistrations();
