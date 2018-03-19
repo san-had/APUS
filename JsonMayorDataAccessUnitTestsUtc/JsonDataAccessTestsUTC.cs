@@ -1,6 +1,6 @@
 ﻿namespace APUS.UnitTests.DataAccess
 {
-    using JsonMayorDataAccess;
+    using JsonMayorDataAccessUtc;
     using System.Linq;
     using Xunit;
 

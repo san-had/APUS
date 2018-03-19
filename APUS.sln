@@ -9,17 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APUS.UnitTests", "APUS.Unit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonDataAccess", "CommonDataAccess\CommonDataAccess.csproj", "{D4DEDCEC-A893-47AF-9661-2ACECA207060}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsvPresidentDataAccessEn", "CsvPresidentDataAccess\CsvPresidentDataAccessEn.csproj", "{0DF88CE3-675A-4B57-B484-279F408DF456}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsvPresidentDataAccessEn", "CsvPresidentDataAccessEn\CsvPresidentDataAccessEn.csproj", "{0DF88CE3-675A-4B57-B484-279F408DF456}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Csv2PresidentDataAccessUs", "Csv2PresidentDataAccess\Csv2PresidentDataAccessUs.csproj", "{4E67B534-C2BF-4CBE-BD8D-8D2C98F3CC35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Csv2PresidentDataAccessUs", "Csv2PresidentDataAccessUs\Csv2PresidentDataAccessUs.csproj", "{4E67B534-C2BF-4CBE-BD8D-8D2C98F3CC35}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonMayorDataAccessUtc", "JsonMayorDataAccess\JsonMayorDataAccessUtc.csproj", "{F6FB8C3E-DF05-4085-9BED-2B36EF611134}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonMayorDataAccessUtc", "JsonMayorDataAccessUtc\JsonMayorDataAccessUtc.csproj", "{F6FB8C3E-DF05-4085-9BED-2B36EF611134}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsvPresidentDataAccessEnUnitTests", "CsvPresidentDataAccessUnitTests\CsvPresidentDataAccessEnUnitTests.csproj", "{F803A317-4A04-42FE-B921-C9066F90F24F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsvPresidentDataAccessEnUnitTests", "CsvPresidentDataAccessEnUnitTests\CsvPresidentDataAccessEnUnitTests.csproj", "{F803A317-4A04-42FE-B921-C9066F90F24F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Csv2PresidentDataAccessUsUnitTests", "Csv2PresidentDataAccessUnitTests\Csv2PresidentDataAccessUsUnitTests.csproj", "{5B0EA51A-89C2-4BFE-A1A4-D905038BDD30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Csv2PresidentDataAccessUsUnitTests", "Csv2PresidentDataAccessUsUnitTests\Csv2PresidentDataAccessUsUnitTests.csproj", "{5B0EA51A-89C2-4BFE-A1A4-D905038BDD30}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonMayorDataAccessUnitTestsUtc", "JsonMayorDataAccessUnitTests\JsonMayorDataAccessUnitTestsUtc.csproj", "{2FCA554B-9E96-414C-A80C-8618C2AF78FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonMayorDataAccessUnitTestsUtc", "JsonMayorDataAccessUnitTestsUtc\JsonMayorDataAccessUnitTestsUtc.csproj", "{2FCA554B-9E96-414C-A80C-8618C2AF78FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

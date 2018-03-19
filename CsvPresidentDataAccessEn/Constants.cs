@@ -1,4 +1,4 @@
-﻿namespace CsvPresidentDataAccess
+﻿namespace CsvPresidentDataAccessEn
 {
     public static class Constants
     {

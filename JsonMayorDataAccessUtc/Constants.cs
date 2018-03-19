@@ -1,4 +1,4 @@
-﻿namespace JsonMayorDataAccess
+﻿namespace JsonMayorDataAccessUtc
 {
     public static class Constants
     {
