@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Unity;
     using Unity.Injection;
 
@@ -39,28 +40,31 @@
 
         private static void DataAccessConfiguration()
         {
-            Type dataAccessType = GetDataAccessType();
+            var dictionary = GetDataAccessType();
 
-            //switch (dataAccessTypeNumber)
-            //{
-            //    case 1:
-            //        container.RegisterType<CommonDataAccess.ICommonDataAccess, >();
-            //        container.RegisterType<DataLoader.IDateParser, DataLoader.EnDateParser>();
-            //        break;
+            container.RegisterType(dictionary.Keys.First(), dictionary.Values.First());
 
-            //    case 2:
-            //        container.RegisterType<CommonDataAccess.ICommonDataAccess, DataAccess.Csv2PresidentDataAccess>();
-            //        container.RegisterType<DataLoader.IDateParser, DataLoader.UsDateParser>();
-            //        break;
+            var dataAccessPluginName = dictionary.Values.First().Assembly.FullName.Split(',')[0].Trim();
 
-            //    case 3:
-            //        container.RegisterType<CommonDataAccess.ICommonDataAccess, DataAccess.JsonMayorDataAccess>();
-            //        container.RegisterType<DataLoader.IDateParser, DataLoader.UTCDateTimeParser>();
-            //        break;
+            switch (dataAccessPluginName)
+            {
+                case "CsvPresidentDataAccess":
+                    container.RegisterType<DataLoader.IDateParser, DataLoader.EnDateParser>();
+                    break;
 
-            //    default:
-            //        throw new NotImplementedException($"Invalid dataAccessTypeNumber: {dataAccessTypeNumber.ToString()}");
-            //}
+                case "Csv2PresidentDataAccess":
+                    container.RegisterType<DataLoader.IDateParser, DataLoader.UsDateParser>();
+                    break;
+
+                case "JsonMayorDataAccess":
+                    container.RegisterType<DataLoader.IDateParser, DataLoader.UTCDateTimeParser>();
+                    break;
+
+                default:
+                    throw new NotImplementedException($"Invalid dataAccessType: {dataAccessPluginName}");
+            }
+
+            DisplayContainerRegistrations();
         }
 
         private static void DataLoaderConfiguration()
@@ -129,15 +133,38 @@
             reportGenerator.CreateReport();
         }
 
-        private static Type GetDataAccessType()
+        private static Dictionary<Type, Type> GetDataAccessType()
         {
+            Type typeFrom = null;
+
+            Type typeTo = null;
+
             var pluginExplorer = new PluginExplorer();
 
-            var typeDictionary = pluginExplorer.GetPlugins(Constants.DataAccessPluginFolder);
+            var typeExploreredCollection = pluginExplorer.GetPlugins(Constants.DataAccessPluginFolder);
+
+            var types = new List<Type>();
+
+            foreach (var items in typeExploreredCollection)
+            {
+                typeFrom = items.Key;
+
+                foreach (var item in items.Value)
+                {
+                    types.Add(item);
+                }
+            }
 
             var pluginMenu = new PluginMenu();
-            pluginMenu.DisplayMenu(typeDictionary);
-            return pluginMenu.GetChoise(typeDictionary);
+            pluginMenu.DisplayMenu(types);
+
+            typeTo = pluginMenu.GetChoise(types);
+
+            var mapping = new Dictionary<Type, Type>();
+
+            mapping.Add(typeFrom, typeTo);
+
+            return mapping;
         }
 
         private static int GetOutputFormat()
@@ -164,6 +191,15 @@
             var menu = new Menu();
             menu.DisplayMenu(menuDictionary);
             return menu.GetChoise(menuDictionary);
+        }
+
+        private static void DisplayContainerRegistrations()
+        {
+            Console.WriteLine($"Container has {container.Registrations.ToList().Count()} Registrations: ");
+            foreach (var registration in container.Registrations)
+            {
+                Console.WriteLine(registration.GetMappingAsString());
+            }
         }
     }
 }

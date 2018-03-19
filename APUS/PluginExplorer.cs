@@ -16,7 +16,6 @@
 
             foreach (string fileName in Dependencies)
             {
-                //string assemblyName = Path.GetFileNameWithoutExtension(fileName);
                 AssemblyName assemblyName = AssemblyName.GetAssemblyName(fileName);
                 if (assemblyName != null)
                 {
@@ -40,7 +39,7 @@
                                         var pluginTypeList = new List<Type>();
                                         pluginTypeList.Add(pluginType);
                                         pluginMappings.Add(typeInterface, pluginTypeList);
-                                    }                                    
+                                    }
                                 }
                             }
                         }

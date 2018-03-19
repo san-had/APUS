@@ -1,12 +1,12 @@
 ﻿namespace APUS
 {
     using System;
-    using System.Collections.Generic;    
+    using System.Collections.Generic;
 
     public interface IPluginMenu
     {
-        void DisplayMenu(Dictionary<Type,IList<Type>> options);
+        void DisplayMenu(IList<Type> options);
 
-        Type GetChoise(Dictionary<Type, IList<Type>> options);
+        Type GetChoise(IList<Type> options);
     }
 }
