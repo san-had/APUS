@@ -7,32 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="CommonDataAccess\**" />
-    <EmbeddedResource Remove="CommonDataAccess\**" />
-    <None Remove="CommonDataAccess\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="ConsoleTableExt" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
     <PackageReference Include="Unity" Version="5.7.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CommonDataAccess\CommonDataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="DataAccessPlugins\Csv2PresidentDataAccess.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="DataAccessPlugins\CsvPresidentDataAccess.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="DataAccessPlugins\JsonMayorDataAccess.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Data\data.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
