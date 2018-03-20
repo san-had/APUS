@@ -5,12 +5,42 @@
     using Newtonsoft.Json;
     using System.Collections.Generic;
     using System.IO;
+    using System;
 
     public class JsonMayorDataAccessUtc : ICommonDataAccess
     {
+        private readonly string fileName;
+
+        public JsonMayorDataAccessUtc(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentNullException($"Null or empty fileName.");
+            }
+
+            if (!File.Exists(fileName))
+            {
+                throw new FileNotFoundException($"File is not found: {fileName}");
+            }
+
+            this.fileName = fileName;
+        }
+
+        public bool CanDo()
+        {
+            bool isCanDo = false;
+
+            if (fileName.ToUpper().EndsWith(Constants.MatchingFiles))
+            {
+                isCanDo = true;
+            }
+
+            return isCanDo;
+        }
+
         public IEnumerable<CommonDbOfficer> GetCommonDbOfficers()
         {
-            var mayorsText = ReadMayorsFile(Constants.JsonDataFileName);
+            var mayorsText = ReadMayorsFile(fileName);
 
             var mayorsCollection = DeserializeMayorCollection(mayorsText);
 

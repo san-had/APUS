@@ -2,6 +2,8 @@
 {
     public static class Constants
     {
-        internal const string JsonDataFileName = @"Data\mayorsOfNYC.json";
+        public const string JsonDataFileName = @"Data\mayorsOfNYCutc.json";
+
+        public const string MatchingFiles = "UTC.JSON";
     }
 }

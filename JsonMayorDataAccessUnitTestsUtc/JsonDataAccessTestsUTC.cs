@@ -9,7 +9,7 @@
         [Fact]
         public void JsonMayorDataAccessUtc_ReadsFile_ReturnsRightRowNumber()
         {
-            var jsonMayorDataAccesUtc = new JsonMayorDataAccessUtc();
+            var jsonMayorDataAccesUtc = new JsonMayorDataAccessUtc(Constants.JsonDataFileName);
 
             var actualDbPersonsRowCount = jsonMayorDataAccesUtc.GetCommonDbOfficers().Count();
 
@@ -21,7 +21,7 @@
         [Fact]
         public void JsonMayorDataAccessUtc_ReadsFile_ReturnsDbPresidentType()
         {
-            var jsonMayorDataAccesUtc = new JsonMayorDataAccessUtc();
+            var jsonMayorDataAccesUtc = new JsonMayorDataAccessUtc(Constants.JsonDataFileName);
 
             var actualDbPersonsTypeName = jsonMayorDataAccesUtc.GetCommonDbOfficers().First().GetType().ToString();
 

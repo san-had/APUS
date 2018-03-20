@@ -4,6 +4,8 @@
 
     public interface ICommonDataAccess
     {
+        bool CanDo();
+
         IEnumerable<CommonDbOfficer> GetCommonDbOfficers();
     }
 }

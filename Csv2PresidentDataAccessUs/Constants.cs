@@ -2,6 +2,8 @@
 {
     public static class Constants
     {
-        internal const string Csv2DataFileName = @"Data\data2.csv";
+        public const string Csv2DataFileName = @"Data\data2us.csv";
+
+        public const string MatchingFiles = "US.CSV";
     }
 }

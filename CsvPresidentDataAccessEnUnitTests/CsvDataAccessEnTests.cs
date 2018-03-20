@@ -9,7 +9,7 @@
         [Fact]
         public void CsvPresidentDataAccessEn_ReadsFile_ReturnsRightRowNumber()
         {
-            var csvPresidentDataAccesEn = new CsvPresidentDataAccessEn();
+            var csvPresidentDataAccesEn = new CsvPresidentDataAccessEn(Constants.CsvDataFileName);
 
             var actualDbPersonsRowCount = csvPresidentDataAccesEn.GetCommonDbOfficers().Count();
 
@@ -21,7 +21,7 @@
         [Fact]
         public void CsvPresidentDataAccessEn_ReadsFile_ReturnsDbPresidentType()
         {
-            var csvPresidentDataAccesEn = new CsvPresidentDataAccessEn();
+            var csvPresidentDataAccesEn = new CsvPresidentDataAccessEn(Constants.CsvDataFileName);
 
             var actualDbPersonsTypeName = csvPresidentDataAccesEn.GetCommonDbOfficers().First().GetType().ToString();
 

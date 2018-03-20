@@ -5,6 +5,11 @@
 
     public class FakeCsvPresidentDataAccess : ICommonDataAccess
     {
+        public bool CanDo()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<CommonDbOfficer> GetCommonDbOfficers()
         {
             var dbCommonOfficer1 = new CommonDbOfficer

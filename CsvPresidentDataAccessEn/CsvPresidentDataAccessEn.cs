@@ -1,15 +1,45 @@
 ﻿namespace CsvPresidentDataAccessEn
 {
     using CommonDataAccess;
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
 
     public class CsvPresidentDataAccessEn : ICommonDataAccess
     {
+        private readonly string fileName;
+
+        public CsvPresidentDataAccessEn(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentNullException($"Null or empty fileName.");
+            }
+
+            if (!File.Exists(fileName))
+            {
+                throw new FileNotFoundException($"File is not found: {fileName}");
+            }
+
+            this.fileName = fileName;
+        }
+
+        public bool CanDo()
+        {
+            bool isCanDo = false;
+
+            if (fileName.ToUpper().EndsWith(Constants.MatchingFiles))
+            {
+                isCanDo = true;
+            }
+
+            return isCanDo;
+        }
+
         public IEnumerable<CommonDbOfficer> GetCommonDbOfficers()
         {
-            return File.ReadAllLines(Constants.CsvDataFileName)
+            return File.ReadAllLines(fileName)
                 .Skip(1)
                 .Select(line => line.Split(','))
                 .Select(x => new CommonDbOfficer

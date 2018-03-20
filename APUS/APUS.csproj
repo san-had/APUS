@@ -22,13 +22,13 @@
     <None Update="DataAccessPlugins\JsonMayorDataAccessUtc.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\data.csv">
+    <None Update="Data\dataen.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\data2.csv">
+    <None Update="Data\data2us.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\mayorsOfNYC.json">
+    <None Update="Data\mayorsOfNYCutc.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
