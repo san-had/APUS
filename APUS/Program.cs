@@ -1,11 +1,14 @@
 ﻿namespace APUS
 {
     using APUS.ViewModels.Calculation;
+    using log4net;
+    using log4net.Config;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using Unity;
     using Unity.Injection;
 
@@ -17,6 +20,8 @@
         private static void Main(string[] args)
         {
             Console.WriteLine(Constants.GreetingText);
+
+            LoggerSetup();
 
             string[] fileNames = Directory.GetFiles(Constants.DataFilesFolder);
 
@@ -32,6 +37,17 @@
                     }
                 }
             }
+        }
+
+        private static void LoggerSetup()
+        {
+            var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+
+            XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+
+            var logger = LogManager.GetLogger(typeof(Program));
+
+            logger.Error("Hello World");
         }
 
         private static bool Setup(string fileName)
