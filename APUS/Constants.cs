@@ -11,5 +11,7 @@
         public const string DllPattern = "*.dll";
 
         public const string DataAccessPluginFolder = "DataAccessPlugins";
+
+        public const string DataFilesFolder = "Data";
     }
 }

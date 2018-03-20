@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
     using System.Linq;
     using Unity;
     using Unity.Injection;
@@ -17,17 +18,30 @@
         {
             Console.WriteLine(Constants.GreetingText);
 
-            using (container = new UnityContainer())
-            {
-                Setup();
+            string[] fileNames = Directory.GetFiles(Constants.DataFilesFolder);
 
-                Run();
+            foreach (var fileName in fileNames)
+            {
+                using (container = new UnityContainer())
+                {
+                    bool isSuccess = Setup(fileName);
+
+                    if (isSuccess)
+                    {
+                        Run();
+                    }
+                }
             }
         }
 
-        private static void Setup()
+        private static bool Setup(string fileName)
         {
-            DataAccessConfiguration();
+            bool isSuccess = DataAccessConfiguration(fileName);
+
+            if (!isSuccess)
+            {
+                return false;
+            }
 
             DataLoaderConfiguration();
 
@@ -36,13 +50,22 @@
             OutputFormatterConfiguration();
 
             ReportGeneratorConfiguration();
+
+            return isSuccess;
         }
 
-        private static void DataAccessConfiguration()
+        private static bool DataAccessConfiguration(string fileName)
         {
-            var dictionary = GetDataAccessType();
+            var dictionary = GetDataAccessType(fileName);
 
-            container.RegisterType(dictionary.Keys.First(), dictionary.Values.First());
+            if (dictionary.Count > 0)
+            {
+                container.RegisterType(dictionary.Keys.First(), dictionary.Values.First(), new InjectionConstructor(fileName));
+            }
+            else
+            {
+                return false;
+            }
 
             var dataAccessPluginName = dictionary.Values.First().Assembly.FullName.Split(',')[0].Trim();
 
@@ -64,6 +87,8 @@
             }
 
             DisplayContainerRegistrations();
+
+            return true;
         }
 
         private static void DataLoaderConfiguration()
@@ -132,7 +157,7 @@
             reportGenerator.CreateReport();
         }
 
-        private static Dictionary<Type, Type> GetDataAccessType()
+        private static Dictionary<Type, Type> GetDataAccessType(string fileName)
         {
             Type typeFrom = null;
 
@@ -154,14 +179,15 @@
                 }
             }
 
-            var pluginMenu = new PluginMenu();
-            pluginMenu.DisplayMenu(types);
-
-            typeTo = pluginMenu.GetChoise(types);
+            var pluginSelector = new PluginSelector();
+            typeTo = pluginSelector.GetSelected(fileName, types);
 
             var mapping = new Dictionary<Type, Type>();
 
-            mapping.Add(typeFrom, typeTo);
+            if (typeFrom != null && typeTo != null)
+            {
+                mapping.Add(typeFrom, typeTo);
+            }
 
             return mapping;
         }
