@@ -13,6 +13,8 @@
 
         private string fileName;
 
+        private ILogger logger;
+
         public bool IsSuccesfulConfiguration { get; set; } = false;
 
         public ReportConfigurator(IUnityContainer container, string fileName)
@@ -31,6 +33,8 @@
 
         public void Setup()
         {
+            LoggerConfiguration();
+
             IsSuccesfulConfiguration = DataAccessConfiguration();
 
             if (!IsSuccesfulConfiguration)
@@ -45,6 +49,15 @@
             OutputFormatterConfiguration();
 
             ReportGeneratorConfiguration();
+
+            logger = container.Resolve<ILogger>();
+
+            logger.Log(fileName);
+        }
+
+        private void LoggerConfiguration()
+        {
+            container.RegisterType<ILogger, Logger>();
         }
 
         private bool DataAccessConfiguration()
