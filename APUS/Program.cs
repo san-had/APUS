@@ -1,5 +1,6 @@
 ﻿namespace APUS
 {
+    using APUS.Utils;
     using APUS.ViewModels.Calculation;
     using log4net;
     using log4net.Config;

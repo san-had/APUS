@@ -1,4 +1,4 @@
-﻿namespace APUS
+﻿namespace APUS.Utils
 {
     using System;
     using Unity.Registration;

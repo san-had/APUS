@@ -1,4 +1,4 @@
-﻿namespace APUS
+﻿namespace APUS.Utils
 {
     using System.Collections.Generic;
 
