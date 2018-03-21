@@ -47,7 +47,7 @@
 
             var logger = LogManager.GetLogger(typeof(Program));
 
-            logger.Error("Hello World");
+            logger.Info("Hello World");
         }
 
         private static bool Setup(string fileName)
