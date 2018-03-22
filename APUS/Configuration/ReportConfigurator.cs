@@ -55,10 +55,6 @@
 
             var reportGeneratorConfiguration = new ReportGeneratorConfiguration(container);
             reportGeneratorConfiguration.Configure();
-
-            logger = container.Resolve<ILogger>();
-
-            logger.Log(fileName);
         }
 
         private void DisplayContainerRegistrations()

@@ -30,7 +30,7 @@
                     {
                         Run();
                         logger = container.Resolve<ILogger>();
-                        logger.Log($"Hello {fileName}");
+                        logger.Log($"Processed: {fileName}");
                     }
                 }
             }
