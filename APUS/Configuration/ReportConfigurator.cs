@@ -1,12 +1,9 @@
 ﻿namespace APUS.Configuration
 {
     using APUS.Utils;
-    using APUS.ViewModels.Calculation;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using Unity;
-    using Unity.Injection;
 
     public class ReportConfigurator : IReportConfigurator
     {
@@ -47,102 +44,21 @@
                 return;
             }
 
-            DataLoaderConfiguration();
+            var dataLoaderConfiguration = new DataLoaderConfiguration(container);
+            dataLoaderConfiguration.Configure();
 
-            ViewModelLoaderConfiguration();
+            var viewModelLoaderConfiguration = new ViewModelLoaderConfiguration(container);
+            viewModelLoaderConfiguration.Configure();
 
-            OutputFormatterConfiguration();
+            var outputFormatterConfiguration = new OutputFormatterConfiguration(container);
+            outputFormatterConfiguration.Configure();
 
-            ReportGeneratorConfiguration();
+            var reportGeneratorConfiguration = new ReportGeneratorConfiguration(container);
+            reportGeneratorConfiguration.Configure();
 
             logger = container.Resolve<ILogger>();
 
             logger.Log(fileName);
-        }
-
-        private void DataLoaderConfiguration()
-        {
-            container.RegisterType<DataLoader.IOfficerDataMapper, DataLoader.OfficerDataMapper>(new InjectionConstructor(typeof(DataLoader.IDateParser)));
-            container.RegisterType<DataLoader.IDataLoader, DataLoader.DataLoader>(new InjectionConstructor(typeof(CommonDataAccess.ICommonDataAccess), typeof(DataLoader.IOfficerDataMapper)));
-        }
-
-        private void ViewModelLoaderConfiguration()
-        {
-            container.RegisterType<IInOfficeDaysCalculator, InOfficeDaysCalculator>();
-            container.RegisterType<IInOfficeRangeComposer, InOfficeRangeComposer>();
-            container.RegisterType<ILeftOfficeParser, LeftOfficeParser>();
-
-            int viewFormatNumber = GetViewFormat();
-
-            switch (viewFormatNumber)
-            {
-                case 1:
-                    container.RegisterType<ViewModels.IOfficerViewModelDataMapper, ViewModels.OfficerViewModelLoaderFirstFormat>
-                        (
-                            new InjectionProperty("InOfficeDaysCalculator"),
-                            new InjectionProperty("InOfficeRangeComposer"),
-                            new InjectionProperty("LeftOfficeParser"));
-                    break;
-
-                case 2:
-                    container.RegisterType<ViewModels.IOfficerViewModelDataMapper, ViewModels.OfficerViewModelLoaderSecondFormat>();
-                    break;
-
-                default:
-                    throw new NotImplementedException($"Invalid viewFormatNumber: {viewFormatNumber.ToString()}");
-            }
-        }
-
-        private void OutputFormatterConfiguration()
-        {
-            int outputFormatTypeNumber = GetOutputFormat();
-
-            switch (outputFormatTypeNumber)
-            {
-                case 1:
-                    container.RegisterType<OutputFormatters.IOutputFormatter, OutputFormatters.StdOutputFormatter>(new InjectionConstructor(typeof(OutputFormatters.IConsoleWriter)));
-                    break;
-
-                case 2:
-                    container.RegisterType<OutputFormatters.IOutputFormatter, OutputFormatters.ConsoleTableOutputFormatter>(new InjectionConstructor(typeof(OutputFormatters.IConsoleWriter)));
-                    break;
-
-                default:
-                    throw new NotImplementedException($"Invalid outputFormatTypeNumber: {outputFormatTypeNumber.ToString()}");
-            }
-
-            container.RegisterType<OutputFormatters.IConsoleWriter, OutputFormatters.ConsoleWriter>();
-        }
-
-        private void ReportGeneratorConfiguration()
-        {
-            container.RegisterType<IReportGenerator, ReportGenerator>(new InjectionConstructor(typeof(DataLoader.IDataLoader), typeof(ViewModels.IOfficerViewModelDataMapper), typeof(OutputFormatters.IOutputFormatter)));
-        }
-
-        private int GetOutputFormat()
-        {
-            var menuDictionary = new Dictionary<int, string>()
-            {
-                {1, "Standard" },
-                {2, "Table" }
-            };
-
-            var menu = new Menu();
-            menu.DisplayMenu(menuDictionary);
-            return menu.GetChoise(menuDictionary);
-        }
-
-        private int GetViewFormat()
-        {
-            var menuDictionary = new Dictionary<int, string>()
-            {
-                {1, "First Format" },
-                {2, "Second Format" }
-            };
-
-            var menu = new Menu();
-            menu.DisplayMenu(menuDictionary);
-            return menu.GetChoise(menuDictionary);
         }
 
         private void DisplayContainerRegistrations()
