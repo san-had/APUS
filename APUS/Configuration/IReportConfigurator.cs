@@ -1,4 +1,4 @@
-﻿namespace APUS.Utils
+﻿namespace APUS.Configuration
 {
     public interface IReportConfigurator
     {

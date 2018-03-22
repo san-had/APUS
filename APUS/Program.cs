@@ -1,6 +1,6 @@
 ﻿namespace APUS
 {
-    using APUS.Utils;
+    using APUS.Configuration;
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;

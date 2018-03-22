@@ -1,5 +1,6 @@
-﻿namespace APUS.Utils
+﻿namespace APUS.Configuration
 {
+    using APUS.Utils;
     using APUS.ViewModels.Calculation;
     using System;
     using System.Collections.Generic;
@@ -33,7 +34,8 @@
 
         public void Setup()
         {
-            LoggerConfiguration();
+            var loggerConfiguration = new LoggerConfiguration(container);
+            loggerConfiguration.Configure();
 
             IsSuccesfulConfiguration = DataAccessConfiguration();
 
