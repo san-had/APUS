@@ -12,27 +12,40 @@
     {
         private IUnityContainer container;
 
+        private IUnityContainer loggerContainer;
+
         private ILogger logger;
+
+        private ILogger globalLogger;
 
         public void FilesProcessing()
         {
-            string[] fileNames = Directory.GetFiles(Constants.DataFilesFolder);
-
-            foreach (var fileName in fileNames)
+            using (loggerContainer = new UnityContainer())
             {
-                using (container = new UnityContainer())
+                loggerContainer.RegisterType<ILogger, Logger>();
+
+                var globalLogger = loggerContainer.Resolve<ILogger>();
+
+                string[] fileNames = Directory.GetFiles(Constants.DataFilesFolder);
+
+                foreach (var fileName in fileNames)
                 {
-                    var configurator = new ReportConfigurator(container, fileName);
-
-                    configurator.Setup();
-
-                    if (configurator.IsSuccesfulConfiguration)
+                    using (container = new UnityContainer())
                     {
-                        Run();
-                        logger = container.Resolve<ILogger>();
-                        logger.Log($"Processed: {fileName}");
+                        var configurator = new ReportConfigurator(container, fileName);
+
+                        configurator.Setup();
+
+                        if (configurator.IsSuccesfulConfiguration)
+                        {
+                            Run();
+                            //logger = container.Resolve<ILogger>();
+                            //logger.Log($"Processed: {fileName}");
+                            globalLogger.IncrementCounter();
+                        }
                     }
                 }
+                globalLogger.Log(globalLogger.LogCounter.ToString());
             }
         }
 

@@ -9,6 +9,8 @@
     {
         private ILog logger;
 
+        public int LogCounter { get; set; }
+
         public Logger()
         {
             LoggerSetup();
@@ -17,6 +19,11 @@
         public void Log(string message)
         {
             this.logger.Info(message);
+        }
+
+        public void IncrementCounter()
+        {
+            LogCounter++;
         }
 
         private void LoggerSetup()
