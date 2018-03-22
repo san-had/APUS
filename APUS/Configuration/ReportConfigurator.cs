@@ -37,7 +37,10 @@
             var loggerConfiguration = new LoggerConfiguration(container);
             loggerConfiguration.Configure();
 
-            IsSuccesfulConfiguration = DataAccessConfiguration();
+            var dataAccessConfiguration = new DataAccessConfiguration(container, fileName);
+            dataAccessConfiguration.Configure();
+
+            IsSuccesfulConfiguration = dataAccessConfiguration.IsSuccesfulDataConfiguration;
 
             if (!IsSuccesfulConfiguration)
             {
@@ -55,83 +58,6 @@
             logger = container.Resolve<ILogger>();
 
             logger.Log(fileName);
-        }
-
-        private void LoggerConfiguration()
-        {
-            container.RegisterType<ILogger, Logger>();
-        }
-
-        private bool DataAccessConfiguration()
-        {
-            var dictionary = GetDataAccessType(fileName);
-
-            if (dictionary.Count > 0)
-            {
-                container.RegisterType(dictionary.Keys.First(), dictionary.Values.First(), new InjectionConstructor(fileName));
-            }
-            else
-            {
-                return false;
-            }
-
-            var dataAccessPluginName = dictionary.Values.First().Assembly.FullName.Split(',')[0].Trim();
-
-            if (dataAccessPluginName.EndsWith("En"))
-            {
-                container.RegisterType<DataLoader.IDateParser, DataLoader.EnDateParser>();
-            }
-            else if (dataAccessPluginName.EndsWith("Us"))
-            {
-                container.RegisterType<DataLoader.IDateParser, DataLoader.UsDateParser>();
-            }
-            else if (dataAccessPluginName.EndsWith("Utc"))
-            {
-                container.RegisterType<DataLoader.IDateParser, DataLoader.UTCDateTimeParser>();
-            }
-            else
-            {
-                throw new NotImplementedException($"No available DateTime parser for this dataAccessType: {dataAccessPluginName}");
-            }
-
-            DisplayContainerRegistrations();
-
-            return true;
-        }
-
-        private Dictionary<Type, Type> GetDataAccessType(string fileName)
-        {
-            Type typeFrom = null;
-
-            Type typeTo = null;
-
-            var pluginExplorer = new PluginExplorer();
-
-            var typeExploreredCollection = pluginExplorer.GetPlugins(Constants.DataAccessPluginFolder);
-
-            var types = new List<Type>();
-
-            foreach (var items in typeExploreredCollection)
-            {
-                typeFrom = items.Key;
-
-                foreach (var item in items.Value)
-                {
-                    types.Add(item);
-                }
-            }
-
-            var pluginSelector = new PluginSelector();
-            typeTo = pluginSelector.GetSelected(fileName, types);
-
-            var mapping = new Dictionary<Type, Type>();
-
-            if (typeFrom != null && typeTo != null)
-            {
-                mapping.Add(typeFrom, typeTo);
-            }
-
-            return mapping;
         }
 
         private void DataLoaderConfiguration()
