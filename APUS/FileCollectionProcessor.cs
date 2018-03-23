@@ -15,10 +15,14 @@
 
         private ILogger globalLogger;
 
+        private static LogReportInfo logReportInfo;
+
         public void FilesProcessing()
         {
             using (loggerContainer = new UnityContainer())
             {
+                logReportInfo = new LogReportInfo();
+
                 loggerContainer.RegisterType<ILogger, Logger>();
 
                 var globalLogger = loggerContainer.Resolve<ILogger>();

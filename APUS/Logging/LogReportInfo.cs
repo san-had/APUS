@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class LogReportInfo : ILogReportInfo
+    public class LogReportInfo
     {
         public int AllRecordNum { get; set; }
 

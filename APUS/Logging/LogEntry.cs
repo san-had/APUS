@@ -1,6 +1,6 @@
 ﻿namespace APUS.Logging
 {
-    public class LogEntry
+    public class LogEntry : ILogEntry
     {
         public int RecordNum { get; set; }
 
