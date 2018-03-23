@@ -1,4 +1,4 @@
-﻿namespace APUS.Utils
+﻿namespace APUS.Logging
 {
     using log4net;
     using log4net.Config;

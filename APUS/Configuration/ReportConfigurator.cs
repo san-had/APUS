@@ -1,5 +1,6 @@
 ﻿namespace APUS.Configuration
 {
+    using APUS.Logging;
     using APUS.Utils;
     using System;
     using System.Linq;

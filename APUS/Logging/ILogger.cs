@@ -1,4 +1,4 @@
-﻿namespace APUS.Utils
+﻿namespace APUS.Logging
 {
     public interface ILogger
     {

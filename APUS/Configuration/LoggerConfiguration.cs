@@ -1,6 +1,6 @@
 ﻿namespace APUS.Configuration
 {
-    using APUS.Utils;
+    using APUS.Logging;
     using System;
     using Unity;
 

@@ -1,11 +1,8 @@
 ﻿namespace APUS
 {
     using APUS.Configuration;
-    using APUS.Utils;
-    using System;
-    using System.Collections.Generic;
+    using APUS.Logging;
     using System.IO;
-    using System.Text;
     using Unity;
 
     public class FileCollectionProcessor
