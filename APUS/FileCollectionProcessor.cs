@@ -23,10 +23,6 @@
             {
                 logReportInfo = new LogReportInfo();
 
-                loggerContainer.RegisterType<ILogger, Logger>();
-
-                var globalLogger = loggerContainer.Resolve<ILogger>();
-
                 string[] fileNames = Directory.GetFiles(Constants.DataFilesFolder);
 
                 foreach (var fileName in fileNames)
@@ -42,11 +38,10 @@
                             Run();
                             //logger = container.Resolve<ILogger>();
                             //logger.Log($"Processed: {fileName}");
-                            globalLogger.IncrementCounter();
                         }
                     }
                 }
-                globalLogger.Log(globalLogger.LogCounter.ToString());
+                Logger.WriteLog("Hello from FileCollectionProcessor");
             }
         }
 

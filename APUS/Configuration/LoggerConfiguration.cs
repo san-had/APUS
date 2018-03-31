@@ -15,7 +15,6 @@
 
         public void Configure()
         {
-            container.RegisterType<ILogger, Logger>();
             container.RegisterType<ILogEntry, LogEntry>();
         }
     }

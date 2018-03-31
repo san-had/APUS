@@ -7,7 +7,7 @@
     using APUS.Models;
     using CommonDataAccess;
 
-    public class DataLoader : IDataLoader
+    public class DataLoader : IDataLoader, ILogger
     {
         private readonly ICommonDataAccess dataAccess;
         private readonly IOfficerDataMapper mapper;
@@ -22,10 +22,16 @@
 
         public IEnumerable<Officer> LoadData()
         {
-            logEntry.RecordNum = dataAccess.GetCommonDbOfficers().ToList().Count();
-            logEntry.Parser = nameof(mapper);
+            WriteLog();
 
             return this.mapper.Map(dataAccess.GetCommonDbOfficers());
+        }
+
+        public void WriteLog()
+        {
+            logEntry.RecordNum = dataAccess.GetCommonDbOfficers().ToList().Count();
+            logEntry.Parser = mapper.GetType().Name;
+            Logger.WriteLog($"{logEntry.RecordNum}\t{logEntry.Parser}");
         }
     }
 }

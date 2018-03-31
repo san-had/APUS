@@ -5,34 +5,33 @@
     using System.IO;
     using System.Reflection;
 
-    public class Logger : ILogger
+    public sealed class Logger
     {
-        private ILog logger;
+        private static ILog logger;
 
         public int LogCounter { get; set; }
 
-        public Logger()
+        private Logger()
+        {
+        }
+
+        static Logger()
         {
             LoggerSetup();
         }
 
-        public void Log(string message)
+        public static void WriteLog(string message)
         {
-            this.logger.Info(message);
+            logger.Info(message);
         }
 
-        public void IncrementCounter()
-        {
-            LogCounter++;
-        }
-
-        private void LoggerSetup()
+        private static void LoggerSetup()
         {
             var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
 
             XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
 
-            this.logger = LogManager.GetLogger(typeof(Logger));
+            logger = LogManager.GetLogger(typeof(Logger));
         }
     }
 }
