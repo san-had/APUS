@@ -38,8 +38,8 @@
         {
             this.logEntry.OutputFormatter = outputFormatter.GetType().Name;
             this.logEntry.ViewModelFormat = officerViewModelLoader.GetType().Name;
-            var logger = Logger.GetInstance();
-            logger.UpdateLastLogEntry(logEntry);
+            var logCollector = LogEntryCollector.GetInstance();
+            logCollector.UpdateLastLogEntry(logEntry);
         }
     }
 }

@@ -30,8 +30,8 @@
         public void WriteLog()
         {
             logEntry.RecordNum = dataAccess.GetCommonDbOfficers().ToList().Count();
-            var logger = Logger.GetInstance();
-            logger.UpdateLastLogEntry(logEntry);
+            var logCollector = LogEntryCollector.GetInstance();
+            logCollector.UpdateLastLogEntry(logEntry);
         }
     }
 }

@@ -13,7 +13,7 @@
         {
             string[] fileNames = Directory.GetFiles(Constants.DataFilesFolder);
 
-            var logger = Logger.GetInstance();
+            var logCollector = LogEntryCollector.GetInstance();
 
             foreach (var fileName in fileNames)
             {
@@ -29,13 +29,13 @@
 
                         logEntry.FileName = fileName;
 
-                        logger.AddLogEntry(logEntry);
+                        logCollector.AddLogEntry(logEntry);
 
                         Run();
                     }
                 }
             }
-            logger.WriteLogEntryList();
+            logCollector.WriteLogEntryList();
         }
 
         private void Run()

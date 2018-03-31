@@ -36,8 +36,8 @@
         public void WriteLog()
         {
             logEntry.Parser = this.dateParser.GetType().Name;
-            var logger = Logger.GetInstance();
-            logger.UpdateLastLogEntry(logEntry);
+            var logCollector = LogEntryCollector.GetInstance();
+            logCollector.UpdateLastLogEntry(logEntry);
         }
     }
 }
