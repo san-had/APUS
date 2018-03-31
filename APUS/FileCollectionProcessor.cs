@@ -9,40 +9,33 @@
     {
         private IUnityContainer container;
 
-        private IUnityContainer loggerContainer;
-
-        private ILogger logger;
-
-        private ILogger globalLogger;
-
-        private static LogReportInfo logReportInfo;
-
         public void FilesProcessing()
         {
-            using (loggerContainer = new UnityContainer())
+            string[] fileNames = Directory.GetFiles(Constants.DataFilesFolder);
+
+            var logger = Logger.GetInstance();
+
+            foreach (var fileName in fileNames)
             {
-                logReportInfo = new LogReportInfo();
-
-                string[] fileNames = Directory.GetFiles(Constants.DataFilesFolder);
-
-                foreach (var fileName in fileNames)
+                using (container = new UnityContainer())
                 {
-                    using (container = new UnityContainer())
+                    var configurator = new ReportConfigurator(container, fileName);
+
+                    configurator.Setup();
+
+                    if (configurator.IsSuccesfulConfiguration)
                     {
-                        var configurator = new ReportConfigurator(container, fileName);
+                        ILogEntry logEntry = new LogEntry();
 
-                        configurator.Setup();
+                        logEntry.FileName = fileName;
 
-                        if (configurator.IsSuccesfulConfiguration)
-                        {
-                            Run();
-                            //logger = container.Resolve<ILogger>();
-                            //logger.Log($"Processed: {fileName}");
-                        }
+                        logger.AddLogEntry(logEntry);
+
+                        Run();
                     }
                 }
-                Logger.WriteLog("Hello from FileCollectionProcessor");
             }
+            logger.WriteLogEntryList();
         }
 
         private void Run()

@@ -12,7 +12,7 @@
 
         private string fileName;
 
-        private ILogger logger;
+        private ILogging logger;
 
         public bool IsSuccesfulConfiguration { get; set; } = false;
 

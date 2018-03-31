@@ -8,6 +8,8 @@
 
         public string Parser { get; set; }
 
+        public string ViewModelFormat { get; set; }
+
         public string OutputFormatter { get; set; }
     }
 }

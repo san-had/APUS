@@ -15,7 +15,12 @@
 
         public void Configure()
         {
-            container.RegisterType<IReportGenerator, ReportGenerator>(new InjectionConstructor(typeof(DataLoader.IDataLoader), typeof(ViewModels.IOfficerViewModelDataMapper), typeof(OutputFormatters.IOutputFormatter)));
+            container.RegisterType<IReportGenerator, ReportGenerator>(
+                new InjectionConstructor(
+                    typeof(DataLoader.IDataLoader),
+                    typeof(ViewModels.IOfficerViewModelDataMapper),
+                    typeof(OutputFormatters.IOutputFormatter),
+                    typeof(Logging.ILogEntry)));
         }
     }
 }

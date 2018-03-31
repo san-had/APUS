@@ -1,6 +1,6 @@
 ﻿namespace APUS.Logging
 {
-    public interface ILogger
+    public interface ILogging
     {
         void WriteLog();
     }

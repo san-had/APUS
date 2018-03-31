@@ -7,7 +7,7 @@
     using APUS.Models;
     using CommonDataAccess;
 
-    public class DataLoader : IDataLoader, ILogger
+    public class DataLoader : IDataLoader, ILogging
     {
         private readonly ICommonDataAccess dataAccess;
         private readonly IOfficerDataMapper mapper;
@@ -30,8 +30,8 @@
         public void WriteLog()
         {
             logEntry.RecordNum = dataAccess.GetCommonDbOfficers().ToList().Count();
-            logEntry.Parser = mapper.GetType().Name;
-            Logger.WriteLog($"{logEntry.RecordNum}\t{logEntry.Parser}");
+            var logger = Logger.GetInstance();
+            logger.UpdateLastLogEntry(logEntry);
         }
     }
 }
