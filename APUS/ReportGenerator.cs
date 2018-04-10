@@ -36,8 +36,8 @@
             var record = new OfficerProcessingRecord();
             record.OutputFormatter = outputFormatter.GetType().Name;
             record.ViewModelFormat = officerViewModelLoader.GetType().Name;
-            var logCollector = LogEntryCollector.GetInstance();
-            logCollector.UpdateLastRecord(record);
+            var recordCollector = RecordCollector.GetInstance();
+            recordCollector.UpdateLastRecord(record);
         }
     }
 }

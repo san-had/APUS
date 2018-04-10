@@ -29,8 +29,8 @@
         {
             var record = new OfficerProcessingRecord();
             record.RecordNum = dataAccess.GetCommonDbOfficers().ToList().Count();
-            var logCollector = LogEntryCollector.GetInstance();
-            logCollector.UpdateLastRecord(record);
+            var recordCollector = RecordCollector.GetInstance();
+            recordCollector.UpdateLastRecord(record);
         }
     }
 }

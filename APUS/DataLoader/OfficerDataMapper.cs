@@ -34,8 +34,8 @@
         {
             var record = new OfficerProcessingRecord();
             record.Parser = this.dateParser.GetType().Name;
-            var logCollector = LogEntryCollector.GetInstance();
-            logCollector.UpdateLastRecord(record);
+            var recordCollector = RecordCollector.GetInstance();
+            recordCollector.UpdateLastRecord(record);
         }
     }
 }

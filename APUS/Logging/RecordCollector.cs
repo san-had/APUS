@@ -4,20 +4,20 @@
     using System.Linq;
     using System.Text;
 
-    public sealed class LogEntryCollector
+    public sealed class RecordCollector
     {
-        private static readonly LogEntryCollector singletonCollector = new LogEntryCollector();
+        private static readonly RecordCollector singletonRecordCollector = new RecordCollector();
 
         private IList<OfficerProcessingRecord> recordList;
 
-        private LogEntryCollector()
+        private RecordCollector()
         {
             recordList = new List<OfficerProcessingRecord>();
         }
 
-        public static LogEntryCollector GetInstance()
+        public static RecordCollector GetInstance()
         {
-            return singletonCollector;
+            return singletonRecordCollector;
         }
 
         public void AddRecord(OfficerProcessingRecord record)
