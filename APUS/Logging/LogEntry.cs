@@ -1,6 +1,6 @@
 ﻿namespace APUS.Logging
 {
-    public class LogEntry
+    public class OfficerProcessingRecord
     {
         public int RecordNum { get; set; }
 

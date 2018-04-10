@@ -32,10 +32,10 @@
 
         public void WriteLog()
         {
-            var logEntry = new LogEntry();
-            logEntry.Parser = this.dateParser.GetType().Name;
+            var record = new OfficerProcessingRecord();
+            record.Parser = this.dateParser.GetType().Name;
             var logCollector = LogEntryCollector.GetInstance();
-            logCollector.UpdateLastLogEntry(logEntry);
+            logCollector.UpdateLastRecord(record);
         }
     }
 }

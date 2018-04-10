@@ -27,10 +27,10 @@
 
         public void WriteLog()
         {
-            var logEntry = new LogEntry();
-            logEntry.RecordNum = dataAccess.GetCommonDbOfficers().ToList().Count();
+            var record = new OfficerProcessingRecord();
+            record.RecordNum = dataAccess.GetCommonDbOfficers().ToList().Count();
             var logCollector = LogEntryCollector.GetInstance();
-            logCollector.UpdateLastLogEntry(logEntry);
+            logCollector.UpdateLastRecord(record);
         }
     }
 }

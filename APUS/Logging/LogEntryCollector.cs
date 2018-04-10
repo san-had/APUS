@@ -8,11 +8,11 @@
     {
         private static readonly LogEntryCollector singletonCollector = new LogEntryCollector();
 
-        private IList<LogEntry> logEntryList;
+        private IList<OfficerProcessingRecord> recordList;
 
         private LogEntryCollector()
         {
-            logEntryList = new List<LogEntry>();
+            recordList = new List<OfficerProcessingRecord>();
         }
 
         public static LogEntryCollector GetInstance()
@@ -20,74 +20,74 @@
             return singletonCollector;
         }
 
-        public void AddLogEntry(LogEntry logEntry)
+        public void AddRecord(OfficerProcessingRecord record)
         {
-            logEntryList.Add(logEntry);
+            recordList.Add(record);
         }
 
-        public void UpdateLastLogEntry(LogEntry logEntry)
+        public void UpdateLastRecord(OfficerProcessingRecord record)
         {
-            if (logEntryList != null && logEntryList.Count > 0)
+            if (recordList != null && recordList.Count > 0)
             {
-                var lastIndex = logEntryList.Count - 1;
-                var lastLogEntry = logEntryList[lastIndex];
+                var lastIndex = recordList.Count - 1;
+                var lastRecord = recordList[lastIndex];
 
-                if (logEntry.RecordNum != 0)
+                if (record.RecordNum != 0)
                 {
-                    lastLogEntry.RecordNum = logEntry.RecordNum;
+                    lastRecord.RecordNum = record.RecordNum;
                 }
 
-                if (!string.IsNullOrWhiteSpace(logEntry.FileName))
+                if (!string.IsNullOrWhiteSpace(record.FileName))
                 {
-                    lastLogEntry.FileName = logEntry.FileName;
+                    lastRecord.FileName = record.FileName;
                 }
 
-                if (!string.IsNullOrWhiteSpace(logEntry.Parser))
+                if (!string.IsNullOrWhiteSpace(record.Parser))
                 {
-                    lastLogEntry.Parser = logEntry.Parser;
+                    lastRecord.Parser = record.Parser;
                 }
 
-                if (!string.IsNullOrWhiteSpace(logEntry.ViewModelFormat))
+                if (!string.IsNullOrWhiteSpace(record.ViewModelFormat))
                 {
-                    lastLogEntry.ViewModelFormat = logEntry.ViewModelFormat;
+                    lastRecord.ViewModelFormat = record.ViewModelFormat;
                 }
 
-                if (!string.IsNullOrWhiteSpace(logEntry.OutputFormatter))
+                if (!string.IsNullOrWhiteSpace(record.OutputFormatter))
                 {
-                    lastLogEntry.OutputFormatter = logEntry.OutputFormatter;
+                    lastRecord.OutputFormatter = record.OutputFormatter;
                 }
             }
             else
             {
-                AddLogEntry(logEntry);
+                AddRecord(record);
             }
         }
 
-        public string WriteLogEntryListToString()
+        public string WriteRecordListToString()
         {
             StringBuilder sb = new StringBuilder();
 
-            var sumRecord = logEntryList.Select(x => x.RecordNum).Sum();
+            var sumRecord = recordList.Select(x => x.RecordNum).Sum();
 
             sb.Append($"{sumRecord} records have been processed; ");
 
-            foreach (var logEntry in logEntryList)
+            foreach (var record in recordList)
             {
                 sb.Append(
-                    $"{logEntry.RecordNum} records from {logEntry.FileName}," +
-                    $" with parser: {logEntry.Parser}," +
-                    $" with viewModelFormat: {logEntry.ViewModelFormat}," +
-                    $" output formatter: {logEntry.OutputFormatter}; ");
+                    $"{record.RecordNum} records from {record.FileName}," +
+                    $" with parser: {record.Parser}," +
+                    $" with viewModelFormat: {record.ViewModelFormat}," +
+                    $" output formatter: {record.OutputFormatter}; ");
             }
             return sb.ToString();
         }
 
-        public void WriteLogEntryList()
+        public void WriteRecordList()
         {
-            var logEntryString = WriteLogEntryListToString();
+            var recordString = WriteRecordListToString();
 
             var logger = Logger.GetInstance();
-            logger.WriteLog(logEntryString);
+            logger.WriteLog(recordString);
         }
     }
 }

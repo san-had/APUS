@@ -25,17 +25,17 @@
 
                     if (configurator.IsSuccesfulConfiguration)
                     {
-                        var logEntry = new LogEntry();
+                        var record = new OfficerProcessingRecord();
 
-                        logEntry.FileName = fileName;
+                        record.FileName = fileName;
 
-                        logCollector.AddLogEntry(logEntry);
+                        logCollector.AddRecord(record);
 
                         Run();
                     }
                 }
             }
-            logCollector.WriteLogEntryList();
+            logCollector.WriteRecordList();
         }
 
         private void Run()
