@@ -13,14 +13,11 @@
 
         private readonly IOutputFormatter outputFormatter;
 
-        private readonly ILogEntry logEntry;
-
-        public ReportGenerator(DataLoader.IDataLoader dataLoader, IOfficerViewModelDataMapper officerViewModelLoader, IOutputFormatter outputFormatter, ILogEntry logEntry)
+        public ReportGenerator(DataLoader.IDataLoader dataLoader, IOfficerViewModelDataMapper officerViewModelLoader, IOutputFormatter outputFormatter)
         {
             this.dataLoader = dataLoader ?? throw new ArgumentNullException(nameof(dataLoader));
             this.officerViewModelLoader = officerViewModelLoader ?? throw new ArgumentNullException(nameof(officerViewModelLoader));
             this.outputFormatter = outputFormatter ?? throw new ArgumentNullException(nameof(outputFormatter));
-            this.logEntry = logEntry ?? throw new ArgumentNullException(nameof(logEntry));
         }
 
         public void CreateReport()
@@ -36,8 +33,9 @@
 
         public void WriteLog()
         {
-            this.logEntry.OutputFormatter = outputFormatter.GetType().Name;
-            this.logEntry.ViewModelFormat = officerViewModelLoader.GetType().Name;
+            var logEntry = new LogEntry();
+            logEntry.OutputFormatter = outputFormatter.GetType().Name;
+            logEntry.ViewModelFormat = officerViewModelLoader.GetType().Name;
             var logCollector = LogEntryCollector.GetInstance();
             logCollector.UpdateLastLogEntry(logEntry);
         }

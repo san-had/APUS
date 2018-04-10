@@ -32,9 +32,6 @@
 
         public void Setup()
         {
-            var loggerConfiguration = new LoggerConfiguration(container);
-            loggerConfiguration.Configure();
-
             var dataAccessConfiguration = new DataAccessConfiguration(container, fileName);
             dataAccessConfiguration.Configure();
 

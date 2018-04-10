@@ -11,13 +11,11 @@
     {
         private readonly ICommonDataAccess dataAccess;
         private readonly IOfficerDataMapper mapper;
-        private readonly ILogEntry logEntry;
 
-        public DataLoader(ICommonDataAccess dataAccess, IOfficerDataMapper mapper, ILogEntry logEntry)
+        public DataLoader(ICommonDataAccess dataAccess, IOfficerDataMapper mapper)
         {
             this.dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            this.logEntry = logEntry ?? throw new ArgumentNullException(nameof(logEntry));
         }
 
         public IEnumerable<Officer> LoadData()
@@ -29,6 +27,7 @@
 
         public void WriteLog()
         {
+            var logEntry = new LogEntry();
             logEntry.RecordNum = dataAccess.GetCommonDbOfficers().ToList().Count();
             var logCollector = LogEntryCollector.GetInstance();
             logCollector.UpdateLastLogEntry(logEntry);

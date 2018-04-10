@@ -25,7 +25,7 @@
 
                     if (configurator.IsSuccesfulConfiguration)
                     {
-                        ILogEntry logEntry = new LogEntry();
+                        var logEntry = new LogEntry();
 
                         logEntry.FileName = fileName;
 

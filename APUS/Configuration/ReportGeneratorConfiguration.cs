@@ -19,8 +19,7 @@
                 new InjectionConstructor(
                     typeof(DataLoader.IDataLoader),
                     typeof(ViewModels.IOfficerViewModelDataMapper),
-                    typeof(OutputFormatters.IOutputFormatter),
-                    typeof(Logging.ILogEntry)));
+                    typeof(OutputFormatters.IOutputFormatter)));
         }
     }
 }

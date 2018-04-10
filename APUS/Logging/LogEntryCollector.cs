@@ -8,11 +8,11 @@
     {
         private static readonly LogEntryCollector singletonCollector = new LogEntryCollector();
 
-        private IList<ILogEntry> logEntryList;
+        private IList<LogEntry> logEntryList;
 
         private LogEntryCollector()
         {
-            logEntryList = new List<ILogEntry>();
+            logEntryList = new List<LogEntry>();
         }
 
         public static LogEntryCollector GetInstance()
@@ -20,12 +20,12 @@
             return singletonCollector;
         }
 
-        public void AddLogEntry(ILogEntry logEntry)
+        public void AddLogEntry(LogEntry logEntry)
         {
             logEntryList.Add(logEntry);
         }
 
-        public void UpdateLastLogEntry(ILogEntry logEntry)
+        public void UpdateLastLogEntry(LogEntry logEntry)
         {
             if (logEntryList != null && logEntryList.Count > 0)
             {

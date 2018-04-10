@@ -10,12 +10,9 @@
     {
         private readonly IDateParser dateParser;
 
-        private readonly ILogEntry logEntry;
-
-        public OfficerDataMapper(IDateParser dateParser, ILogEntry logEntry)
+        public OfficerDataMapper(IDateParser dateParser)
         {
             this.dateParser = dateParser ?? throw new ArgumentNullException(nameof(dateParser));
-            this.logEntry = logEntry ?? throw new ArgumentNullException(nameof(logEntry));
         }
 
         public IEnumerable<Officer> Map(IEnumerable<CommonDbOfficer> dbOfficers)
@@ -35,6 +32,7 @@
 
         public void WriteLog()
         {
+            var logEntry = new LogEntry();
             logEntry.Parser = this.dateParser.GetType().Name;
             var logCollector = LogEntryCollector.GetInstance();
             logCollector.UpdateLastLogEntry(logEntry);
