@@ -11,5 +11,9 @@
         public string ViewModelFormat { get; set; }
 
         public string OutputFormatter { get; set; }
+
+        public string RecordingTime { get; set; }
+
+        public string CallerName { get; set; }
     }
 }

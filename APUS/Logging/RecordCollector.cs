@@ -56,6 +56,23 @@
                 {
                     lastRecord.OutputFormatter = record.OutputFormatter;
                 }
+
+                if (!string.IsNullOrWhiteSpace(record.CallerName))
+                {
+                    if (lastRecord.CallerName != record.CallerName)
+                    {
+                        lastRecord.CallerName = record.CallerName;
+                    }
+                    ;
+                }
+
+                if (!string.IsNullOrWhiteSpace(record.RecordingTime))
+                {
+                    if (lastRecord.RecordingTime != record.RecordingTime)
+                    {
+                        lastRecord.RecordingTime = record.RecordingTime;
+                    }
+                }
             }
             else
             {
@@ -74,8 +91,8 @@
             foreach (var record in recordList)
             {
                 sb.Append(
-                    $"{record.RecordNum} records from {record.FileName}," +
-                    $" with parser: {record.Parser}," +
+                    $"{record.RecordNum} records from {record.FileName} [caller:{record.CallerName} at {record.RecordingTime}]," +
+                    $" with parser: {record.Parser} [caller:{record.CallerName} at {record.RecordingTime}]," +
                     $" with viewModelFormat: {record.ViewModelFormat}," +
                     $" output formatter: {record.OutputFormatter}; ");
             }

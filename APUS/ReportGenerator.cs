@@ -4,6 +4,7 @@
     using APUS.OutputFormatters;
     using APUS.ViewModels;
     using System;
+    using System.Runtime.CompilerServices;
 
     public class ReportGenerator : IReportGenerator, ILogging
     {
@@ -31,11 +32,13 @@
             WriteLog();
         }
 
-        public void WriteLog()
+        public void WriteLog([CallerMemberName] string callerName = null)
         {
             var record = new OfficerProcessingRecord();
             record.OutputFormatter = outputFormatter.GetType().Name;
             record.ViewModelFormat = officerViewModelLoader.GetType().Name;
+            record.CallerName = callerName;
+            record.RecordingTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
             var recordCollector = RecordCollector.GetInstance();
             recordCollector.UpdateLastRecord(record);
         }

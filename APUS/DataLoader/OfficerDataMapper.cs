@@ -5,6 +5,7 @@
     using APUS.Models;
     using CommonDataAccess;
     using APUS.Logging;
+    using System.Runtime.CompilerServices;
 
     public class OfficerDataMapper : IOfficerDataMapper, ILogging
     {
@@ -30,10 +31,12 @@
             WriteLog();
         }
 
-        public void WriteLog()
+        public void WriteLog([CallerMemberName] string callerName = null)
         {
             var record = new OfficerProcessingRecord();
             record.Parser = this.dateParser.GetType().Name;
+            record.CallerName = callerName;
+            record.RecordingTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
             var recordCollector = RecordCollector.GetInstance();
             recordCollector.UpdateLastRecord(record);
         }
