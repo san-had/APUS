@@ -1,7 +1,9 @@
 ﻿namespace APUS.Models
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     public class Officer
     {
         public string FirstName { get; set; }

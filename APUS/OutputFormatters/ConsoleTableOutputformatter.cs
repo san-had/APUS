@@ -1,7 +1,6 @@
 ﻿namespace APUS.OutputFormatters
 {
     using System;
-    using System.Collections.Generic;
     using System.Data;
     using APUS.ViewModels;
     using ConsoleTableExt;

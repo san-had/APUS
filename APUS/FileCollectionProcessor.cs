@@ -2,9 +2,11 @@
 {
     using APUS.Configuration;
     using APUS.Logging;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using Unity;
 
+    [ExcludeFromCodeCoverage]
     public class FileCollectionProcessor
     {
         private IUnityContainer container;

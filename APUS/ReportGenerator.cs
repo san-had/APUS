@@ -4,6 +4,7 @@
     using APUS.OutputFormatters;
     using APUS.ViewModels;
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     public class ReportGenerator : IReportGenerator, ILogging
@@ -21,6 +22,7 @@
             this.outputFormatter = outputFormatter ?? throw new ArgumentNullException(nameof(outputFormatter));
         }
 
+        [ExcludeFromCodeCoverage]
         public void CreateReport()
         {
             var officers = dataLoader.LoadData();
@@ -32,6 +34,7 @@
             WriteLog();
         }
 
+        [ExcludeFromCodeCoverage]
         public void WriteLog([CallerMemberName] string callerName = null)
         {
             var record = new OfficerProcessingRecord();

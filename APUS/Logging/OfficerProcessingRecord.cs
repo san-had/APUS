@@ -1,5 +1,8 @@
 ﻿namespace APUS.Logging
 {
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage]
     public class OfficerProcessingRecord
     {
         public int RecordNum { get; set; }
