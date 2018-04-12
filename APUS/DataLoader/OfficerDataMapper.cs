@@ -35,8 +35,8 @@
         {
             var record = new OfficerProcessingRecord();
             record.Parser = this.dateParser.GetType().Name;
-            record.CallerName = callerName;
-            record.RecordingTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            record.ParserCaller = callerName;
+            record.ParserRecordingTime = DateTime.Now.ToString(Constants.LogDateTimeFormat);
             var recordCollector = RecordCollector.GetInstance();
             recordCollector.UpdateLastRecord(record);
         }

@@ -13,5 +13,7 @@
         public const string DataAccessPluginFolder = "DataAccessPlugins";
 
         public const string DataFilesFolder = "Data";
+
+        public const string LogDateTimeFormat = "yyyy-MM-dd hh:mm:ss.fff";
     }
 }

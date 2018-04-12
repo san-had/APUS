@@ -37,8 +37,8 @@
             var record = new OfficerProcessingRecord();
             record.OutputFormatter = outputFormatter.GetType().Name;
             record.ViewModelFormat = officerViewModelLoader.GetType().Name;
-            record.CallerName = callerName;
-            record.RecordingTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            record.ReportGenCaller = callerName;
+            record.ReportGenRecordingTime = DateTime.Now.ToString(Constants.LogDateTimeFormat);
             var recordCollector = RecordCollector.GetInstance();
             recordCollector.UpdateLastRecord(record);
         }

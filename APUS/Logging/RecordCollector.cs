@@ -42,9 +42,29 @@
                     lastRecord.FileName = record.FileName;
                 }
 
+                if (!string.IsNullOrWhiteSpace(record.FileNameCaller) && lastRecord.FileNameCaller != record.FileNameCaller)
+                {
+                    lastRecord.FileNameCaller = record.FileNameCaller;
+                }
+
+                if (!string.IsNullOrWhiteSpace(record.FileNameRecordingTime) && lastRecord.FileNameRecordingTime != record.FileNameRecordingTime)
+                {
+                    lastRecord.FileNameRecordingTime = record.FileNameRecordingTime;
+                }
+
                 if (!string.IsNullOrWhiteSpace(record.Parser))
                 {
                     lastRecord.Parser = record.Parser;
+                }
+
+                if (!string.IsNullOrWhiteSpace(record.ParserCaller) && lastRecord.ParserCaller != record.ParserCaller)
+                {
+                    lastRecord.ParserCaller = record.ParserCaller;
+                }
+
+                if (!string.IsNullOrWhiteSpace(record.ParserRecordingTime) && lastRecord.ParserRecordingTime != record.ParserRecordingTime)
+                {
+                    lastRecord.ParserRecordingTime = record.ParserRecordingTime;
                 }
 
                 if (!string.IsNullOrWhiteSpace(record.ViewModelFormat))
@@ -57,21 +77,14 @@
                     lastRecord.OutputFormatter = record.OutputFormatter;
                 }
 
-                if (!string.IsNullOrWhiteSpace(record.CallerName))
+                if (!string.IsNullOrWhiteSpace(record.ReportGenCaller) && lastRecord.ReportGenCaller != record.ReportGenCaller)
                 {
-                    if (lastRecord.CallerName != record.CallerName)
-                    {
-                        lastRecord.CallerName = record.CallerName;
-                    }
-                    ;
+                    lastRecord.ReportGenCaller = record.ReportGenCaller;
                 }
 
-                if (!string.IsNullOrWhiteSpace(record.RecordingTime))
+                if (!string.IsNullOrWhiteSpace(record.ReportGenRecordingTime) && lastRecord.ReportGenRecordingTime != record.ReportGenRecordingTime)
                 {
-                    if (lastRecord.RecordingTime != record.RecordingTime)
-                    {
-                        lastRecord.RecordingTime = record.RecordingTime;
-                    }
+                    lastRecord.ReportGenRecordingTime = record.ReportGenRecordingTime;
                 }
             }
             else
@@ -91,10 +104,10 @@
             foreach (var record in recordList)
             {
                 sb.Append(
-                    $"{record.RecordNum} records from {record.FileName} [caller:{record.CallerName} at {record.RecordingTime}]," +
-                    $" with parser: {record.Parser} [caller:{record.CallerName} at {record.RecordingTime}]," +
-                    $" with viewModelFormat: {record.ViewModelFormat}," +
-                    $" output formatter: {record.OutputFormatter}; ");
+                    $"{record.RecordNum} records from {record.FileName} [caller:{record.FileNameCaller} at {record.FileNameRecordingTime}]," +
+                    $" with parser: {record.Parser} [caller:{record.ParserCaller} at {record.ParserRecordingTime}]," +
+                    $" with viewModelFormat: {record.ViewModelFormat} [caller:{record.ReportGenCaller} at {record.ReportGenRecordingTime}]," +
+                    $" output formatter: {record.OutputFormatter} [caller:{record.ReportGenCaller} at {record.ReportGenRecordingTime}]; ");
             }
             return sb.ToString();
         }

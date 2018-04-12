@@ -30,8 +30,8 @@
         {
             var record = new OfficerProcessingRecord();
             record.RecordNum = dataAccess.GetCommonDbOfficers().ToList().Count();
-            record.CallerName = callerName;
-            record.RecordingTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            record.FileNameCaller = callerName;
+            record.FileNameRecordingTime = DateTime.Now.ToString(Constants.LogDateTimeFormat);
             var recordCollector = RecordCollector.GetInstance();
             recordCollector.UpdateLastRecord(record);
         }
