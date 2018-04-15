@@ -17,11 +17,6 @@
                 throw new ArgumentNullException($"Null or empty fileName.");
             }
 
-            if (!File.Exists(fileName))
-            {
-                throw new FileNotFoundException($"File is not found: {fileName}");
-            }
-
             this.fileName = fileName;
         }
 
@@ -39,6 +34,11 @@
 
         public IEnumerable<CommonDbOfficer> GetCommonDbOfficers()
         {
+            if (!File.Exists(this.fileName))
+            {
+                throw new FileNotFoundException($"File is not found: {this.fileName}");
+            }
+
             return File.ReadAllLines(fileName)
                 .Skip(1)
                 .Select(line => line.Split(';'))

@@ -18,11 +18,6 @@
                 throw new ArgumentNullException($"Null or empty fileName.");
             }
 
-            if (!File.Exists(fileName))
-            {
-                throw new FileNotFoundException($"File is not found: {fileName}");
-            }
-
             this.fileName = fileName;
         }
 
@@ -72,6 +67,11 @@
 
         public string ReadMayorsFile(string path)
         {
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException($"File is not found: {path}");
+            }
+
             string mayors = File.ReadAllText(path);
 
             int index1 = mayors.IndexOf('[');
