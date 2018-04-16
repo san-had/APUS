@@ -51,8 +51,9 @@
         }
 
         [Theory]
-        //[InlineData("dataen.csv")]
-        [InlineData("hello.xyz")]
+        [InlineData("helloen.csv")]
+        [InlineData("hellous.csv")]
+        [InlineData("helloutc.xyz")]
         public void DataAccessConfiguration_ConfigureRightFileNamesAddParsersToContainer(string fakeFileName)
         {
             var fakeUnityContainer = new UnityContainer();
@@ -61,7 +62,26 @@
 
             dataAccessConfiguration.Configure();
 
-            Assert.True(fakeUnityContainer.IsRegistered<IDateParser>());
+            var isRegistered = fakeUnityContainer.IsRegistered<IDateParser>();
+
+            Assert.True(isRegistered);
+        }
+
+        [Theory]
+        [InlineData("helloetn.csv")]
+        [InlineData("hellouts.csv")]
+        [InlineData("hellouttc.xyz")]
+        public void DataAccessConfiguration_ConfigureBadFileNamesNotAddParsersToContainer(string fakeFileName)
+        {
+            var fakeUnityContainer = new UnityContainer();
+
+            var dataAccessConfiguration = new DataAccessConfiguration(fakeUnityContainer, fakeFileName);
+
+            dataAccessConfiguration.Configure();
+
+            var isRegistered = fakeUnityContainer.IsRegistered<IDateParser>();
+
+            Assert.True(isRegistered);
         }
     }
 }
