@@ -4,6 +4,7 @@
     using APUS.DataLoader;
     using CommonDataAccess;
     using System;
+    using System.Linq;
     using Unity;
     using Xunit;
 
@@ -63,9 +64,11 @@
 
             dataAccessConfiguration.Configure();
 
-            var isRegistered = fakeUnityContainer.IsRegistered<IDateParser>();
+            var numberOfRegistration = fakeUnityContainer.Registrations.Where(x => x.RegisteredType == typeof(IDateParser)).Count();
 
-            Assert.True(isRegistered);
+            var expectedNumberOfRegistrations = 1;
+
+            Assert.Equal(expectedNumberOfRegistrations, numberOfRegistration);
         }
 
         [Theory]
@@ -83,9 +86,11 @@
 
             dataAccessConfiguration.Configure();
 
-            var isRegistered = fakeUnityContainer.IsRegistered<IDateParser>();
+            var numberOfRegistration = fakeUnityContainer.Registrations.Where(x => x.RegisteredType == typeof(IDateParser)).Count();
 
-            Assert.False(isRegistered);
+            var expectedNumberOfRegistrations = 0;
+
+            Assert.Equal(expectedNumberOfRegistrations, numberOfRegistration);
         }
 
         [Theory]
@@ -100,9 +105,11 @@
 
             dataAccessConfiguration.Configure();
 
-            var isRegistered = fakeUnityContainer.IsRegistered<ICommonDataAccess>();
+            var numberOfRegistration = fakeUnityContainer.Registrations.Where(x => x.RegisteredType == typeof(ICommonDataAccess)).Count();
 
-            Assert.True(isRegistered);
+            var expectedNumberOfRegistrations = 1;
+
+            Assert.Equal(expectedNumberOfRegistrations, numberOfRegistration);
         }
 
         [Theory]
@@ -120,9 +127,11 @@
 
             dataAccessConfiguration.Configure();
 
-            var isRegistered = fakeUnityContainer.IsRegistered<ICommonDataAccess>();
+            var numberOfRegistration = fakeUnityContainer.Registrations.Where(x => x.RegisteredType == typeof(ICommonDataAccess)).Count();
 
-            Assert.False(isRegistered);
+            var expectedNumberOfRegistrations = 0;
+
+            Assert.Equal(expectedNumberOfRegistrations, numberOfRegistration);
         }
     }
 }
