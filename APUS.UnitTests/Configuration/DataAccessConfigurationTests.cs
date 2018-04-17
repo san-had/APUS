@@ -2,6 +2,7 @@
 {
     using APUS.Configuration;
     using APUS.DataLoader;
+    using CommonDataAccess;
     using System;
     using Unity;
     using Xunit;
@@ -53,7 +54,7 @@
         [Theory]
         [InlineData("helloen.csv")]
         [InlineData("hellous.csv")]
-        [InlineData("helloutc.xyz")]
+        [InlineData("helloutc.json")]
         public void DataAccessConfiguration_ConfigureRightFileNamesAddParsersToContainer(string fakeFileName)
         {
             var fakeUnityContainer = new UnityContainer();
@@ -68,9 +69,12 @@
         }
 
         [Theory]
+        [InlineData("helloen.xyz")]
+        [InlineData("hellous.zcd")]
+        [InlineData("helloutc.nosj")]
         [InlineData("helloetn.csv")]
         [InlineData("hellouts.csv")]
-        [InlineData("hellouttc.xyz")]
+        [InlineData("hellouttc.json")]
         public void DataAccessConfiguration_ConfigureBadFileNamesNotAddParsersToContainer(string fakeFileName)
         {
             var fakeUnityContainer = new UnityContainer();
@@ -81,7 +85,44 @@
 
             var isRegistered = fakeUnityContainer.IsRegistered<IDateParser>();
 
+            Assert.False(isRegistered);
+        }
+
+        [Theory]
+        [InlineData("helloen.csv")]
+        [InlineData("hellous.csv")]
+        [InlineData("helloutc.json")]
+        public void DataAccessConfiguration_ConfigureRightFileNamesAddDataAccessToContainer(string fakeFileName)
+        {
+            var fakeUnityContainer = new UnityContainer();
+
+            var dataAccessConfiguration = new DataAccessConfiguration(fakeUnityContainer, fakeFileName);
+
+            dataAccessConfiguration.Configure();
+
+            var isRegistered = fakeUnityContainer.IsRegistered<ICommonDataAccess>();
+
             Assert.True(isRegistered);
+        }
+
+        [Theory]
+        [InlineData("helloen.xyz")]
+        [InlineData("hellous.zcd")]
+        [InlineData("helloutc.nosj")]
+        [InlineData("helloetn.csv")]
+        [InlineData("hellouts.csv")]
+        [InlineData("hellouttc.json")]
+        public void DataAccessConfiguration_ConfigureBadFileNamesNotAddDataAccessToContainer(string fakeFileName)
+        {
+            var fakeUnityContainer = new UnityContainer();
+
+            var dataAccessConfiguration = new DataAccessConfiguration(fakeUnityContainer, fakeFileName);
+
+            dataAccessConfiguration.Configure();
+
+            var isRegistered = fakeUnityContainer.IsRegistered<ICommonDataAccess>();
+
+            Assert.False(isRegistered);
         }
     }
 }
