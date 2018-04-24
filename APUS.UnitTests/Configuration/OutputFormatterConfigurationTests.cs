@@ -4,8 +4,7 @@
     using APUS.OutputFormatters;
     using APUS.Utils;
     using System;
-    using System.Collections.Generic;
-    using System.Text;
+    using System.Linq;
     using Unity;
     using Xunit;
 
@@ -43,20 +42,38 @@
             Assert.NotNull(outputFormatterConfiguration);
         }
 
-        [Fact]
-        public void OutputFormatterConfiguration_ConfigureAddOutputFormatter()
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        public void OutputFormatterConfiguration_ConfigureOutputFormatterWithValidFormatNumbers(int formatNumber)
         {
             var fakeUnityContainer = new UnityContainer();
 
-            var fakeMenu = NSubstitute.Substitute.For<IMenu>();
+            var fakeMenu = new FakeMenu(formatNumber);
 
             var outputFormatterConfiguration = new OutputFormatterConfiguration(fakeUnityContainer, fakeMenu);
 
             outputFormatterConfiguration.Configure();
 
-            var isRegistered = fakeUnityContainer.IsRegistered<IOutputFormatter>();
+            var numberOfRegistration = fakeUnityContainer.Registrations.Where(x => x.RegisteredType == typeof(IOutputFormatter)).Count();
 
-            Assert.True(isRegistered);
+            var expectedNumberOfRegistrations = 1;
+
+            Assert.Equal(expectedNumberOfRegistrations, numberOfRegistration);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(8)]
+        public void OutputFormatterConfiguration_ConfigureOutputFormatterWithInValidFormatNumbers(int formatNumber)
+        {
+            var fakeUnityContainer = new UnityContainer();
+
+            var fakeMenu = new FakeMenu(formatNumber);
+
+            var outputFormatterConfiguration = new OutputFormatterConfiguration(fakeUnityContainer, fakeMenu);
+
+            Assert.Throws<NotImplementedException>(() => outputFormatterConfiguration.Configure());
         }
     }
 }

@@ -4,8 +4,8 @@
 
     public interface IMenu
     {
-        int GetChoise(Dictionary<int, string> options);
-
         void DisplayMenu(Dictionary<int, string> options);
+
+        int GetChoise(Dictionary<int, string> options);
     }
 }
