@@ -45,10 +45,15 @@
             var dataLoaderConfiguration = new DataLoaderConfiguration(container);
             dataLoaderConfiguration.Configure();
 
+            var menuConfiguration = new MenuConfiguration(container);
+            menuConfiguration.Configure();
+
+            var menu = container.Resolve<IMenu>();
+
             var viewModelLoaderConfiguration = new ViewModelLoaderConfiguration(container);
             viewModelLoaderConfiguration.Configure();
 
-            var outputFormatterConfiguration = new OutputFormatterConfiguration(container);
+            var outputFormatterConfiguration = new OutputFormatterConfiguration(container, menu);
             outputFormatterConfiguration.Configure();
 
             var reportGeneratorConfiguration = new ReportGeneratorConfiguration(container);

@@ -10,9 +10,13 @@
     {
         private IUnityContainer container;
 
-        public OutputFormatterConfiguration(IUnityContainer container)
+        private IMenu menu;
+
+        public OutputFormatterConfiguration(IUnityContainer container, IMenu menu)
         {
             this.container = container ?? throw new ArgumentNullException(nameof(container));
+
+            this.menu = menu ?? throw new ArgumentNullException(nameof(menu));
         }
 
         public void Configure()
@@ -44,7 +48,6 @@
                 {2, "Table" }
             };
 
-            var menu = new Menu();
             menu.DisplayMenu(menuDictionary);
             return menu.GetChoise(menuDictionary);
         }

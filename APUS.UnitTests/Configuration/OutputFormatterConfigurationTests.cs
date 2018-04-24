@@ -2,6 +2,7 @@
 {
     using APUS.Configuration;
     using APUS.OutputFormatters;
+    using APUS.Utils;
     using System;
     using System.Collections.Generic;
     using System.Text;
@@ -15,15 +16,29 @@
         {
             IUnityContainer fakeUnityContainer = null;
 
-            Assert.Throws<ArgumentNullException>(() => new OutputFormatterConfiguration(fakeUnityContainer));
+            IMenu fakeMenu = NSubstitute.Substitute.For<IMenu>();
+
+            Assert.Throws<ArgumentNullException>(() => new OutputFormatterConfiguration(fakeUnityContainer, fakeMenu));
+        }
+
+        [Fact]
+        public void OutputFormatterConfiguration_ConstructorParameterMenuNullReturnsException()
+        {
+            IUnityContainer fakeUnityContainer = NSubstitute.Substitute.For<IUnityContainer>();
+
+            IMenu fakeMenu = null;
+
+            Assert.Throws<ArgumentNullException>(() => new OutputFormatterConfiguration(fakeUnityContainer, fakeMenu));
         }
 
         [Fact]
         public void OutputFormatterConfiguration_ConstructorParameterContainerNotNullReturnsOutputFormatterConfiguration()
         {
-            var fakeUnityContainer = new UnityContainer();
+            var fakeUnityContainer = NSubstitute.Substitute.For<IUnityContainer>();
 
-            var outputFormatterConfiguration = new OutputFormatterConfiguration(fakeUnityContainer);
+            var fakeMenu = NSubstitute.Substitute.For<IMenu>();
+
+            var outputFormatterConfiguration = new OutputFormatterConfiguration(fakeUnityContainer, fakeMenu);
 
             Assert.NotNull(outputFormatterConfiguration);
         }
@@ -33,7 +48,9 @@
         {
             var fakeUnityContainer = new UnityContainer();
 
-            var outputFormatterConfiguration = new OutputFormatterConfiguration(fakeUnityContainer);
+            var fakeMenu = NSubstitute.Substitute.For<IMenu>();
+
+            var outputFormatterConfiguration = new OutputFormatterConfiguration(fakeUnityContainer, fakeMenu);
 
             outputFormatterConfiguration.Configure();
 
