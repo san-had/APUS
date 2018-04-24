@@ -11,9 +11,13 @@
     {
         private IUnityContainer container;
 
-        public ViewModelLoaderConfiguration(IUnityContainer container)
+        private IMenu menu;
+
+        public ViewModelLoaderConfiguration(IUnityContainer container, IMenu menu)
         {
             this.container = container ?? throw new ArgumentNullException(nameof(container));
+
+            this.menu = menu ?? throw new ArgumentNullException(nameof(menu));
         }
 
         public void Configure()
@@ -51,7 +55,6 @@
                 {2, "Second Format" }
             };
 
-            var menu = new Menu();
             menu.DisplayMenu(menuDictionary);
             return menu.GetChoise(menuDictionary);
         }

@@ -50,7 +50,7 @@
 
             var menu = container.Resolve<IMenu>();
 
-            var viewModelLoaderConfiguration = new ViewModelLoaderConfiguration(container);
+            var viewModelLoaderConfiguration = new ViewModelLoaderConfiguration(container, menu);
             viewModelLoaderConfiguration.Configure();
 
             var outputFormatterConfiguration = new OutputFormatterConfiguration(container, menu);
