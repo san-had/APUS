@@ -31,7 +31,7 @@
         }
 
         [Fact]
-        public void OutputFormatterConfiguration_ConstructorParameterContainerNotNullReturnsOutputFormatterConfiguration()
+        public void OutputFormatterConfiguration_ConstructorParametersNotNullReturnsOutputFormatterConfiguration()
         {
             var fakeUnityContainer = NSubstitute.Substitute.For<IUnityContainer>();
 
