@@ -3,6 +3,7 @@
     using APUS.Configuration;
     using APUS.Utils;
     using APUS.ViewModels;
+    using APUS.ViewModels.Calculation;
     using System;
     using System.Linq;
     using Unity;
@@ -74,6 +75,60 @@
             var viewModelLoaderConfiguration = new ViewModelLoaderConfiguration(fakeUnityContainer, fakeMenu);
 
             Assert.Throws<NotImplementedException>(() => viewModelLoaderConfiguration.Configure());
+        }
+
+        [Fact]
+        public void ViewModelLoaderConfiguration_ConfigureViewLoader_CheckInOfficeDaysCalculatorInContainer()
+        {
+            var fakeUnityContainer = new UnityContainer();
+
+            var fakeMenu = new FakeMenu(1);
+
+            var viewModelLoaderConfiguration = new ViewModelLoaderConfiguration(fakeUnityContainer, fakeMenu);
+
+            viewModelLoaderConfiguration.Configure();
+
+            var numberOfRegistration = fakeUnityContainer.Registrations.Where(x => x.RegisteredType == typeof(IInOfficeDaysCalculator)).Count();
+
+            var expectedNumberOfRegistrations = 1;
+
+            Assert.Equal(expectedNumberOfRegistrations, numberOfRegistration);
+        }
+
+        [Fact]
+        public void ViewModelLoaderConfiguration_ConfigureViewLoader_CheckInOfficeRangeComposerInContainer()
+        {
+            var fakeUnityContainer = new UnityContainer();
+
+            var fakeMenu = new FakeMenu(1);
+
+            var viewModelLoaderConfiguration = new ViewModelLoaderConfiguration(fakeUnityContainer, fakeMenu);
+
+            viewModelLoaderConfiguration.Configure();
+
+            var numberOfRegistration = fakeUnityContainer.Registrations.Where(x => x.RegisteredType == typeof(IInOfficeRangeComposer)).Count();
+
+            var expectedNumberOfRegistrations = 1;
+
+            Assert.Equal(expectedNumberOfRegistrations, numberOfRegistration);
+        }
+
+        [Fact]
+        public void ViewModelLoaderConfiguration_ConfigureViewLoader_CheckLeftOfficeParserInContainer()
+        {
+            var fakeUnityContainer = new UnityContainer();
+
+            var fakeMenu = new FakeMenu(1);
+
+            var viewModelLoaderConfiguration = new ViewModelLoaderConfiguration(fakeUnityContainer, fakeMenu);
+
+            viewModelLoaderConfiguration.Configure();
+
+            var numberOfRegistration = fakeUnityContainer.Registrations.Where(x => x.RegisteredType == typeof(ILeftOfficeParser)).Count();
+
+            var expectedNumberOfRegistrations = 1;
+
+            Assert.Equal(expectedNumberOfRegistrations, numberOfRegistration);
         }
     }
 }
