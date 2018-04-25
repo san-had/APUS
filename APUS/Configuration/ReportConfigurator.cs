@@ -3,6 +3,7 @@
     using APUS.Logging;
     using APUS.Utils;
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Unity;
 
@@ -14,6 +15,7 @@
 
         private ILogging logger;
 
+        [ExcludeFromCodeCoverage]
         public bool IsSuccesfulConfiguration { get; set; } = false;
 
         public ReportConfigurator(IUnityContainer container, string fileName)
@@ -60,6 +62,7 @@
             reportGeneratorConfiguration.Configure();
         }
 
+        [ExcludeFromCodeCoverage]
         private void DisplayContainerRegistrations()
         {
             Console.WriteLine($"Container has {container.Registrations.ToList().Count()} Registrations: ");
