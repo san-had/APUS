@@ -50,6 +50,20 @@
         }
 
         [Fact]
+        public void ReportConfigurator_ConstructorParametersAreNotNullReturnsReportConfiguration()
+        {
+            IUnityContainer fakeUnityContainer = NSubstitute.Substitute.For<IUnityContainer>();
+
+            string fakeFileName = "fakeFileName";
+
+            IMenu fakeMenu = NSubstitute.Substitute.For<IMenu>();
+
+            var reportConfigurator = new ReportConfigurator(fakeUnityContainer, fakeFileName, fakeMenu);
+
+            Assert.NotNull(reportConfigurator);
+        }
+
+        [Fact]
         public void ReportConfigurator_ConstructorParameterFileNameEmptyReturnsException()
         {
             IUnityContainer fakeUnityContainer = NSubstitute.Substitute.For<IUnityContainer>();
