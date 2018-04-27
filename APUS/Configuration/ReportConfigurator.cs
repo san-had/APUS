@@ -13,12 +13,14 @@
 
         private string fileName;
 
+        private IMenu menu;
+
         private ILogging logger;
 
         [ExcludeFromCodeCoverage]
         public bool IsSuccesfulConfiguration { get; set; } = false;
 
-        public ReportConfigurator(IUnityContainer container, string fileName)
+        public ReportConfigurator(IUnityContainer container, string fileName, IMenu menu)
         {
             this.container = container ?? throw new ArgumentNullException(nameof(container));
 
@@ -30,6 +32,8 @@
             {
                 throw new ArgumentNullException(nameof(fileName));
             }
+
+            this.menu = menu ?? throw new ArgumentNullException(nameof(menu));
         }
 
         public void Setup()
@@ -46,11 +50,6 @@
 
             var dataLoaderConfiguration = new DataLoaderConfiguration(container);
             dataLoaderConfiguration.Configure();
-
-            var menuConfiguration = new MenuConfiguration(container);
-            menuConfiguration.Configure();
-
-            var menu = container.Resolve<IMenu>();
 
             var viewModelLoaderConfiguration = new ViewModelLoaderConfiguration(container, menu);
             viewModelLoaderConfiguration.Configure();

@@ -2,6 +2,7 @@
 {
     using APUS.Configuration;
     using APUS.Logging;
+    using APUS.Utils;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using Unity;
@@ -21,7 +22,12 @@
             {
                 using (container = new UnityContainer())
                 {
-                    var configurator = new ReportConfigurator(container, fileName);
+                    var menuConfiguration = new MenuConfiguration(container);
+                    menuConfiguration.Configure();
+
+                    var menu = container.Resolve<IMenu>();
+
+                    var configurator = new ReportConfigurator(container, fileName, menu);
 
                     configurator.Setup();
 
