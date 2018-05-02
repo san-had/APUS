@@ -66,5 +66,16 @@
 
             return list;
         }
+
+        [Theory]
+        [InlineData(13, 0)]
+        [InlineData(0, 0)]
+        [InlineData(-1, 0)]
+        public void DateParser_MonthMaxDays_InvalidMonth_Returns0(int inputMonth, int expectedMonth)
+        {
+            var actualMonth = new DateParser().MonthMaxDays(inputMonth);
+
+            Assert.Equal(expectedMonth, actualMonth);
+        }
     }
 }
