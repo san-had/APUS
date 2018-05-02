@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Runtime.CompilerServices;
     using APUS.Logging;
@@ -19,6 +20,7 @@
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        [ExcludeFromCodeCoverage]
         public IEnumerable<Officer> LoadData()
         {
             WriteLog();
@@ -26,6 +28,7 @@
             return this.mapper.Map(dataAccess.GetCommonDbOfficers());
         }
 
+        [ExcludeFromCodeCoverage]
         public void WriteLog([CallerMemberName] string callerName = null)
         {
             var record = new OfficerProcessingRecord();
