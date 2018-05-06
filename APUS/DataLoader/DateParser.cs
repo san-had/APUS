@@ -44,7 +44,7 @@
 
         public int MonthMaxDays(int month)
         {
-            if (month > 12)
+            if (month > 12 || month < 0)
             {
                 return 0;
             }
