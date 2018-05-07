@@ -18,6 +18,11 @@
 
         public IEnumerable<Officer> Map(IEnumerable<CommonDbOfficer> dbOfficers)
         {
+            if (dbOfficers == null)
+            {
+                throw new ArgumentNullException(nameof(dbOfficers));
+            }
+
             foreach (var dbOfficer in dbOfficers)
             {
                 var officer = new Officer();
